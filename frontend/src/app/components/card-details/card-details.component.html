@@ -91,7 +91,7 @@
 
     <div class="no-print buttons">
         <button class="btn" (click)="printCard()"> <i class="fas fa-print"></i> Imprimir  </button>
-        <button class="btn" (click)="sendWhatsapp()"><i class="fab fa-whatsapp"></i> Enviar Por Whatsapp  </button> <br>
+        <button class="btn" (click)="sendWhatsapp('card-' + currentCard.id + '-' + currentCard.gameCode )"><i class="fab fa-whatsapp"></i> Enviar Por Whatsapp  </button> <br>
 
         <p>{{ message }}</p>
     </div>

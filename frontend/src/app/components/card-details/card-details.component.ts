@@ -64,7 +64,7 @@ export class CardDetailsComponent implements OnInit {
     window.print();
   }
 
-  sendWhatsapp() {
-    
+  sendWhatsapp(id) {
+    alert (id);
   }
 }
