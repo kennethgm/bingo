@@ -23,18 +23,72 @@
         </form>
 
 
-        <button type="submit" class="btn btn-green" (click)="updateCard()"> Actualizar </button>
-        <button class="btn" (click)="printCard()"> Imprimir</button>
-        <button class="btn" (click)="sendEmail()"> Enviar Por Correo </button>
-        <button class="btn" (click)="sendWhatsapp()">Enviar Por Whatsapp  </button>
-        <button class="btn btn-danger" (click)="deleteCard()">Borrar </button> <br>
+        <button type="submit" class="btn btn-success" (click)="updateCard()"> <i class="fas fa-save"></i> Guardar  </button>
+        <button class="btn btn-danger" (click)="deleteCard()"><i class="fas fa-trash"></i> Borrar </button> <br>
 
         <label for="numbers">Carton</label>
-        <div id="card-{{ currentCard.id }}-{{ currentCard.gameCode }}">
-            BINGO
+        <div class="bingo-card" id="card-{{ currentCard.id }}-{{ currentCard.gameCode }}">
+            <span class="details float-left"> {{ currentCard.name }} </span> <br>
+            <span class="details float-left"> Carton # {{ currentCard.id }} </span>
+            <span class="details float-right"> Codigo de Juego: {{ currentCard.gameCode }} </span> <br>
+            <div class="row">
+                <div class="col">
+                    <div class="card-letter">B</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.b" class="card-number">
+                            {{ element }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-letter">I</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.i" class="card-number">
+                            {{ element }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-letter">N</div>
+                    <div class="card-numbers">
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[0] }}
+                        </div>
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[1] }}
+                        </div>
+                        <div class="card-number">
+                            <div class="freespace"><span>X</span></div>
+                        </div>
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[2] }}
+                        </div>
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[3] }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-letter">G</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.g" class="card-number">
+                            {{ element }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-letter">O</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.o" class="card-number">
+                            {{ element }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-
+        <button class="btn" (click)="printCard()"> <i class="fas fa-print"></i> Imprimir  </button>
+        <button class="btn" (click)="sendWhatsapp()"><i class="fab fa-whatsapp"></i> Enviar Por Whatsapp  </button> <br>
 
         <p>{{ message }}</p>
 
