@@ -39,7 +39,7 @@ export class CardDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.message = 'The card was updated successfully!';
+          this.message = 'El carton fue actualizado correctamente!';
         },
         error => {
           console.log(error);
@@ -51,10 +51,24 @@ export class CardDetailsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/cards']);
+          alert(response);
+          this.router.navigate(['/']);
+
         },
         error => {
           console.log(error);
         });
+  }
+
+  printCard() {
+
+  }
+
+  sendEmail() {
+
+  }
+
+  sendWhatsapp() {
+    
   }
 }

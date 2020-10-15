@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from './../../services/card.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-card',
@@ -18,7 +19,10 @@ export class AddCardComponent implements OnInit {
   cards: any;
   cardsLength = '';
 
-  constructor(private cardService: CardService) { }
+  constructor(
+    private cardService: CardService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.newCard();
@@ -48,7 +52,7 @@ export class AddCardComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.submitted = true;
+          this.router.navigate(['/cards/'+ response['id']]);
         },
         error => {
           console.log(error);
@@ -75,7 +79,30 @@ export class AddCardComponent implements OnInit {
       o: [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75]
     };
     console.log('numbers', numbers);
+    numbers.b = this.shuffle(numbers.b);
+    numbers.b = numbers.b.slice(0, 5);
+    numbers.i = this.shuffle(numbers.i);
+    numbers.i = numbers.i.slice(0, 5);
+    numbers.n = this.shuffle(numbers.n);
+    numbers.n = numbers.i.slice(0, 4);
+    numbers.g = this.shuffle(numbers.g);
+    numbers.g = numbers.g.slice(0, 5);
+    numbers.o = this.shuffle(numbers.o);
+    numbers.o = numbers.o.slice(0, 5);
     return numbers;
+  }
+
+  shuffle(array) {
+    var m = array.length, t, i;
+  
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+  
+    return array;
   }
 
 }
