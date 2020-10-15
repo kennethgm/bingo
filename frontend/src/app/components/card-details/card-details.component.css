@@ -1,5 +1,15 @@
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
 input.form-control {
     max-width: 40%;
+}
+
+.buttons {
+    margin: 20px 0;
 }
 
 .btn {
