@@ -29,71 +29,76 @@
 
     </div>
 
-    <div class="bingo-card" id="card-{{ currentCard.id }}-{{ currentCard.gameCode }}">
-        <span class="details float-left"> {{ currentCard.name }} </span> <br>
-        <span class="details float-left"> Carton # {{ currentCard.id }} </span>
-        <span class="details float-right"> Codigo de Juego: {{ currentCard.gameCode }} </span> <br>
-        <div class="row">
-            <div class="col">
-                <div class="card-letter">B</div>
-                <div class="card-numbers">
-                    <div *ngFor="let element of currentCard.numbers.b" class="card-number">
-                        {{ element }}
+    <div #screen>
+        <div class="bingo-card" id="card-{{ currentCard.id }}-{{ currentCard.gameCode }}">
+            <span class="details float-left"> {{ currentCard.name }} </span> <br>
+            <span class="details float-left"> Carton # {{ currentCard.id }} </span>
+            <span class="details float-right"> Codigo de Juego: {{ currentCard.gameCode }} </span> <br>
+            <div class="row">
+                <div class="col">
+                    <div class="card-letter">B</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.b" class="card-number">
+                            {{ element }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card-letter">I</div>
-                <div class="card-numbers">
-                    <div *ngFor="let element of currentCard.numbers.i" class="card-number">
-                        {{ element }}
+                <div class="col">
+                    <div class="card-letter">I</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.i" class="card-number">
+                            {{ element }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card-letter">N</div>
-                <div class="card-numbers">
-                    <div class="card-number">
-                        {{ currentCard.numbers.n[0] }}
-                    </div>
-                    <div class="card-number">
-                        {{ currentCard.numbers.n[1] }}
-                    </div>
-                    <div class="card-number">
-                        <div class="freespace"><span>X</span></div>
-                    </div>
-                    <div class="card-number">
-                        {{ currentCard.numbers.n[2] }}
-                    </div>
-                    <div class="card-number">
-                        {{ currentCard.numbers.n[3] }}
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card-letter">G</div>
-                <div class="card-numbers">
-                    <div *ngFor="let element of currentCard.numbers.g" class="card-number">
-                        {{ element }}
+                <div class="col">
+                    <div class="card-letter">N</div>
+                    <div class="card-numbers">
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[0] }}
+                        </div>
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[1] }}
+                        </div>
+                        <div class="card-number">
+                            <div class="freespace"><span>X</span></div>
+                        </div>
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[2] }}
+                        </div>
+                        <div class="card-number">
+                            {{ currentCard.numbers.n[3] }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card-letter">O</div>
-                <div class="card-numbers">
-                    <div *ngFor="let element of currentCard.numbers.o" class="card-number">
-                        {{ element }}
+                <div class="col">
+                    <div class="card-letter">G</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.g" class="card-number">
+                            {{ element }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-letter">O</div>
+                    <div class="card-numbers">
+                        <div *ngFor="let element of currentCard.numbers.o" class="card-number">
+                            {{ element }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="no-print buttons">
         <button class="btn" (click)="printCard()"> <i class="fas fa-print"></i> Imprimir  </button>
-        <button class="btn" (click)="sendWhatsapp('card-' + currentCard.id + '-' + currentCard.gameCode )"><i class="fab fa-whatsapp"></i> Enviar Por Whatsapp  </button> <br>
+        <button class="btn" (click)="download('card-' + currentCard.id + '-' + currentCard.gameCode )"><i class="fas fa-download"></i> Descargar  </button> <br>
 
         <p>{{ message }}</p>
+        <div id="download">
+            <img #canvas>
+            <a #downloadLink></a>
+        </div>
     </div>
 
 </div>

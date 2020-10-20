@@ -10,6 +10,7 @@ import { TutorialDetailsComponent } from './components/tutorial-details/tutorial
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
 import { CardDetailsComponent } from './components/card-details/card-details.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import { CardDetailsComponent } from './components/card-details/card-details.com
     TutorialDetailsComponent,
     TutorialsListComponent,
     AddCardComponent,
-    CardDetailsComponent
+    CardDetailsComponent,
+    AdminComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule

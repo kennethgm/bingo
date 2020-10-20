@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from './../../services/card.service';
-
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-card-details',
   templateUrl: './card-details.component.html',
@@ -10,6 +10,9 @@ import { CardService } from './../../services/card.service';
 export class CardDetailsComponent implements OnInit {
   currentCard = null;
   message = '';
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
 
   constructor(
     private cardService: CardService,
@@ -64,7 +67,16 @@ export class CardDetailsComponent implements OnInit {
     window.print();
   }
 
-  sendWhatsapp(id) {
+  download(id) {
     alert (id);
+    let self = this;
+    html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY}).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+      console.log('screen', self.screen);
+      console.log('canvas', canvas);
+      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+      this.downloadLink.nativeElement.download = id + '.png';
+      this.downloadLink.nativeElement.click();
+    });
   }
 }
