@@ -16,15 +16,13 @@
                 <input class="form-control" id="email" required [(ngModel)]="card.email" name="email" />
             </div>
 
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Codigo de Juego</mat-label>
-                    <mat-select>
-                        <mat-option ngDefaultControl *ngFor="let game of games" [(ngModel)]="card.gameCode" [value]="game.code">
-                            {{ game.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <div class="form-group">
+                <label for="gameCode">Juego</label>
+                <select id="gameCode" class="form-control" [(ngModel)]="card.gameCode" name="gameCode">
+                    <option [value]="game.id" *ngFor="let game of games">
+                        {{ game.name }}
+                    </option>
+                </select>
             </div>
 
             <button (click)="saveCard()" class="btn btn-success">Crear</button>

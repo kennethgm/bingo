@@ -16,8 +16,12 @@
             </div>
 
             <div class="form-group">
-                <label for="gameCode">Codigo Del Juego Asociado</label>
-                <input type="text" class="form-control" id="gameCode" [(ngModel)]="currentCard.gameCode" name="gameCode" />
+                <label for="gameCode">Juego</label>
+                <select id="gameCode" class="form-control" [(ngModel)]="currentCard.gameCode" name="gameCode">
+                    <option [value]="game.id" *ngFor="let game of games">
+                        {{ game.name }}
+                    </option>
+                </select>
             </div>
 
         </form>

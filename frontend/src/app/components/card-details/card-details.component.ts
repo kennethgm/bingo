@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from './../../services/card.service';
+import { GameService } from './../../services/game.service';
 import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-card-details',
@@ -13,15 +14,23 @@ export class CardDetailsComponent implements OnInit {
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
+  games = [];
 
   constructor(
     private cardService: CardService,
     private route: ActivatedRoute,
+    private gameService: GameService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.message = '';
     this.getCard(this.route.snapshot.paramMap.get('id'));
+    this.gameService.getAll().subscribe(
+      data => {
+        this.games = data;
+        //console.log('games', this.games);
+      }
+    );
   }
 
   getCard(id): void {
@@ -33,7 +42,8 @@ export class CardDetailsComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });
+      }
+    );
   }
 
  

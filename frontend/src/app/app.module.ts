@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { GamesListComponent } from './components/games-list/games-list.component';
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,9 +36,10 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatInputModule
   ],
-  providers: [MatDatepickerModule, MatSelectModule],
+  exports: [MatInputModule],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

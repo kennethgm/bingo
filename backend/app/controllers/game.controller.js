@@ -16,7 +16,6 @@ exports.create = (req, res) => {
     // Create a Game
     const game = {
         name: req.body.name,
-        code: req.body.code,
         startDate: req.body.startDate,
         winners: req.body.winners
     };

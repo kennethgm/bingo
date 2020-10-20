@@ -27,7 +27,7 @@ export class GameDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.currentGame = data;
-       //   console.log(data);
+          console.log('currentgame',data);
         },
         error => {
           console.log(error);

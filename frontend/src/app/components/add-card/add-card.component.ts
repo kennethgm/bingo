@@ -56,7 +56,7 @@ export class AddCardComponent implements OnInit {
       numbers: this.card.numbers,
       gameCode: this.card.gameCode
     };
-   // console.log('will send', data);
+    console.log('will send', data);
     this.cardService.create(data).subscribe(
       response => {
      //   console.log(response);
