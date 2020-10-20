@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to application." });
 });
 
-require("./app/routes/turorial.routes")(app);
+require("./app/routes/game.routes")(app);
 require("./app/routes/card.routes")(app);
 
 // set port, listen for requests
