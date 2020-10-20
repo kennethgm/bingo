@@ -1,3 +1,4 @@
+<button class="btn add-game" routerLink="add-game">Crear Nuevo Juego</button>
 <div class="list row">
     <div class="col-md-8">
         <div class="input-group mb-3">
@@ -17,15 +18,13 @@
             </li>
         </ul>
 
-        <button class="m-3 btn btn-sm btn-danger" (click)="removeAllGames()">
-        Borrar Todos
-      </button>
     </div>
     <div class="col-md-6">
         <div *ngIf="currentGame">
             <h4>Juego</h4>
             <div>
-                <label><strong>Nombre:</strong></label> {{ currentGame.name }}
+                <label><strong>Nombre:</strong></label> {{ currentGame.name }} <br>
+                <label><strong>Codigo:</strong></label> {{ currentGame.code }}
             </div>
             <a class="badge badge-warning" routerLink="/game/{{ currentGame.id }}">
           Editar

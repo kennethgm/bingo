@@ -1,0 +1,30 @@
+<div style="margin: auto;">
+    <div class='no-print' *ngIf="currentGame">
+        <form class="edit-form">
+            <div class="form-group">
+                <label for="title">Nombre</label>
+                <input type="text" class="form-control" id="title" [(ngModel)]="currentGame.name" name="name" />
+            </div>
+            <div class="form-group">
+                <label for="code">Codigo de Juego</label>
+                <input type="text" class="form-control" id="code" [(ngModel)]="currentGame.code" name="code" />
+            </div>
+            <div class="form-group">
+                <label for="startDate">Fecha Inicio</label>
+                <mat-form-field appearance="fill">
+                    <input class="form-control date" name="startDate" [(ngModel)]="currentGame.startDate" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+
+        </form>
+
+        <div class="buttons">
+            <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
+            <button class="btn btn-danger" (click)="deleteGame()()"><i class="fas fa-trash"></i> Borrar </button> <br>
+        </div>
+
+    </div>
+</div>
