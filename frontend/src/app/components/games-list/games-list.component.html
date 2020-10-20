@@ -1,16 +1,16 @@
 <div class="list row">
     <div class="col-md-8">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="name" />
+            <input type="text" class="form-control" placeholder="Buscar por nombre" [(ngModel)]="name" />
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" (click)="searchTitle()">
-            Search
+            Buscar
           </button>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <h4>Games List</h4>
+        <h4>Lista de Juegos</h4>
         <ul class="list-group">
             <li class="list-group-item" *ngFor="let game of games; let i = index" [class.active]="i == currentIndex" (click)="setActiveGame(game, i)">
                 {{ game.name }}
@@ -18,26 +18,23 @@
         </ul>
 
         <button class="m-3 btn btn-sm btn-danger" (click)="removeAllGames()">
-        Remove All
+        Borrar Todos
       </button>
     </div>
     <div class="col-md-6">
         <div *ngIf="currentGame">
-            <h4>Game</h4>
+            <h4>Juego</h4>
             <div>
-                <label><strong>Name:</strong></label> {{ currentGame.name }}
+                <label><strong>Nombre:</strong></label> {{ currentGame.name }}
             </div>
-
-
-
             <a class="badge badge-warning" routerLink="/game/{{ currentGame.id }}">
-          Edit
+          Editar
         </a>
         </div>
 
         <div *ngIf="!currentGame">
             <br />
-            <p>Please click on a Game...</p>
+            <p>Elige un Juego</p>
         </div>
     </div>
 </div>
