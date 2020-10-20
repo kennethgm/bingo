@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from './../../services/card.service';
+import { GameService } from './../../services/game.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,9 +19,11 @@ export class AddCardComponent implements OnInit {
   submitted = false;
   cards: any;
   cardsLength = '';
+  games = [];
 
   constructor(
     private cardService: CardService,
+    private gameService: GameService,
     private router: Router
     ) { }
 
@@ -31,15 +34,21 @@ export class AddCardComponent implements OnInit {
         this.cards = data;
         
         this.cardsLength = ((this.cards.length) + 1).toString();
-        console.log('this.cards.length', this.cardsLength);
+        //console.log('this.cards.length', this.cardsLength);
       },
       error => {
-        console.log(error);
+      //console.log(error);
     });
+    this.gameService.getAll().subscribe(
+      data => {
+        this.games = data;
+        //console.log('games', this.games);
+      }
+    );
   }
 
   saveCard(): void {
-    console.log('this.card', this.card);
+    //console.log('this.card', this.card);
     const data = {
       name: this.card.name,
       phonenumber: this.card.phonenumber,
@@ -47,16 +56,16 @@ export class AddCardComponent implements OnInit {
       numbers: this.card.numbers,
       gameCode: this.card.gameCode
     };
-    console.log('will send', data);
-    this.cardService.create(data)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.router.navigate(['/cards/'+ response['id']]);
-        },
-        error => {
-          console.log(error);
-        });
+   // console.log('will send', data);
+    this.cardService.create(data).subscribe(
+      response => {
+     //   console.log(response);
+        this.router.navigate(['/cards/'+ response['id']]);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   newCard(): void {
@@ -78,7 +87,7 @@ export class AddCardComponent implements OnInit {
       g: [46,47,48,49,50,51,52,53,54,55,56,57,58,59,60],
       o: [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75]
     };
-    console.log('numbers', numbers);
+    //console.log('numbers', numbers);
     numbers.b = this.shuffle(numbers.b);
     numbers.b = numbers.b.slice(0, 5);
     numbers.i = this.shuffle(numbers.i);

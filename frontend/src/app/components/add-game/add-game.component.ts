@@ -30,7 +30,7 @@ export class AddGameComponent implements OnInit {
           this.games = data;
           
           this.games = ((this.games.length) + 1).toString();
-          console.log('this.cards.length', this.gamesLength);
+         // console.log('this.cards.length', this.gamesLength);
         },
         error => {
           console.log(error);
@@ -38,18 +38,18 @@ export class AddGameComponent implements OnInit {
     }
 
     saveGame(): void {
-      console.log('this.game', this.game);
+     // console.log('this.game', this.game);
       const data = {
         name: this.game.name,
         code: this.game.code,
         winners: this.game.winners,
         startDate: this.game.startDate
       };
-      console.log('will send', data);
+      //console.log('will send', data);
       this.gameService.create(data)
         .subscribe(
           response => {
-            console.log(response);
+         //   console.log(response);
             this.router.navigate(['/game/'+ response['id']]);
           },
           error => {

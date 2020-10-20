@@ -25,7 +25,7 @@ export class GamesListComponent implements OnInit {
       .subscribe(
         data => {
           this.games = data;
-          console.log(data);
+        //  console.log(data);
         },
         error => {
           console.log(error);
@@ -47,7 +47,7 @@ export class GamesListComponent implements OnInit {
     this.gameService.deleteAll()
       .subscribe(
         response => {
-          console.log(response);
+        //  console.log(response);
           this.refreshList();
         },
         error => {
@@ -60,7 +60,7 @@ export class GamesListComponent implements OnInit {
       .subscribe(
         data => {
           this.games = data;
-          console.log(data);
+        //  console.log(data);
         },
         error => {
           console.log(error);

@@ -27,7 +27,7 @@ export class GameDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.currentGame = data;
-          console.log(data);
+       //   console.log(data);
         },
         error => {
           console.log(error);
@@ -38,7 +38,7 @@ export class GameDetailsComponent implements OnInit {
       this.cardService.update(this.currentGame.id, this.currentGame)
         .subscribe(
           response => {
-            console.log(response);
+          //  console.log(response);
             this.message = 'El juego fue actualizado correctamente!';
             this.router.navigate(['/admin']);
           },
@@ -51,7 +51,7 @@ export class GameDetailsComponent implements OnInit {
       this.cardService.delete(this.currentGame.id)
         .subscribe(
           response => {
-            console.log(response);
+          //  console.log(response);
             alert(response);
             this.router.navigate(['/admin']);
   

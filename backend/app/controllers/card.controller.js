@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Card
 exports.create = (req, res) => {
-    console.log('req body', req.body);
+    //console.log('req body', req.body);
     // Validate request
     if (!req.body.name) {
         res.status(400).send({

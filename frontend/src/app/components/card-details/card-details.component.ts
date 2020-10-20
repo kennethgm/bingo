@@ -29,7 +29,7 @@ export class CardDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.currentCard = data;
-          console.log(data);
+        //  console.log(data);
         },
         error => {
           console.log(error);
@@ -41,7 +41,7 @@ export class CardDetailsComponent implements OnInit {
     this.cardService.update(this.currentCard.id, this.currentCard)
       .subscribe(
         response => {
-          console.log(response);
+        //  console.log(response);
           this.message = 'El carton fue actualizado correctamente!';
         },
         error => {
@@ -53,7 +53,7 @@ export class CardDetailsComponent implements OnInit {
     this.cardService.delete(this.currentCard.id)
       .subscribe(
         response => {
-          console.log(response);
+        //  console.log(response);
           alert(response);
           this.router.navigate(['/']);
 
@@ -72,8 +72,8 @@ export class CardDetailsComponent implements OnInit {
     let self = this;
     html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY}).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
-      console.log('screen', self.screen);
-      console.log('canvas', canvas);
+    //  console.log('screen', self.screen);
+    //  console.log('canvas', canvas);
       this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
       this.downloadLink.nativeElement.download = id + '.png';
       this.downloadLink.nativeElement.click();
