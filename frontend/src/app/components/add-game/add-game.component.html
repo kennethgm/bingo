@@ -15,6 +15,13 @@
                 </mat-form-field>
             </div>
 
+            <div class="form-group">
+                <label for="title">Tipo de Tombola</label> <br>
+                <input type="radio" [(ngModel)]="game.settings.raffleType" value="digital" /> Digital
+                <input type="radio" [(ngModel)]="game.settings.raffleType" value="physic" /> Fisica
+
+            </div>
+
             <button (click)="saveGame()" class="btn btn-success">Crear</button>
         </div>
 

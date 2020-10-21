@@ -18,6 +18,11 @@
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
+                <div class="form-group">
+                    <label for="raffleType">Tipo de Tombola</label> <br>
+                    <input name="raffleType" type="radio" [(ngModel)]="currentGame.settings.raffleType" value="digital" /> Digital
+                    <input name="raffleType" type="radio" [(ngModel)]="currentGame.settings.raffleType" value="physic" /> Fisica
+                </div>
             </form>
 
             <div class="buttons">

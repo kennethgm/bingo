@@ -38,23 +38,22 @@ export class AddGameComponent implements OnInit {
     }
 
     saveGame(): void {
-     // console.log('this.game', this.game);
+     console.log('this.game', this.game);
       const data = {
         name: this.game.name,
         winners: this.game.winners,
         startDate: this.game.startDate,
-        setings: this.game.settings
+        settings: this.game.settings
       };
-      //console.log('will send', data);
+      console.log('will send', data);
       this.gameService.create(data)
         .subscribe(
           response => {
-         //   console.log(response);
             this.router.navigate(['/game/'+ response['id']]);
           },
           error => {
             console.log(error);
-          });
+        });
     }
   
     newGame(): void {
@@ -63,7 +62,9 @@ export class AddGameComponent implements OnInit {
         name: '',
         winners: {},
         startDate: new Date(),
-        settings: {}
+        settings: {
+          raffleType: 'digital'
+        }
       };
     }
 
