@@ -32,30 +32,66 @@
             </div>
         </div>
     </div>
-    <div *ngIf="gameStarted">
+    <div *ngIf="gameStarted && currentGame">
         <div class="bingo-allnumbers">
             <div id="board" class="flex">
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">B</div>
-                    <div *ngFor="let number of array_b" class="col ball">{{number}}</div>
+                    <div *ngFor="let number of array_b" class="col ball">
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                             {{number}} 
+                        </span>
+                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                    </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">I</div>
-                    <div *ngFor="let number of array_i" class="col ball">{{number}}</div>
+                    <div *ngFor="let number of array_i" class="col ball">
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                            {{number}} 
+                       </span>
+                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                    </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">N</div>
-                    <div *ngFor="let number of array_n" class="col ball">{{number}}</div>
+                    <div *ngFor="let number of array_n" class="col ball">
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                            {{number}} 
+                       </span>
+                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                    </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">G</div>
-                    <div *ngFor="let number of array_g" class="col ball">{{number}}</div>
+                    <div *ngFor="let number of array_g" class="col ball">
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                            {{number}} 
+                       </span>
+                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                    </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">O</div>
-                    <div *ngFor="let number of array_o" class="col ball">{{number}}</div>
+                    <div *ngFor="let number of array_o" class="col ball">
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                            {{number}} 
+                       </span>
+                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="last-calls">
+            Ultimos numeros:
+            <span *ngFor="let number of currentGame.settings.selectedNumbers?.slice(-5); index as i;">
+               <span *ngIf="number != lastNumber"> 
+                   {{ number }}  
+                </span>
+            </span>
+            <span *ngIf="lastNumber">
+                <span class="last"> {{ lastNumber }} </span>
+            </span>
         </div>
     </div>
 </div>
