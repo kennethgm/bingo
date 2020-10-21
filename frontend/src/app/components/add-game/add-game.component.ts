@@ -12,7 +12,8 @@ export class AddGameComponent implements OnInit {
   game = {
     name: '',
     winners: {},
-    startDate: new Date()
+    startDate: new Date(),
+    settings: {}
   };
   submitted = false;
   games: any;
@@ -41,7 +42,8 @@ export class AddGameComponent implements OnInit {
       const data = {
         name: this.game.name,
         winners: this.game.winners,
-        startDate: this.game.startDate
+        startDate: this.game.startDate,
+        setings: this.game.settings
       };
       //console.log('will send', data);
       this.gameService.create(data)
@@ -60,7 +62,8 @@ export class AddGameComponent implements OnInit {
       this.game = {
         name: '',
         winners: {},
-        startDate: new Date()
+        startDate: new Date(),
+        settings: {}
       };
     }
 

@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Card = sequelize.define("game", {
+    const Game = sequelize.define("games", {
         name: {
             type: Sequelize.STRING
         },
@@ -8,8 +8,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         winners: {
             type: Sequelize.JSONB
+        },
+        settings: {
+            type: Sequelize.JSONB
         }
     });
 
-    return Card;
+    return Game;
 };

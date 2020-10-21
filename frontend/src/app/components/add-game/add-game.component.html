@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="startDate">Fecha de Inicio</label> <br>
                 <mat-form-field appearance="fill">
-                    <input class="form-control date" [(ngModel)]="game.startDate" matSelect [matDatepicker]="picker" />
+                    <input class="form-control date" [(ngModel)]="game.startDate" matInput [matDatepicker]="picker" />
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

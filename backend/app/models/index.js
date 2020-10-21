@@ -18,7 +18,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.cards = require("./card.model.js")(sequelize, Sequelize);
 db.games = require("./game.model.js")(sequelize, Sequelize);
+db.cards = require("./card.model.js")(sequelize, Sequelize);
 
 module.exports = db;

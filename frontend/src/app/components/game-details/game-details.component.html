@@ -1,30 +1,56 @@
 <div style="margin: auto;">
-    <div class='no-print' *ngIf="currentGame">
-        <form class="edit-form">
-            <div class="form-group">
-                <label for="title">Nombre</label>
-                <input type="text" class="form-control" id="title" [(ngModel)]="currentGame.name" name="name" />
-            </div>
-            <div class="form-group">
-                <label for="code">Codigo de Juego</label>
-                <input type="text" class="form-control" id="code" [(ngModel)]="currentGame.id" name="id" />
-            </div>
-            <div class="form-group">
-                <label for="startDate">Fecha Inicio</label>
-                <mat-form-field appearance="fill">
-                    <input class="form-control date" name="startDate" [(ngModel)]="currentGame.startDate" matInput [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
+    <div *ngIf="!gameStarted">
+        <div class='no-print' *ngIf="currentGame">
+            <form class="edit-form">
+                <div class="form-group">
+                    <label for="title">Nombre</label>
+                    <input type="text" class="form-control" id="title" [(ngModel)]="currentGame.name" name="name" />
+                </div>
+                <div class="form-group">
+                    <label for="code">Codigo de Juego</label>
+                    <input type="text" class="form-control" id="code" [(ngModel)]="currentGame.id" name="id" />
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Fecha Inicio</label> <br>
+                    <mat-form-field appearance="fill">
+                        <input class="form-control date" name="startDate" [(ngModel)]="currentGame.startDate" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </form>
 
-
-        </form>
-
-        <div class="buttons">
-            <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
-            <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> <br>
+            <div class="buttons">
+                <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
+                <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> <br>
+                <button class="btn" (click)="startGame()"> <i class="fas fa-play"></i> INICIAR JUEGO  <i class="fas fa-play"></i></button>
+            </div>
         </div>
-
+    </div>
+    <div *ngIf="gameStarted">
+        <div class="bingo-allnumbers">
+            <div id="board" class="flex">
+                <div class="row no-wrap set-size text-center notranslate">
+                    <div class="col board-letter white-bg red-text">B</div>
+                    <div *ngFor="let number of array_b" class="col ball">{{number}}</div>
+                </div>
+                <div class="row no-wrap set-size text-center notranslate">
+                    <div class="col board-letter white-bg red-text">I</div>
+                    <div *ngFor="let number of array_i" class="col ball">{{number}}</div>
+                </div>
+                <div class="row no-wrap set-size text-center notranslate">
+                    <div class="col board-letter white-bg red-text">N</div>
+                    <div *ngFor="let number of array_n" class="col ball">{{number}}</div>
+                </div>
+                <div class="row no-wrap set-size text-center notranslate">
+                    <div class="col board-letter white-bg red-text">G</div>
+                    <div *ngFor="let number of array_g" class="col ball">{{number}}</div>
+                </div>
+                <div class="row no-wrap set-size text-center notranslate">
+                    <div class="col board-letter white-bg red-text">O</div>
+                    <div *ngFor="let number of array_o" class="col ball">{{number}}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

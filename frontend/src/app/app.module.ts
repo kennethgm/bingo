@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
 import { CardDetailsComponent } from './components/card-details/card-details.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -20,7 +19,6 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 @NgModule({
   declarations: [
     AppComponent,
-    TutorialsListComponent,
     AddCardComponent,
     CardDetailsComponent,
     AdminComponent,

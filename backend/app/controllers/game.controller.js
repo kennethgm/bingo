@@ -17,7 +17,8 @@ exports.create = (req, res) => {
     const game = {
         name: req.body.name,
         startDate: req.body.startDate,
-        winners: req.body.winners
+        winners: req.body.winners,
+        settings: req.body.settings
     };
 
     // Save Game in the database

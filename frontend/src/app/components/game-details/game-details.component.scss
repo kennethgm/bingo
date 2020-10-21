@@ -33,3 +33,50 @@ input.form-control {
         max-width: 100%;
     }
 }
+
+#board {
+    padding: 1rem;
+    display: flex;
+    flex-flow: column;
+    align-self: stretch;
+    justify-content: space-between;
+    background-color: black;
+    * {
+        font-size: 2.7rem;
+        font-size: 2vw;
+        line-height: 1.5;
+    }
+    .row {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+        margin-left: 0;
+        margin-right: 0;
+        &.no-wrap {
+            flex-wrap: nowrap;
+        }
+        &.set-size>.col {
+            flex-basis: 0;
+        }
+        &>.col:first-child {
+            margin-left: 0;
+        }
+        .col {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    .board-letter {
+        flex: 0 0 1.25em!important;
+        font-weight: 700;
+        &.white-bg.red-text {
+            background-color: #fff!important;
+            color: red!important;
+        }
+    }
+    .ball {
+        color: #3c3c3c;
+    }
+}
