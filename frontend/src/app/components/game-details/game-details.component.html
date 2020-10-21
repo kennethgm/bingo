@@ -1,6 +1,6 @@
-<div style="margin: auto;">
+<div style="width: 700px; margin: auto;">
     <div *ngIf="!gameStarted">
-        <div class='no-print' *ngIf="currentGame">
+        <div *ngIf="currentGame">
             <form class="edit-form">
                 <div class="form-group">
                     <label for="title">Nombre</label>
@@ -28,7 +28,7 @@
             <div class="buttons">
                 <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
                 <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> <br>
-                <button class="btn" (click)="startGame()"> <i class="fas fa-play"></i> INICIAR JUEGO  <i class="fas fa-play"></i></button>
+                <button class="btn start-game" (click)="startGame()"> <i class="fas fa-play"></i> INICIAR JUEGO  <i class="fas fa-play"></i></button>
             </div>
         </div>
     </div>
