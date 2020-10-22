@@ -38,52 +38,52 @@
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">B</div>
                     <div *ngFor="let number of array_b" class="col ball">
-                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="!isInArray(number) && addToGame(number)"> 
                              {{number}} 
                         </span>
-                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" *ngIf="currentGame.settings.raffleType == 'digital'"> {{number}} </span>
                     </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">I</div>
                     <div *ngFor="let number of array_i" class="col ball">
-                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="!isInArray(number) && addToGame(number)"> 
                             {{number}} 
                        </span>
-                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" *ngIf="currentGame.settings.raffleType == 'digital'"> {{number}} </span>
                     </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">N</div>
                     <div *ngFor="let number of array_n" class="col ball">
-                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="!isInArray(number) && addToGame(number)"> 
                             {{number}} 
                        </span>
-                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" *ngIf="currentGame.settings.raffleType == 'digital'"> {{number}} </span>
                     </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">G</div>
                     <div *ngFor="let number of array_g" class="col ball">
-                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="!isInArray(number) && addToGame(number)"> 
                             {{number}} 
                        </span>
-                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" *ngIf="currentGame.settings.raffleType == 'digital'"> {{number}} </span>
                     </div>
                 </div>
                 <div class="row no-wrap set-size text-center notranslate">
                     <div class="col board-letter white-bg red-text">O</div>
                     <div *ngFor="let number of array_o" class="col ball">
-                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="addToGame(number)"> 
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" class="clickable" *ngIf="currentGame.settings.raffleType == 'physic'" (click)="!isInArray(number) && addToGame(number)"> 
                             {{number}} 
                        </span>
-                        <span *ngIf="currentGame.settings.raffleType != 'physic'"> {{number}} </span>
+                        <span [class.selected]="isInArray(number) ? 'selected' : ''" *ngIf="currentGame.settings.raffleType == 'digital'"> {{number}} </span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="last-calls">
-            Ultimos numeros:
+            <p> Ultimos numeros: </p>
             <span *ngFor="let number of currentGame.settings.selectedNumbers?.slice(-5); index as i;">
                <span *ngIf="number != lastNumber"> 
                    {{ number }}  
@@ -92,6 +92,19 @@
             <span *ngIf="lastNumber">
                 <span class="last"> {{ lastNumber }} </span>
             </span>
+        </div>
+        <div class="raffle" *ngIf="currentGame.settings.raffleType == 'digital'">
+            <button *ngIf="!showRaffle" class="btn" (click)="getRandomNumber(1,75)"> Girar Tombola </button> <br>
+            <div>
+                <img *ngIf="showRaffle" src="../../../assets/bingo.gif " />
+                <img *ngIf="!showRaffle" src="../../../assets/bingo-paused.jpg" />
+            </div>
+            <div>
+                <div *ngIf="lastNumber && !showRaffle" class="ball">
+                    {{ lastNumber }}
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

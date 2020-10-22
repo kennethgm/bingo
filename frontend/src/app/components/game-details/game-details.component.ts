@@ -18,6 +18,7 @@ export class GameDetailsComponent implements OnInit {
   array_g = [46,47,48,49,50,51,52,53,54,55,56,57,58,59,60];
   array_o = [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75];
   lastNumber;
+  showRaffle = false;
 
   constructor(
     private cardService: GameService,
@@ -97,5 +98,32 @@ export class GameDetailsComponent implements OnInit {
     }
   }
   
+  getRandomNumber(min, max) {
+    let self = this;
+    this.showRaffle = true;
+    let newNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    if (self.currentGame.settings.selectedNumbers) {
+      if (self.currentGame.settings.selectedNumbers.length < 75) {
+        if (self.isInArray(newNumber)) {
+          self.getRandomNumber(1,75);
+        } else {
+          setTimeout(function(){
+            self.addToGame(newNumber);
+            self.showRaffle = false;
+          }, 5900);
+        }
+      }
+    } else {
+      if (self.isInArray(newNumber)) {
+        self.getRandomNumber(1,75);
+      } else {
+        setTimeout(function(){
+          self.addToGame(newNumber);
+          self.showRaffle = false;
+        }, 5900);
+      }
+    } 
+  }
 
 }
