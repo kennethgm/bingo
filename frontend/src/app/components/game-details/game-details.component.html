@@ -28,7 +28,8 @@
             <div class="buttons">
                 <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
                 <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> <br>
-                <button class="btn start-game" (click)="startGame()"> <i class="fas fa-play"></i> INICIAR JUEGO  <i class="fas fa-play"></i></button>
+                <button *ngIf="!currentGame.settings.gameStarted" class="btn start-game" (click)="startGame()"> <i class="fas fa-play"></i> INICIAR JUEGO  <i class="fas fa-play"></i></button>
+                <button *ngIf="currentGame.settings.gameStarted" class="btn start-game" (click)="startGame()"> <i class="fas fa-play"></i> CONTINUAR JUEGO  <i class="fas fa-play"></i></button>
             </div>
         </div>
     </div>
@@ -98,13 +99,15 @@
             <div>
                 <img *ngIf="showRaffle" src="../../../assets/bingo.gif " />
                 <img *ngIf="!showRaffle" src="../../../assets/bingo-paused.jpg" />
-            </div>
-            <div>
                 <div *ngIf="lastNumber && !showRaffle" class="ball">
                     {{ lastNumber }}
                 </div>
             </div>
 
+        </div>
+        <div class="buttons">
+            <button class="btn" (click)="restartGame()"> Reiniciar el Juego </button>
+            <button class="btn" (click)="this.gameStarted = false"> Salir </button>
         </div>
     </div>
 </div>

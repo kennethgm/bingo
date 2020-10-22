@@ -55,6 +55,28 @@ export class GameDetailsComponent implements OnInit {
     });
   }
 
+  saveGameProgress(): void {
+    this.cardService.update(this.currentGame.id, this.currentGame)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.message = 'El juego fue actualizado correctamente!';
+        },
+        error => {
+          console.log(error);
+    });
+  }
+
+  restartGame() {
+    if (confirm('Estas seguro que quieres reiniciar el juego?')) {
+      this.lastNumber = undefined;
+      let raffleType = this.currentGame.settings.raffleType;
+      let gameStarted = this.gameStarted;
+      this.currentGame.settings = {"raffleType":  raffleType, "gameStarted": gameStarted };
+      this.saveGameProgress();
+    }
+  }
+
   deleteGame(): void {
     this.cardService.delete(this.currentGame.id)
       .subscribe(
@@ -70,12 +92,11 @@ export class GameDetailsComponent implements OnInit {
   }
 
   startGame() {
-    console.log('starting game');
     this.gameStarted = true;
+    this.currentGame.settings['gameStarted'] = this.gameStarted;
   }
 
   addToGame(number) {
-    console.log('addtogame', number);
     this.lastNumber = number;
     if (this.currentGame.settings.selectedNumbers) {
       this.currentGame.settings.selectedNumbers.push(number);
@@ -83,7 +104,7 @@ export class GameDetailsComponent implements OnInit {
       this.currentGame.settings['selectedNumbers'] = [];
       this.currentGame.settings.selectedNumbers.push(number);
     }
-    console.log('currentgame', this.currentGame);
+    this.saveGameProgress();
   }
 
   isInArray(number) {
