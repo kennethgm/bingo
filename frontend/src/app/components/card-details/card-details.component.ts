@@ -60,7 +60,8 @@ export class CardDetailsComponent implements OnInit {
   }
 
   deleteCard(): void {
-    this.cardService.delete(this.currentCard.id)
+    if (confirm('Estas seguro que quieres borrar este carton?')) {
+      this.cardService.delete(this.currentCard.id)
       .subscribe(
         response => {
         //  console.log(response);
@@ -70,7 +71,8 @@ export class CardDetailsComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });
+    });
+    }
   }
 
   printCard() {

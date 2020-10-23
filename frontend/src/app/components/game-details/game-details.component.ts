@@ -78,17 +78,16 @@ export class GameDetailsComponent implements OnInit {
   }
 
   deleteGame(): void {
-    this.cardService.delete(this.currentGame.id)
+    if(confirm('Estas seguro que quieres borrar este juego? Todo se perdera!')) {
+      this.cardService.delete(this.currentGame.id)
       .subscribe(
-        response => {
-        //  console.log(response);
-          alert(response);
-          this.router.navigate(['/admin']);
-
-        },
-        error => {
-          console.log(error);
-    });
+          response => {
+            this.router.navigate(['/admin']);
+          },
+          error => {
+            console.log(error);
+      });
+    }
   }
 
   startGame() {

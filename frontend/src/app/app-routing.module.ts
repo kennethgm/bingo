@@ -5,9 +5,10 @@ import { AddCardComponent } from './components/add-card/add-card.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'cards', pathMatch: 'full' },
+  { path: '',  component: HomeComponent },
   { path: 'cards/:id', component: CardDetailsComponent },
   { path: 'add', component: AddCardComponent },
   { path: 'admin', component: AdminComponent },

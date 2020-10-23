@@ -15,6 +15,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { GamesListComponent } from './components/games-list/games-list.component';
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
     AdminComponent,
     GamesListComponent,
     AddGameComponent,
-    GameDetailsComponent
+    GameDetailsComponent,
+    HomeComponent
   ],
   imports: [
   BrowserModule,

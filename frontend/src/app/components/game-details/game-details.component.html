@@ -1,4 +1,4 @@
-<div style="width: 700px; margin: auto;">
+<div class="container">
     <div *ngIf="!gameStarted">
         <div *ngIf="currentGame">
             <form class="edit-form">
@@ -95,7 +95,7 @@
             </span>
         </div>
         <div class="raffle" *ngIf="currentGame.settings.raffleType == 'digital'">
-            <button *ngIf="!showRaffle" class="btn" (click)="getRandomNumber(1,75)"> Girar Tombola </button> <br>
+            <button *ngIf="!showRaffle" class="btn" (click)="getRandomNumber(1,75)"> <i class="fas fa-undo"></i> Girar Tombola <i class="fas fa-undo"></i> </button> <br>
             <div>
                 <img *ngIf="showRaffle" src="../../../assets/bingo.gif " />
                 <img *ngIf="!showRaffle" src="../../../assets/bingo-paused.jpg" />
@@ -106,8 +106,8 @@
 
         </div>
         <div class="buttons">
-            <button class="btn" (click)="restartGame()"> Reiniciar el Juego </button>
-            <button class="btn" (click)="this.gameStarted = false"> Salir </button>
+            <button class="btn" (click)="restartGame()"> <i class="fas fa-recycle"></i> Reiniciar el Juego  </button>
+            <button class="btn" (click)="this.gameStarted = false"> <i class="fas fa-arrow-circle-left"></i> Salir  </button>
         </div>
     </div>
 </div>

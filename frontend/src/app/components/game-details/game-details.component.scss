@@ -1,3 +1,7 @@
+.container {
+    padding: 30px;
+}
+
 .form-control.date {
     max-width: 200px;
     display: inline-block;
@@ -78,9 +82,10 @@ input.form-control {
         }
     }
     button {
-        width: 100%;
+        width: 85%;
         background-color: #1396d3;
         color: white;
+        margin: 20px 0;
     }
     .ball {
         min-width: 175px;
