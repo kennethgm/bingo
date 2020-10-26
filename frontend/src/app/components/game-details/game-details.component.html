@@ -94,16 +94,20 @@
                 <span class="last"> {{ lastNumber }} </span>
             </span>
         </div>
-        <div class="raffle" *ngIf="currentGame.settings.raffleType == 'digital'">
-            <button *ngIf="!showRaffle" class="btn" (click)="getRandomNumber(1,75)"> <i class="fas fa-undo"></i> Girar Tombola <i class="fas fa-undo"></i> </button> <br>
-            <div>
-                <img *ngIf="showRaffle" src="../../../assets/bingo.gif " />
-                <img *ngIf="!showRaffle" src="../../../assets/bingo-paused.jpg" />
-                <div *ngIf="lastNumber && !showRaffle" class="ball">
-                    {{ lastNumber }}
+        <div class="raffle container-fluid" *ngIf="currentGame.settings.raffleType == 'digital'">
+            <div class="col-md-6 d-inline-block">
+                <button *ngIf="!showRaffle" class="btn" (click)="getRandomNumber(1,75)"> <i class="fas fa-undo"></i> Girar Tombola <i class="fas fa-undo"></i> </button> <br>
+                <div>
+                    <img *ngIf="showRaffle" src="../../../assets/bingo.gif " />
+                    <img *ngIf="!showRaffle" src="../../../assets/bingo-paused.jpg" />
+                    <div *ngIf="lastNumber && !showRaffle" class="ball">
+                        {{ lastNumber }}
+                    </div>
                 </div>
             </div>
-
+            <div class="col-md-6 d-inline-block">
+                <h5> Ranking </h5>
+            </div>
         </div>
         <div class="buttons">
             <button class="btn" (click)="restartGame()"> <i class="fas fa-recycle"></i> Reiniciar el Juego  </button>
