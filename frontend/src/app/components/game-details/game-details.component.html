@@ -94,71 +94,72 @@
                 <span class="last"> {{ lastNumber }} </span>
             </span>
         </div>
-        <div class="raffle container-fluid" *ngIf="currentGame.settings.raffleType == 'digital'">
-            <div class="col-md-6 d-inline-block">
-                <button *ngIf="!showRaffle" class="btn" (click)="getRandomNumber(1,75)"> <i class="fas fa-undo"></i> Girar Tombola <i class="fas fa-undo"></i> </button> <br>
+        <div class="raffle container-fluid">
+            <div *ngIf="currentGame.settings.raffleType=='digital' " class="col-md-6 d-inline-block ">
+                <button *ngIf="!showRaffle " class="btn " (click)="getRandomNumber(1,75) "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
                 <div>
-                    <img *ngIf="showRaffle" src="../../../assets/bingo.gif " />
-                    <img *ngIf="!showRaffle" src="../../../assets/bingo-paused.jpg" />
-                    <div *ngIf="lastNumber && !showRaffle" class="ball">
+                    <img *ngIf="showRaffle " src="../../../assets/bingo.gif " />
+                    <img *ngIf="!showRaffle " src="../../../assets/bingo-paused.jpg " />
+                    <div *ngIf="lastNumber && !showRaffle " class="ball ">
                         {{ lastNumber }}
                     </div>
                 </div>
             </div>
-            <div class="ranking col-md-6 d-inline-block">
-                <h2> Ranking </h2>
+            <div class="ranking col-md-6 d-inline-block ">
+                <h2> Ranking de Posibles Ganadores </h2>
                 <ul>
-                    <li *ngFor="let ranking of rankingOfWinners; index as i;"> {{ i + 1 }}. {{ ranking.name }} <i (click)="ranking.showDetails = !ranking.showDetails" class="fas fa-eye"></i>
-                        <div class="details" *ngIf="ranking.showDetails == true">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-letter">B</div>
-                                    <div class="card-numbers">
-                                        <div *ngFor="let element of ranking.numbers.b" class="card-number">
+                    <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
+                        <span class="winner" *ngIf="ranking.winnerDetail != ''"> BINGO!!! {{ ranking.winnerDetail }} </span>
+                        <div class="details" *ngIf="ranking.showDetails==true ">
+                            <div class="row ">
+                                <div class="col ">
+                                    <div class="card-letter ">B</div>
+                                    <div class="card-numbers ">
+                                        <div *ngFor="let element of ranking.numbers.b " class="card-number ">
                                             {{ element }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card-letter">I</div>
-                                    <div class="card-numbers">
-                                        <div *ngFor="let element of ranking.numbers.i" class="card-number">
+                                <div class="col ">
+                                    <div class="card-letter ">I</div>
+                                    <div class="card-numbers ">
+                                        <div *ngFor="let element of ranking.numbers.i " class="card-number ">
                                             {{ element }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card-letter">N</div>
-                                    <div class="card-numbers">
-                                        <div class="card-number">
+                                <div class="col ">
+                                    <div class="card-letter ">N</div>
+                                    <div class="card-numbers ">
+                                        <div class="card-number ">
                                             {{ ranking.numbers.n[0] }}
                                         </div>
-                                        <div class="card-number">
+                                        <div class="card-number ">
                                             {{ ranking.numbers.n[1] }}
                                         </div>
-                                        <div class="card-number">
-                                            <div class="freespace"><span>X</span></div>
+                                        <div class="card-number ">
+                                            <div class="freespace "><span>X</span></div>
                                         </div>
-                                        <div class="card-number">
+                                        <div class="card-number ">
                                             {{ ranking.numbers.n[2] }}
                                         </div>
-                                        <div class="card-number">
+                                        <div class="card-number ">
                                             {{ ranking.numbers.n[3] }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card-letter">G</div>
-                                    <div class="card-numbers">
-                                        <div *ngFor="let element of ranking.numbers.g" class="card-number">
+                                <div class="col ">
+                                    <div class="card-letter ">G</div>
+                                    <div class="card-numbers ">
+                                        <div *ngFor="let element of ranking.numbers.g " class="card-number ">
                                             {{ element }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card-letter">O</div>
-                                    <div class="card-numbers">
-                                        <div *ngFor="let element of ranking.numbers.o" class="card-number">
+                                <div class="col ">
+                                    <div class="card-letter ">O</div>
+                                    <div class="card-numbers ">
+                                        <div *ngFor="let element of ranking.numbers.o " class="card-number ">
                                             {{ element }}
                                         </div>
                                     </div>
@@ -169,9 +170,9 @@
                 </ul>
             </div>
         </div>
-        <div class="buttons">
-            <button class="btn" (click)="restartGame()"> <i class="fas fa-recycle"></i> Reiniciar el Juego  </button>
-            <button class="btn" (click)="this.gameStarted = false"> <i class="fas fa-arrow-circle-left"></i> Salir  </button>
+        <div class="buttons ">
+            <button class="btn " (click)="restartGame() "> <i class="fas fa-recycle "></i> Reiniciar el Juego  </button>
+            <button class="btn " (click)="this.gameStarted=false "> <i class="fas fa-arrow-circle-left "></i> Salir  </button>
         </div>
     </div>
 </div>

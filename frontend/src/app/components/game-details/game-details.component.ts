@@ -36,10 +36,12 @@ export class GameDetailsComponent implements OnInit {
 
   getCards(): void {
     let self = this;
-    this.cardService.findByGameCode(this.currentGame.id)
+    if (!self.currentGame.settings['rankingOfWinners'] || self.currentGame.settings['rankingOfWinners'] == []) {
+      this.cardService.findByGameCode(this.currentGame.id)
       .subscribe(
         data => {
           this.gameCards = data;
+          this.rankingOfWinners = [];
           this.gameCards.forEach(element => {
             let rankingPlayer = new Object();
             rankingPlayer['id'] = element.id;
@@ -51,6 +53,7 @@ export class GameDetailsComponent implements OnInit {
             rankingPlayer['horizontalCenter'] = 0;
             rankingPlayer['corners'] = 0;
             rankingPlayer['fullGame'] = 0;
+            rankingPlayer['winnerDetail'] = '';
             rankingPlayer['showDetails'] = false; 
             rankingPlayer['matchedNumbers'] = {
               'b1': false,
@@ -81,11 +84,14 @@ export class GameDetailsComponent implements OnInit {
             };
             self.rankingOfWinners.push(rankingPlayer);
           });
-          console.log('rankingOfWinners', this.rankingOfWinners);
         },
         error => {
           console.log(error);
-    });
+      });
+    } else {
+      self.rankingOfWinners = self.currentGame.settings['rankingOfWinners'];
+    }
+    console.log('currentRanking', self.rankingOfWinners);
   }
 
   getGame(id): void {
@@ -127,9 +133,11 @@ export class GameDetailsComponent implements OnInit {
   restartGame() {
     if (confirm('Estas seguro que quieres reiniciar el juego?')) {
       this.lastNumber = undefined;
+      this.rankingOfWinners = [];
       let raffleType = this.currentGame.settings.raffleType;
       let gameStarted = this.gameStarted;
       this.currentGame.settings = {"raffleType":  raffleType, "gameStarted": gameStarted };
+      this.gameStarted = false;
       this.saveGameProgress();
     }
   }
@@ -208,10 +216,54 @@ export class GameDetailsComponent implements OnInit {
 
   updateRankings(number) {
     let self = this;
-    let foundOnRanking = false;
-    
+    this.rankingOfWinners.forEach(player => {
+      self.check4Corners(player, number);
+    });
+    self.rankingOfWinners.sort(self.compareCorners);
+    console.log('updated ranking', self.rankingOfWinners);
+    this.currentGame.settings['rankingOfWinners'] = this.rankingOfWinners;
+    //this.saveGameProgress();
+  }
+
+  check4Corners(player, newNumber) {
+    console.log('player', player);
+    switch(newNumber)  {
+      case player.numbers['b'][0]: 
+        player.corners++;
+        player.matchedNumbers['b1'] = true;
+        break;
+      case player.numbers['b'][4]:
+        player.corners++;
+        player.matchedNumbers['b5'] = true;
+        break;
+      case player.numbers['o'][0]:
+        player.corners++;
+        player.matchedNumbers['o1'] = true;
+        break;
+      case player.numbers['o'][4]:
+        player.corners++;
+        player.matchedNumbers['o5'] = true;
+        break;
+      default: console.log('no matches in corners'); break;
+    }
+    console.log('playercorners', player.corners);
+    if (player.corners == 4) {
+      player.winnerDetail = '(4 esquinas)';
+    }
   }
 
 
+  compareCorners(a, b) {
+    const object1 = a.corners;
+    const object2 = b.corners;
+  
+    let comparison = 0;
+    if (object1 < object2) {
+      comparison = 1;
+    } else if (object1 > object2) {
+      comparison = -1;
+    }
+    return comparison;
+  }
 
 }

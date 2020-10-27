@@ -74,6 +74,7 @@ input.form-control {
 
 .raffle {
     text-align: center;
+    min-height: 60vh;
     .raffle-object {
         text-align: left;
         img {
@@ -112,6 +113,11 @@ input.form-control {
         list-style: none;
         li {
             margin: 10px 0;
+            font-size: 1rem;
+            text-align: left;
+            .winner {
+                color: red;
+            }
             .details {
                 position: absolute;
                 left: 40%;
