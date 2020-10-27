@@ -93,7 +93,7 @@ export class AddCardComponent implements OnInit {
     numbers.i = this.shuffle(numbers.i);
     numbers.i = numbers.i.slice(0, 5);
     numbers.n = this.shuffle(numbers.n);
-    numbers.n = numbers.i.slice(0, 4);
+    numbers.n = numbers.n.slice(0, 4);
     numbers.g = this.shuffle(numbers.g);
     numbers.g = numbers.g.slice(0, 5);
     numbers.o = this.shuffle(numbers.o);

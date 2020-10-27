@@ -106,16 +106,21 @@
                 </div>
             </div>
             <div class="ranking col-md-6 d-inline-block ">
-                <h2> Ranking de Posibles Ganadores </h2>
+                <h2> Ranking de Jugadores </h2>
                 <ul>
                     <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
+                        <span class="current"> 
+                            Esquinas: {{ ranking.corners }}, Vert: {{ ranking.vertical }}, 
+                            Vert(c): {{ ranking.verticalCenter }}, Horiz: {{ ranking.horizontal }}, 
+                            Horiz(c): {{ ranking.horizontalCentral }}, Lleno: {{ ranking.fullGame }} 
+                        </span>
                         <span class="winner" *ngIf="ranking.winnerDetail != ''"> BINGO!!! {{ ranking.winnerDetail }} </span>
                         <div class="details" *ngIf="ranking.showDetails==true ">
                             <div class="row ">
                                 <div class="col ">
                                     <div class="card-letter ">B</div>
                                     <div class="card-numbers ">
-                                        <div *ngFor="let element of ranking.numbers.b " class="card-number ">
+                                        <div *ngFor="let element of ranking.numbers.b; index as i;" class="card-number" [class.selected]="ranking.matchedNumbers['b'+ (i+1) ] ? 'selected' : ''">
                                             {{ element }}
                                         </div>
                                     </div>
@@ -123,7 +128,7 @@
                                 <div class="col ">
                                     <div class="card-letter ">I</div>
                                     <div class="card-numbers ">
-                                        <div *ngFor="let element of ranking.numbers.i " class="card-number ">
+                                        <div *ngFor="let element of ranking.numbers.i; index as i;" class="card-number" [class.selected]="ranking.matchedNumbers['i'+ (i+1) ] ? 'selected' : ''">
                                             {{ element }}
                                         </div>
                                     </div>
@@ -131,19 +136,19 @@
                                 <div class="col ">
                                     <div class="card-letter ">N</div>
                                     <div class="card-numbers ">
-                                        <div class="card-number ">
+                                        <div class="card-number " [class.selected]="ranking.matchedNumbers['n1'] ? 'selected' : ''">
                                             {{ ranking.numbers.n[0] }}
                                         </div>
-                                        <div class="card-number ">
+                                        <div class="card-number " [class.selected]="ranking.matchedNumbers['n2'] ? 'selected' : ''">
                                             {{ ranking.numbers.n[1] }}
                                         </div>
                                         <div class="card-number ">
                                             <div class="freespace "><span>X</span></div>
                                         </div>
-                                        <div class="card-number ">
+                                        <div class="card-number " [class.selected]="ranking.matchedNumbers['n4'] ? 'selected' : ''">
                                             {{ ranking.numbers.n[2] }}
                                         </div>
-                                        <div class="card-number ">
+                                        <div class="card-number " [class.selected]="ranking.matchedNumbers['n5'] ? 'selected' : ''">
                                             {{ ranking.numbers.n[3] }}
                                         </div>
                                     </div>
@@ -151,7 +156,7 @@
                                 <div class="col ">
                                     <div class="card-letter ">G</div>
                                     <div class="card-numbers ">
-                                        <div *ngFor="let element of ranking.numbers.g " class="card-number ">
+                                        <div *ngFor="let element of ranking.numbers.g; index as i; " class="card-number " [class.selected]="ranking.matchedNumbers['g'+ (i+1) ] ? 'selected' : ''">
                                             {{ element }}
                                         </div>
                                     </div>
@@ -159,7 +164,7 @@
                                 <div class="col ">
                                     <div class="card-letter ">O</div>
                                     <div class="card-numbers ">
-                                        <div *ngFor="let element of ranking.numbers.o " class="card-number ">
+                                        <div *ngFor="let element of ranking.numbers.o; index as i;" class="card-number " [class.selected]="ranking.matchedNumbers['o'+ (i+1) ] ? 'selected' : ''">
                                             {{ element }}
                                         </div>
                                     </div>

@@ -109,8 +109,10 @@ input.form-control {
 }
 
 .ranking {
+    vertical-align: top;
     ul {
         list-style: none;
+        padding: 0;
         li {
             margin: 10px 0;
             font-size: 1rem;
@@ -118,9 +120,13 @@ input.form-control {
             .winner {
                 color: red;
             }
+            .current {
+                font-size: 12px;
+                color: #28a745;
+            }
             .details {
                 position: absolute;
-                left: 40%;
+                left: 20%;
                 .row {
                     max-width: 230px;
                     background: black;
@@ -157,6 +163,9 @@ input.form-control {
                             text-align: center;
                             padding: .25em;
                             margin: 0;
+                            &.selected {
+                                background-color: #28a745;
+                            }
                         }
                     }
                 }
