@@ -38,4 +38,13 @@ export class CardService {
   findByName(title): Observable<any> {
     return this.http.get(`${baseUrl}?name=${title}`);
   }
+
+  findByGameCode(gameCode): Observable<any> {
+    console.log('called');
+    const data = {
+      code: gameCode
+    };
+    return this.http.post(baseUrl + '/find/code', data);
+  }
 }
+

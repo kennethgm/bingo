@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
-
+import { CardService } from 'src/app/services/card.service';
 @Component({
   selector: 'app-game-details',
   templateUrl: './game-details.component.html',
@@ -19,23 +19,36 @@ export class GameDetailsComponent implements OnInit {
   array_o = [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75];
   lastNumber;
   showRaffle = false;
+  gameCards = [];
 
   constructor(
-    private cardService: GameService,
+    private gameService: GameService,
+    private cardService: CardService,
     private route: ActivatedRoute,
     private router: Router) { }
 
     ngOnInit(): void {
       this.message = '';
       this.getGame(this.route.snapshot.paramMap.get('id'));
+      
     }
 
+  getCards(): void {
+    this.cardService.findByGameCode(this.currentGame.id)
+      .subscribe(
+        data => {
+          this.gameCards = data;
+        },
+        error => {
+          console.log(error);
+    });
+  }
+
   getGame(id): void {
-    this.cardService.get(id)
+    this.gameService.get(id)
     .subscribe(
       data => {
         this.currentGame = data;
-        console.log('currentgame',data);
       },
       error => {
         console.log(error);
@@ -43,7 +56,7 @@ export class GameDetailsComponent implements OnInit {
   }
 
   updateGame(): void {
-    this.cardService.update(this.currentGame.id, this.currentGame)
+    this.gameService.update(this.currentGame.id, this.currentGame)
       .subscribe(
         response => {
         //  console.log(response);
@@ -56,7 +69,7 @@ export class GameDetailsComponent implements OnInit {
   }
 
   saveGameProgress(): void {
-    this.cardService.update(this.currentGame.id, this.currentGame)
+    this.gameService.update(this.currentGame.id, this.currentGame)
       .subscribe(
         response => {
           console.log(response);
@@ -79,7 +92,7 @@ export class GameDetailsComponent implements OnInit {
 
   deleteGame(): void {
     if(confirm('Estas seguro que quieres borrar este juego? Todo se perdera!')) {
-      this.cardService.delete(this.currentGame.id)
+      this.gameService.delete(this.currentGame.id)
       .subscribe(
           response => {
             this.router.navigate(['/admin']);
@@ -93,6 +106,7 @@ export class GameDetailsComponent implements OnInit {
   startGame() {
     this.gameStarted = true;
     this.currentGame.settings['gameStarted'] = this.gameStarted;
+    this.getCards();
   }
 
   addToGame(number) {
@@ -144,6 +158,10 @@ export class GameDetailsComponent implements OnInit {
         }, 5900);
       }
     } 
+  }
+
+  updateRankings(number) {
+
   }
 
 }

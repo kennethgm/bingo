@@ -147,3 +147,19 @@ exports.findAllPublished = (req, res) => {
             });
         });
 };
+
+exports.findWithGameCode = (req, res) => {
+    let code = (req.body.code).toString();
+    Card.findAll({
+            where: {
+                gameCode: code
+            }
+        }).then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving cards."
+            });
+        });
+};

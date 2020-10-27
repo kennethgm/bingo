@@ -9,6 +9,8 @@ module.exports = app => {
     // Retrieve all Tutorials
     router.get("/", cards.findAll);
 
+    router.post("/find/code", cards.findWithGameCode);
+
     // Retrieve all published Tutorials
     router.get("/published", cards.findAllPublished);
 
