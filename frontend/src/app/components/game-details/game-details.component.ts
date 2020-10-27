@@ -20,6 +20,7 @@ export class GameDetailsComponent implements OnInit {
   lastNumber;
   showRaffle = false;
   gameCards = [];
+  rankingOfWinners = [];
 
   constructor(
     private gameService: GameService,
@@ -34,10 +35,53 @@ export class GameDetailsComponent implements OnInit {
     }
 
   getCards(): void {
+    let self = this;
     this.cardService.findByGameCode(this.currentGame.id)
       .subscribe(
         data => {
           this.gameCards = data;
+          this.gameCards.forEach(element => {
+            let rankingPlayer = new Object();
+            rankingPlayer['id'] = element.id;
+            rankingPlayer['name'] = element.name;
+            rankingPlayer['numbers'] = element.numbers;
+            rankingPlayer['vertical'] = 0;
+            rankingPlayer['verticalCenter'] = 0;
+            rankingPlayer['horizontal'] = 0;
+            rankingPlayer['horizontalCenter'] = 0;
+            rankingPlayer['corners'] = 0;
+            rankingPlayer['fullGame'] = 0;
+            rankingPlayer['showDetails'] = false; 
+            rankingPlayer['matchedNumbers'] = {
+              'b1': false,
+              'b2': false,
+              'b3': false,
+              'b4': false,
+              'b5': false,
+              'i1': false,
+              'i2': false,
+              'i3': false,
+              'i4': false,
+              'i5': false,
+              'n1': false,
+              'n2': false,
+              'n3': true,
+              'n4': false,
+              'n5': false,
+              'g1': false,
+              'g2': false,
+              'g3': false,
+              'g4': false,
+              'g5': false,
+              'o1': false,
+              'o2': false,
+              'o3': false,
+              'o4': false,
+              'o5': false,
+            };
+            self.rankingOfWinners.push(rankingPlayer);
+          });
+          console.log('rankingOfWinners', this.rankingOfWinners);
         },
         error => {
           console.log(error);
@@ -113,9 +157,11 @@ export class GameDetailsComponent implements OnInit {
     this.lastNumber = number;
     if (this.currentGame.settings.selectedNumbers) {
       this.currentGame.settings.selectedNumbers.push(number);
+      this.updateRankings(number);
     } else {
       this.currentGame.settings['selectedNumbers'] = [];
       this.currentGame.settings.selectedNumbers.push(number);
+      this.updateRankings(number);
     }
     this.saveGameProgress();
   }
@@ -161,7 +207,11 @@ export class GameDetailsComponent implements OnInit {
   }
 
   updateRankings(number) {
-
+    let self = this;
+    let foundOnRanking = false;
+    
   }
+
+
 
 }

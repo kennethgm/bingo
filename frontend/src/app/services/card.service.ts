@@ -40,7 +40,6 @@ export class CardService {
   }
 
   findByGameCode(gameCode): Observable<any> {
-    console.log('called');
     const data = {
       code: gameCode
     };

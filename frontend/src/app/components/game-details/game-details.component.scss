@@ -107,6 +107,63 @@ input.form-control {
     }
 }
 
+.ranking {
+    ul {
+        list-style: none;
+        li {
+            margin: 10px 0;
+            .details {
+                position: absolute;
+                left: 40%;
+                .row {
+                    max-width: 230px;
+                    background: black;
+                    border-radius: 10px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-between;
+                    align-items: stretch;
+                    align-content: stretch;
+                }
+                .col {
+                    text-align: center;
+                    padding: 0;
+                    padding: 0!important;
+                    margin: 0!important;
+                    flex-basis: 20%;
+                    max-width: 20%;
+                    .card-letter {
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        text-align: center;
+                        padding: .25em;
+                        margin: 0;
+                    }
+                    .card-numbers {
+                        border-top: 1px solid #cecece;
+                        border-bottom: 1px solid #cecece;
+                        .card-number {
+                            font-size: 1rem;
+                            background: #fff;
+                            border: 1px solid #cecece;
+                            text-align: center;
+                            padding: .25em;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+            i {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
 #board {
     padding: 1rem;
     display: flex;
