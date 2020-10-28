@@ -122,7 +122,7 @@ export class GameDetailsComponent implements OnInit {
     this.gameService.update(this.currentGame.id, this.currentGame)
       .subscribe(
         response => {
-          console.log(response);
+         // console.log(response);
           this.message = 'El juego fue actualizado correctamente!';
         },
         error => {
@@ -136,7 +136,17 @@ export class GameDetailsComponent implements OnInit {
       this.rankingOfWinners = [];
       let raffleType = this.currentGame.settings.raffleType;
       let gameStarted = this.gameStarted;
-      this.currentGame.settings = {"raffleType":  raffleType, "gameStarted": gameStarted };
+      let ways = {
+        corners: this.currentGame.settings.winningWays.corners ? this.currentGame.settings.winningWays.corners : false,
+        vertical:  this.currentGame.settings.winningWays.vertical ? this.currentGame.settings.winningWays.vertivcal : false,
+        horizontal:  this.currentGame.settings.winningWays.horizontal ? this.currentGame.settings.winningWays.horizontal : false,
+        fullGame:  this.currentGame.settings.winningWays.fullGame ? this.currentGame.settings.winningWays.fullGame : false,
+      };
+      this.currentGame.settings = {
+        "raffleType":  raffleType, 
+        "gameStarted": gameStarted, 
+        "winningWays": ways
+      };
       this.gameStarted = false;
       this.saveGameProgress();
     }
@@ -216,17 +226,27 @@ export class GameDetailsComponent implements OnInit {
 
   updateRankings(number) {
     let self = this;
+    let ways = Object.entries(self.currentGame.settings.winningWays);
+    
     this.rankingOfWinners.forEach(player => {
-      self.check4Corners(player, number);
-    });
+      ways.forEach(way => {
+        switch (way[0]) {
+          case 'corners':
+            if (way[1]) {
+              self.check4Corners(player, number);
+            }
+            break;
+          default: break;
+        }
+      });
+     
+    })
     self.rankingOfWinners.sort(self.compareCorners);
     console.log('updated ranking', self.rankingOfWinners);
     this.currentGame.settings['rankingOfWinners'] = this.rankingOfWinners;
-    //this.saveGameProgress();
   }
 
   check4Corners(player, newNumber) {
-    console.log('player', player);
     switch(newNumber)  {
       case player.numbers['b'][0]: 
         player.corners++;
@@ -244,9 +264,8 @@ export class GameDetailsComponent implements OnInit {
         player.corners++;
         player.matchedNumbers['o5'] = true;
         break;
-      default: console.log('no matches in corners'); break;
+      default: break;
     }
-    console.log('playercorners', player.corners);
     if (player.corners == 4) {
       player.winnerDetail = '(4 esquinas)';
     }

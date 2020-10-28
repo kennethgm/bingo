@@ -23,6 +23,20 @@
                     <input name="raffleType" type="radio" [(ngModel)]="currentGame.settings.raffleType" value="digital" /> Digital
                     <input name="raffleType" type="radio" [(ngModel)]="currentGame.settings.raffleType" value="physic" /> Fisica
                 </div>
+
+                <div class="form-group">
+                    <label for="raffleType">Formas de Ganar</label> <br>
+                    <input name="corners" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.corners">
+                    <span> 4 esquinas  </span> <br>
+                    <input name="vertical" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.vertical">
+                    <span> Vertical </span> <br>
+                    <input name="horizotal" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.horizontal">
+                    <span> Horizontal  </span> <br>
+                    <input name="fullGame" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.fullGame">
+                    <span> Carton Lleno </span> <br>
+
+                </div>
+
             </form>
 
             <div class="buttons">

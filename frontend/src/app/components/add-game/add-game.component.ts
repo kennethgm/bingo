@@ -63,7 +63,13 @@ export class AddGameComponent implements OnInit {
         winners: {},
         startDate: new Date(),
         settings: {
-          raffleType: 'digital'
+          raffleType: 'digital',
+          winningWays: {
+            "corners": false,
+            "vertical": false,
+            "horizontal": false,
+            "fullGame": false
+          }
         }
       };
     }
