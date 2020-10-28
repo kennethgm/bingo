@@ -12,6 +12,7 @@ export class GameDetailsComponent implements OnInit {
   currentGame = null;
   message = '';
   gameStarted = false;
+  gameFinished = false;
   array_b = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   array_i = [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
   array_n = [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45];
@@ -134,11 +135,17 @@ export class GameDetailsComponent implements OnInit {
     if (confirm('Estas seguro que quieres reiniciar el juego?')) {
       this.lastNumber = undefined;
       this.rankingOfWinners = [];
+      this.currentGame.winners = {
+        "corners": [],
+        "vertical": [],
+        "horizontal": [],
+        "fullGame": []
+      };
       let raffleType = this.currentGame.settings.raffleType;
       let gameStarted = this.gameStarted;
       let ways = {
         corners: this.currentGame.settings.winningWays.corners ? this.currentGame.settings.winningWays.corners : false,
-        vertical:  this.currentGame.settings.winningWays.vertical ? this.currentGame.settings.winningWays.vertivcal : false,
+        vertical:  this.currentGame.settings.winningWays.vertical ? this.currentGame.settings.winningWays.vertical : false,
         horizontal:  this.currentGame.settings.winningWays.horizontal ? this.currentGame.settings.winningWays.horizontal : false,
         fullGame:  this.currentGame.settings.winningWays.fullGame ? this.currentGame.settings.winningWays.fullGame : false,
       };
@@ -224,6 +231,21 @@ export class GameDetailsComponent implements OnInit {
     } 
   }
 
+  checkIfFinished() {
+    let self = this;
+    let ways = Object.entries(self.currentGame.settings.winningWays);
+    ways.forEach(way => {
+      if (way[1]) {
+        if (self.currentGame.winners[way[0]].length > 0) {
+          self.gameFinished = true;
+        } else {
+          self.gameFinished = false;
+        }
+      }
+    });
+    console.log('gameFinished', self.gameFinished);
+  }
+
   updateRankings(number) {
     let self = this;
     let ways = Object.entries(self.currentGame.settings.winningWays);
@@ -232,8 +254,9 @@ export class GameDetailsComponent implements OnInit {
       ways.forEach(way => {
         switch (way[0]) {
           case 'corners':
-            if (way[1]) {
+            if (way[1] && self.currentGame.winners.corners.length == 0) {
               self.check4Corners(player, number);
+              self.checkIfFinished();
             }
             break;
           default: break;
@@ -247,6 +270,7 @@ export class GameDetailsComponent implements OnInit {
   }
 
   check4Corners(player, newNumber) {
+    let self = this;
     switch(newNumber)  {
       case player.numbers['b'][0]: 
         player.corners++;
@@ -268,6 +292,7 @@ export class GameDetailsComponent implements OnInit {
     }
     if (player.corners == 4) {
       player.winnerDetail = '(4 esquinas)';
+      self.currentGame.winners.corners.push(player);
     }
   }
 
