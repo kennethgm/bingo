@@ -131,11 +131,23 @@ input.form-control {
                 color: #28a745;
             }
             .details {
+                background: black;
                 position: absolute;
-                left: 20%;
+                left: 30%;
+                z-index: 5;
+                color: white;
+                width: 100%;
+                .bcard {
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                .stats {
+                    padding: 20px;
+                    display: inline-block;
+                    margin-top: 5px;
+                }
                 .row {
                     max-width: 230px;
-                    background: black;
                     border-radius: 10px;
                     margin: 0 auto;
                     padding: 20px;
@@ -152,12 +164,14 @@ input.form-control {
                     margin: 0!important;
                     flex-basis: 20%;
                     max-width: 20%;
+                    color: black;
                     .card-letter {
                         font-size: 1rem;
                         line-height: 1.5;
                         text-align: center;
                         padding: .25em;
                         margin: 0;
+                        color: white;
                     }
                     .card-numbers {
                         border-top: 1px solid #cecece;

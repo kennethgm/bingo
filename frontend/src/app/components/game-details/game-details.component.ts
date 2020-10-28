@@ -48,10 +48,16 @@ export class GameDetailsComponent implements OnInit {
             rankingPlayer['id'] = element.id;
             rankingPlayer['name'] = element.name;
             rankingPlayer['numbers'] = element.numbers;
-            rankingPlayer['vertical'] = 0;
-            rankingPlayer['verticalCenter'] = 0;
-            rankingPlayer['horizontal'] = 0;
-            rankingPlayer['horizontalCenter'] = 0;
+            rankingPlayer['verticalB'] = 0;
+            rankingPlayer['verticalI'] = 0;
+            rankingPlayer['verticalN'] = 0;
+            rankingPlayer['verticalG'] = 0;
+            rankingPlayer['verticalO'] = 0;
+            rankingPlayer['horizontal0'] = 0;
+            rankingPlayer['horizontal2'] = 0;
+            rankingPlayer['horizontal3'] = 0;
+            rankingPlayer['horizontal4'] = 0;
+            rankingPlayer['horizontal5'] = 0;
             rankingPlayer['corners'] = 0;
             rankingPlayer['fullGame'] = 0;
             rankingPlayer['winnerDetail'] = '';
@@ -259,12 +265,17 @@ export class GameDetailsComponent implements OnInit {
               self.checkIfFinished();
             }
             break;
+          case 'vertical':
+            if (way[1] && self.currentGame.winners.vertical.length == 0) {
+              self.checkVerticals(player, number);
+              self.checkIfFinished();
+            }
+            break;
           default: break;
         }
       });
-     
-    })
-    self.rankingOfWinners.sort(self.compareCorners);
+    });
+    self.rankingOfWinners.sort(self.compareRanking);
     console.log('updated ranking', self.rankingOfWinners);
     this.currentGame.settings['rankingOfWinners'] = this.rankingOfWinners;
   }
@@ -291,15 +302,84 @@ export class GameDetailsComponent implements OnInit {
       default: break;
     }
     if (player.corners == 4) {
-      player.winnerDetail = '(4 esquinas)';
+      player.winnerDetail += ' - (4 esquinas) ';
       self.currentGame.winners.corners.push(player);
     }
   }
 
+  checkVerticals(player, newNumber) {
+    let self = this;
+    console.log('checking verticals', player, newNumber);
+    let index = 1;
+    player.numbers['b'].forEach(element => {
+      if (newNumber == element) {
+        player.matchedNumbers['b' + index] = true;
+        player.verticalB++;
+      }
+      index++;
+    });
+    index = 1;
+    player.numbers['i'].forEach(element => {
+      if (newNumber == element) {
+        player.matchedNumbers['i' + index] = true;
+        player.verticalI++;
+      }
+      index++;
+    });
+    index = 1;
+    player.numbers['n'].forEach(element => {
+      if (newNumber == element) {
+        if (index == 1 || index == 2) {
+          player.matchedNumbers['n' + index] = true;
+        } else {
+          player.matchedNumbers['n' + (index + 1)] = true;
+        }
+        player.verticalN++;
+      }
+      index++;
+    });
+    index = 1;
+    player.numbers['g'].forEach(element => {
+      if (newNumber == element) {
+        player.matchedNumbers['g' + index] = true;
+        player.verticalG++;
+      }
+      index++;
+    });
+    index = 1;
+    player.numbers['o'].forEach(element => {
+      if (newNumber == element) {
+        player.matchedNumbers['o' + index] = true;
+        player.verticalO++;
+      }
+      index++;
+    });
+    if (player.verticalB == 5) {
+      player.winnerDetail += ' - (Vertical - Columna B)';
+      self.currentGame.winners.vertical.push(player);
+    }
+    if (player.verticalI == 5) {
+      player.winnerDetail += ' - (Vertical - Columna I)';
+      self.currentGame.winners.vertical.push(player);
+    }
+    if (player.verticalN == 4) {
+      player.winnerDetail += ' - (Vertical - Columna N (centro))';
+      self.currentGame.winners.vertical.push(player);
+    }
+    if (player.verticalG == 5) {
+      player.winnerDetail += ' - (Vertical - Columna G)';
+      self.currentGame.winners.vertical.push(player);
+    }
+    if (player.verticalO == 5) {
+      player.winnerDetail += ' - (Vertical - Columna O)';
+      self.currentGame.winners.vertical.push(player);
+    }
+  }
 
-  compareCorners(a, b) {
-    const object1 = a.corners;
-    const object2 = b.corners;
+
+  compareRanking(a, b) {
+    const object1 = a.corners + a.verticalB + a.verticalI + a.verticalN + a.verticalG+ a.verticalO + a.fullGame;
+    const object2 = b.corners + b.verticalB + b.verticalI + b.verticalN + b.verticalG+ b.verticalO + b.fullGame;
   
     let comparison = 0;
     if (object1 < object2) {
