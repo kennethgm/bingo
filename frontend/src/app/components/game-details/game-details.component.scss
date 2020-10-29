@@ -116,6 +116,7 @@ input.form-control {
 
 .ranking {
     vertical-align: top;
+    min-height: 75vh;
     ul {
         list-style: none;
         padding: 0;
@@ -133,10 +134,10 @@ input.form-control {
             .details {
                 background: black;
                 position: absolute;
-                left: 30%;
+                left: 10%;
                 z-index: 5;
                 color: white;
-                width: 100%;
+                width: 55%;
                 .bcard {
                     display: inline-block;
                     vertical-align: top;

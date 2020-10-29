@@ -109,7 +109,7 @@
             </span>
         </div>
         <div class="raffle container-fluid">
-            <div *ngIf="currentGame.settings.raffleType=='digital' " class="col-md-6 d-inline-block ">
+            <div *ngIf="currentGame.settings.raffleType=='digital' " class="col-md-12 d-inline-block ">
                 <button *ngIf="!showRaffle " class="btn " (click)="getRandomNumber(1,75) "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
                 <div>
                     <img *ngIf="showRaffle " src="../../../assets/bingo.gif " />
@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ranking col-md-6 d-inline-block ">
+            <div class="ranking col-md-12 d-inline-block ">
                 <h2> Ranking de Jugadores </h2>
                 <ul>
                     <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
@@ -186,19 +186,23 @@
                                 </div>
                             </div>
                             <div class="stats">
-                                <label> Esquinas: {{ ranking.corners }} </label> <br>
-                                <label> Vertical B: {{ ranking.verticalB }} </label> <br>
-                                <label> Vertical I: {{ ranking.verticalI }} </label> <br>
-                                <label> Vertical N: {{ ranking.verticalN }} </label> <br>
-                                <label> Vertical G: {{ ranking.verticalG }} </label> <br>
-                                <label> Vertical O: {{ ranking.verticalO }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.corners"> Esquinas: {{ ranking.corners }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.vertical"> Vertical B: {{ ranking.verticalB }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.vertical"> Vertical I: {{ ranking.verticalI }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.vertical"> Vertical N: {{ ranking.verticalN }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.vertical"> Vertical G: {{ ranking.verticalG }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.vertical"> Vertical O: {{ ranking.verticalO }} </label> <br>
+                            </div>
+                            <div class="stats">
+                                <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 1: {{ ranking.horizontal1 }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 2: {{ ranking.horizontal2 }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 3: {{ ranking.horizontal3 }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 4: {{ ranking.horizontal4 }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 5: {{ ranking.horizontal5 }} </label> <br>
                             </div>
                         </div>
                     </li>
                 </ul>
-            </div>
-            <div class="col-md-12">
-                <h2>Tabla de Ganadores </h2>
             </div>
         </div>
         <div class="buttons ">

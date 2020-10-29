@@ -53,7 +53,7 @@ export class GameDetailsComponent implements OnInit {
             rankingPlayer['verticalN'] = 0;
             rankingPlayer['verticalG'] = 0;
             rankingPlayer['verticalO'] = 0;
-            rankingPlayer['horizontal0'] = 0;
+            rankingPlayer['horizontal1'] = 0;
             rankingPlayer['horizontal2'] = 0;
             rankingPlayer['horizontal3'] = 0;
             rankingPlayer['horizontal4'] = 0;
@@ -98,7 +98,6 @@ export class GameDetailsComponent implements OnInit {
     } else {
       self.rankingOfWinners = self.currentGame.settings['rankingOfWinners'];
     }
-    console.log('currentRanking', self.rankingOfWinners);
   }
 
   getGame(id): void {
@@ -271,12 +270,17 @@ export class GameDetailsComponent implements OnInit {
               self.checkIfFinished();
             }
             break;
+          case 'horizontal':
+            if (way[1] && self.currentGame.winners.horizontal.length == 0) {
+              self.checkHorizontals(player, number);
+              self.checkIfFinished();
+            }
+            break;
           default: break;
         }
       });
     });
     self.rankingOfWinners.sort(self.compareRanking);
-    console.log('updated ranking', self.rankingOfWinners);
     this.currentGame.settings['rankingOfWinners'] = this.rankingOfWinners;
   }
 
@@ -309,7 +313,6 @@ export class GameDetailsComponent implements OnInit {
 
   checkVerticals(player, newNumber) {
     let self = this;
-    console.log('checking verticals', player, newNumber);
     let index = 1;
     player.numbers['b'].forEach(element => {
       if (newNumber == element) {
@@ -376,10 +379,75 @@ export class GameDetailsComponent implements OnInit {
     }
   }
 
+  checkHorizontals(player, newNumber) {
+    let self = this;
+    let letters = ['b','i','n','g','o'];
+   
+    for (let index = 0; index < 5; index++) {
+      letters.forEach(letter => {
+        switch (index) {
+          case 0:
+            if (player.numbers[letter][index] == newNumber) {
+              player.matchedNumbers[letter + (index+1)] = true;
+              player.horizontal1++;
+            } 
+            break;
+          case 1:
+            if (player.numbers[letter][index] == newNumber) {
+              player.matchedNumbers[letter + (index+1)] = true;
+              player.horizontal2++;
+            }
+            break
+          case 2:
+            if (player.numbers[letter][index] == newNumber) {
+              player.matchedNumbers[letter + (index+1)] = true;
+              player.horizontal3++;
+            }
+            break;
+          case 3:
+            if (player.numbers[letter][index] == newNumber) {
+              player.matchedNumbers[letter + (index+1)] = true;
+              player.horizontal4++;
+            }
+            break;
+          case 4:
+            if (player.numbers[letter][index] == newNumber) {
+              player.matchedNumbers[letter + (index+1)] = true;
+              player.horizontal5++;
+            }
+            break;
+        }
+      });
+    }
+
+    if (player.horizontal1 == 5) {
+      player.winnerDetail += ' - (Horixontal - Fila 1)';
+      self.currentGame.winners.horizontal.push(player);
+    }
+    if (player.horizontal2 == 5) {
+      player.winnerDetail += ' - (Horizontal - Fila 2)';
+      self.currentGame.winners.horizontal.push(player);
+    }
+    if (player.horizontal3 == 4) {
+      player.winnerDetail += ' - (Horizontal - Fila 3 (centro))';
+      self.currentGame.winners.horizontal.push(player);
+    }
+    if (player.horizontal4 == 5) {
+      player.winnerDetail += ' - (Horizontal - Fila 4)';
+      self.currentGame.winners.horizontal.push(player);
+    }
+    if (player.horizontal5 == 5) {
+      player.winnerDetail += ' - (Horizontal - Fila 5)';
+      self.currentGame.winners.horizontal.push(player);
+    }
+  }
+
 
   compareRanking(a, b) {
-    const object1 = a.corners + a.verticalB + a.verticalI + a.verticalN + a.verticalG+ a.verticalO + a.fullGame;
-    const object2 = b.corners + b.verticalB + b.verticalI + b.verticalN + b.verticalG+ b.verticalO + b.fullGame;
+    const object1 = a.corners + a.verticalB + a.verticalI + a.verticalN + a.verticalG+ a.verticalO +
+                    a.horizontal1 + a.horizontal2 + a.horizontal3 + a.horizontal4 + a.horizontal5 + a.fullGame;
+    const object2 = b.corners + b.verticalB + b.verticalI + b.verticalN + b.verticalG+ b.verticalO +
+                    b.horizontal1 + b.horizontal2 + b.horizontal3  + b.horizontal4 + b.horizontal5 + b.fullGame;
   
     let comparison = 0;
     if (object1 < object2) {
