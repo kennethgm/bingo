@@ -22,6 +22,7 @@ export class GameDetailsComponent implements OnInit {
   showRaffle = false;
   gameCards = [];
   rankingOfWinners = [];
+  moreStats = false;
 
   constructor(
     private gameService: GameService,
@@ -276,6 +277,12 @@ export class GameDetailsComponent implements OnInit {
               self.checkIfFinished();
             }
             break;
+          case 'fullGame':
+            if (way[1] && self.currentGame.winners.fullGame.length == 0) {
+              self.checkFullGame(player, number);
+              self.checkIfFinished();
+            }
+            break;
           default: break;
         }
       });
@@ -421,7 +428,7 @@ export class GameDetailsComponent implements OnInit {
     }
 
     if (player.horizontal1 == 5) {
-      player.winnerDetail += ' - (Horixontal - Fila 1)';
+      player.winnerDetail += ' - (Horizontal - Fila 1)';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal2 == 5) {
@@ -444,10 +451,8 @@ export class GameDetailsComponent implements OnInit {
 
 
   compareRanking(a, b) {
-    const object1 = a.corners + a.verticalB + a.verticalI + a.verticalN + a.verticalG+ a.verticalO +
-                    a.horizontal1 + a.horizontal2 + a.horizontal3 + a.horizontal4 + a.horizontal5 + a.fullGame;
-    const object2 = b.corners + b.verticalB + b.verticalI + b.verticalN + b.verticalG+ b.verticalO +
-                    b.horizontal1 + b.horizontal2 + b.horizontal3  + b.horizontal4 + b.horizontal5 + b.fullGame;
+    const object1 = a.fullGame;
+    const object2 =  b.fullGame;
   
     let comparison = 0;
     if (object1 < object2) {
@@ -456,6 +461,34 @@ export class GameDetailsComponent implements OnInit {
       comparison = -1;
     }
     return comparison;
+  }
+
+  checkFullGame(player, newNumber) {
+    let self = this;
+    let letters = ['b','i','n','g','o'];
+    console.log('checking fullgame', newNumber);
+    let index = 1;
+      letters.forEach(letter => {
+          player.numbers[letter].forEach(element => {
+              if (newNumber == element) {
+                if (letter == 'n' && index > 2) {
+                  player.matchedNumbers[letter + (index + 1)] = true;
+                  player.fullGame++;
+                } else {
+                  player.matchedNumbers[letter + index] = true;
+                  player.fullGame++;
+                }
+              }
+              index++;
+          });
+          index = 1;
+      });
+
+    if (player.fullGame == 24) {
+      player.winnerDetail += ' - (Carton Lleno)';
+      self.currentGame.winners.fullGame.push(player);
+    }
+    
   }
 
 }

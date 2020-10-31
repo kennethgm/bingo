@@ -122,11 +122,12 @@
             <div class="ranking col-md-12 d-inline-block ">
                 <h2> Ranking de Jugadores </h2>
                 <ul>
-                    <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
+                    <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} - Ver Carton <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
                         <span class="current"> 
-                            Carton Lleno: {{ ranking.fullGame }} 
-                        </span>
-                        <span class="winner" *ngIf="ranking.winnerDetail != ''"> BINGO!!! <br> {{ ranking.winnerDetail }} </span>
+                            Puntos: {{ ranking.fullGame }} 
+                        </span> <br>
+                        <span> Detalles del Ranking <i (click)="moreStats = !moreStats" class="fas fa-info-circle"></i>  </span>
+                        <span class="winner" *ngIf="ranking.winnerDetail != ''"> BINGO! <br> {{ ranking.winnerDetail }} </span>
                         <div class="details" *ngIf="ranking.showDetails==true ">
 
                             <div class="bcard">
@@ -185,6 +186,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div *ngIf="moreStats" class="more-details">
                             <div class="stats">
                                 <label *ngIf="currentGame.settings.winningWays.corners"> Esquinas: {{ ranking.corners }} </label> <br>
                                 <label *ngIf="currentGame.settings.winningWays.vertical"> Vertical B: {{ ranking.verticalB }} </label> <br>
@@ -199,6 +202,7 @@
                                 <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 3: {{ ranking.horizontal3 }} </label> <br>
                                 <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 4: {{ ranking.horizontal4 }} </label> <br>
                                 <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 5: {{ ranking.horizontal5 }} </label> <br>
+                                <label *ngIf="currentGame.settings.winningWays.fullGame"> Carton Lleno: {{ ranking.fullGame }} </label> <br>
                             </div>
                         </div>
                     </li>
