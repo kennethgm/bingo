@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         gameCode: {
             type: Sequelize.STRING
+        },
+        officialId: {
+            type: Sequelize.STRING
         }
     });
 

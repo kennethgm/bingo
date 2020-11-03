@@ -19,7 +19,8 @@ exports.create = (req, res) => {
         phonenumber: req.body.phonenumber,
         email: req.body.phonenumber,
         numbers: req.body.numbers,
-        gameCode: req.body.gameCode
+        gameCode: req.body.gameCode,
+        officialId: req.body.officialId
     };
 
     // Save Card in the database

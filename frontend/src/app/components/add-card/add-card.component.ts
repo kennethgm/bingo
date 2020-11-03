@@ -14,7 +14,8 @@ export class AddCardComponent implements OnInit {
     phonenumber: '',
     email: '',
     numbers: {},
-    gameCode: ''
+    gameCode: '',
+    officialId: ''
   };
   submitted = false;
   cards: any;
@@ -54,7 +55,8 @@ export class AddCardComponent implements OnInit {
       phonenumber: this.card.phonenumber,
       email: this.card.phonenumber,
       numbers: this.card.numbers,
-      gameCode: this.card.gameCode
+      gameCode: this.card.gameCode,
+      officialId: this.card.officialId
     };
     console.log('will send', data);
     this.cardService.create(data).subscribe(
@@ -75,7 +77,8 @@ export class AddCardComponent implements OnInit {
       phonenumber: '',
       email: '',
       numbers: this.numbersGenerator(),
-      gameCode: ''
+      gameCode: '',
+      officialId: ''
     };
   }
 
