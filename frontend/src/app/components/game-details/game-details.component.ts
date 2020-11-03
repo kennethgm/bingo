@@ -20,9 +20,11 @@ export class GameDetailsComponent implements OnInit {
   array_o = [61,62,63,64,65,66,67,68,69,70,71,72,73,74,75];
   lastNumber;
   showRaffle = false;
+  spinningRaffle = false;
   gameCards = [];
   rankingOfWinners = [];
   moreStats = false;
+  unTieNumber = 0;
 
   constructor(
     private gameService: GameService,
@@ -217,7 +219,7 @@ export class GameDetailsComponent implements OnInit {
     if (self.currentGame.settings.selectedNumbers) {
       if (self.currentGame.settings.selectedNumbers.length < 75) {
         if (self.isInArray(newNumber)) {
-          self.getRandomNumber(1,75);
+          self.getRandomNumber(min,max);
         } else {
           setTimeout(function(){
             self.addToGame(newNumber);
@@ -227,7 +229,7 @@ export class GameDetailsComponent implements OnInit {
       }
     } else {
       if (self.isInArray(newNumber)) {
-        self.getRandomNumber(1,75);
+        self.getRandomNumber(min,max);
       } else {
         setTimeout(function(){
           self.addToGame(newNumber);
@@ -235,6 +237,17 @@ export class GameDetailsComponent implements OnInit {
         }, 5900);
       }
     } 
+  }
+
+  getRandomNumber2(min, max) {
+    let self = this;
+    self.spinningRaffle = true;
+
+    setTimeout(function(){
+      let newNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      self.unTieNumber = newNumber;
+      self.spinningRaffle = false;
+    }, 5900);
   }
 
   checkIfFinished() {
