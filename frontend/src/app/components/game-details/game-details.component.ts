@@ -329,6 +329,7 @@ export class GameDetailsComponent implements OnInit {
       default: break;
     }
     if (player.corners == 4) {
+      alert('BINGO - 4 esquinas - ' + player.name);
       player.winnerDetail += ' - 4 esquinas ';
       self.currentGame.winners.corners.push(player);
     }
@@ -381,22 +382,27 @@ export class GameDetailsComponent implements OnInit {
       index++;
     });
     if (player.verticalB == 5) {
+      alert('BINGO - - Vertical - Columna B - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna B ';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalI == 5) {
+      alert('BINGO - - Vertical - Columna I - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna I ';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalN == 4) {
+      alert('BINGO - - Vertical - Columna N (centro) - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna N (centro)';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalG == 5) {
+      alert('BINGO - - Vertical - Columna G - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna G';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalO == 5) {
+      alert('BINGO - - Vertical - Columna O - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna O';
       self.currentGame.winners.vertical.push(player);
     }
@@ -428,15 +434,31 @@ export class GameDetailsComponent implements OnInit {
             }
             break;
           case 3:
-            if (player.numbers[letter][index] == newNumber) {
-              player.matchedNumbers[letter + (index+1)] = true;
-              player.horizontal4++;
-            }
+            
+              if (letter != 'n') {
+                if (player.numbers[letter][index] == newNumber) {
+                  player.matchedNumbers[letter + (index+1)] = true;
+                  player.horizontal4++;
+                }
+              } else {
+                if (player.numbers[letter][index - 1] == newNumber) {
+                 player.matchedNumbers[letter + (index)] = true;
+                 player.horizontal4++;
+                }
+              }
+             
             break;
           case 4:
-            if (player.numbers[letter][index] == newNumber) {
-              player.matchedNumbers[letter + (index+1)] = true;
-              player.horizontal5++;
+            if (letter != 'n') {
+              if (player.numbers[letter][index] == newNumber) {
+                player.matchedNumbers[letter + (index+1)] = true;
+                player.horizontal5++;
+              }
+            } else {
+              if (player.numbers[letter][index - 1] == newNumber) {
+               player.matchedNumbers[letter + (index - 1)] = true;
+               player.horizontal5++;
+              }
             }
             break;
         }
@@ -444,22 +466,27 @@ export class GameDetailsComponent implements OnInit {
     }
 
     if (player.horizontal1 == 5) {
+      alert('BINGO -  Horizontal - Fila 1 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 1';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal2 == 5) {
+      alert('BINGO -  Horizontal - Fila 2 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 2';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal3 == 4) {
+      alert('BINGO -  Horizontal - Fila 3 (centro) - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 3 (centro)';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal4 == 5) {
+      alert('BINGO -  Horizontal - Fila 4 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 4';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal5 == 5) {
+      alert('BINGO -  Horizontal - Fila 5 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 5';
       self.currentGame.winners.horizontal.push(player);
     }
@@ -482,7 +509,6 @@ export class GameDetailsComponent implements OnInit {
   checkFullGame(player, newNumber) {
     let self = this;
     let letters = ['b','i','n','g','o'];
-    console.log('checking fullgame', newNumber);
     let index = 1;
       letters.forEach(letter => {
           player.numbers[letter].forEach(element => {
@@ -501,6 +527,7 @@ export class GameDetailsComponent implements OnInit {
       });
 
     if (player.fullGame == 24) {
+      alert('BINGO -  CARTON LLENO - ' + player.name);
       player.winnerDetail += ' - Carton Lleno';
       self.currentGame.winners.fullGame.push(player);
     }
