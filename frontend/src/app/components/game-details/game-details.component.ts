@@ -146,12 +146,13 @@ export class GameDetailsComponent implements OnInit {
     if (confirm('Estas seguro que quieres reiniciar el juego?')) {
       this.lastNumber = undefined;
       this.rankingOfWinners = [];
-      this.currentGame.winners = {
+      this.currentGame.winners.push({
         "corners": [],
         "vertical": [],
         "horizontal": [],
-        "fullGame": []
-      };
+        "fullGame": [],
+        "selectedNumbers": []
+      });
       let raffleType = this.currentGame.settings.raffleType;
       let gameStarted = this.gameStarted;
       let ways = {
@@ -256,9 +257,10 @@ export class GameDetailsComponent implements OnInit {
   checkIfFinished() {
     let self = this;
     let ways = Object.entries(self.currentGame.settings.winningWays);
+    let round = self.currentGame.winners.length - 1;
     ways.forEach(way => {
       if (way[1]) {
-        if (self.currentGame.winners[way[0]].length > 0) {
+        if (self.currentGame.winners[round][way[0]].length > 0) {
           self.gameFinished = true;
         } else {
           self.gameFinished = false;
@@ -271,30 +273,31 @@ export class GameDetailsComponent implements OnInit {
   updateRankings(number) {
     let self = this;
     let ways = Object.entries(self.currentGame.settings.winningWays);
-    
+    let round = self.currentGame.winners.length - 1;
+
     this.rankingOfWinners.forEach(player => {
       ways.forEach(way => {
         switch (way[0]) {
           case 'corners':
-            if (way[1] && self.currentGame.winners.corners.length == 0) {
+            if (way[1] && self.currentGame.winners[round].corners.length == 0) {
               self.check4Corners(player, number);
               self.checkIfFinished();
             }
             break;
           case 'vertical':
-            if (way[1] && self.currentGame.winners.vertical.length == 0) {
+            if (way[1] && self.currentGame.winners[round].vertical.length == 0) {
               self.checkVerticals(player, number);
               self.checkIfFinished();
             }
             break;
           case 'horizontal':
-            if (way[1] && self.currentGame.winners.horizontal.length == 0) {
+            if (way[1] && self.currentGame.winners[round].horizontal.length == 0) {
               self.checkHorizontals(player, number);
               self.checkIfFinished();
             }
             break;
           case 'fullGame':
-            if (way[1] && self.currentGame.winners.fullGame.length == 0) {
+            if (way[1] && self.currentGame.winners[round].fullGame.length == 0) {
               self.checkFullGame(player, number);
               self.checkIfFinished();
             }
@@ -331,7 +334,14 @@ export class GameDetailsComponent implements OnInit {
     if (player.corners == 4) {
       alert('BINGO - 4 esquinas - ' + player.name);
       player.winnerDetail += ' - 4 esquinas ';
-      self.currentGame.winners.corners.push(player);
+      let round = self.currentGame.winners.length - 1;
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].corners.push(winnerPlayer);
     }
   }
 
@@ -381,30 +391,61 @@ export class GameDetailsComponent implements OnInit {
       }
       index++;
     });
+    let round = self.currentGame.winners.length - 1;
     if (player.verticalB == 5) {
       alert('BINGO - - Vertical - Columna B - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna B ';
-      self.currentGame.winners.vertical.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].vertical.push(winnerPlayer);
     }
     if (player.verticalI == 5) {
       alert('BINGO - - Vertical - Columna I - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna I ';
-      self.currentGame.winners.vertical.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].vertical.push(winnerPlayer);
     }
     if (player.verticalN == 4) {
       alert('BINGO - - Vertical - Columna N (centro) - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna N (centro)';
-      self.currentGame.winners.vertical.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].vertical.push(winnerPlayer);
     }
     if (player.verticalG == 5) {
       alert('BINGO - - Vertical - Columna G - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna G';
-      self.currentGame.winners.vertical.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].vertical.push(winnerPlayer);
     }
     if (player.verticalO == 5) {
       alert('BINGO - - Vertical - Columna O - ' + player.name);
       player.winnerDetail += ' - Vertical - Columna O';
-      self.currentGame.winners.vertical.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].vertical.push(winnerPlayer);
     }
   }
 
@@ -465,30 +506,61 @@ export class GameDetailsComponent implements OnInit {
       });
     }
 
+    let round = self.currentGame.winners.length - 1;
     if (player.horizontal1 == 5) {
       alert('BINGO -  Horizontal - Fila 1 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 1';
-      self.currentGame.winners.horizontal.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].horizontal.push(winnerPlayer);
     }
     if (player.horizontal2 == 5) {
       alert('BINGO -  Horizontal - Fila 2 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 2';
-      self.currentGame.winners.horizontal.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].horizontal.push(winnerPlayer);
     }
     if (player.horizontal3 == 4) {
       alert('BINGO -  Horizontal - Fila 3 (centro) - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 3 (centro)';
-      self.currentGame.winners.horizontal.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].horizontal.push(winnerPlayer);
     }
     if (player.horizontal4 == 5) {
       alert('BINGO -  Horizontal - Fila 4 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 4';
-      self.currentGame.winners.horizontal.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].horizontal.push(winnerPlayer);
     }
     if (player.horizontal5 == 5) {
       alert('BINGO -  Horizontal - Fila 5 - ' + player.name);
       player.winnerDetail += ' - Horizontal - Fila 5';
-      self.currentGame.winners.horizontal.push(player);
+      let winnerPlayer = new Object();
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].horizontal.push(winnerPlayer);
     }
   }
 
@@ -529,7 +601,14 @@ export class GameDetailsComponent implements OnInit {
     if (player.fullGame == 24) {
       alert('BINGO -  CARTON LLENO - ' + player.name);
       player.winnerDetail += ' - Carton Lleno';
-      self.currentGame.winners.fullGame.push(player);
+      let winnerPlayer = new Object();
+      let round = self.currentGame.winners.length - 1;
+      winnerPlayer['id'] = player.id;
+      winnerPlayer['name'] = player.name;
+      winnerPlayer['numbers'] = player.numbers;
+      winnerPlayer['winnerDetails'] = player.winnerDetail;
+      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+      self.currentGame.winners[round].fullGame.push(winnerPlayer);
     }
     
   }

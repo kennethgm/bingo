@@ -11,7 +11,7 @@ export class AddGameComponent implements OnInit {
 
   game = {
     name: '',
-    winners: {},
+    winners: [],
     startDate: new Date(),
     settings: {}
   };
@@ -60,12 +60,12 @@ export class AddGameComponent implements OnInit {
       this.submitted = false;
       this.game = {
         name: '',
-        winners: {
+        winners: [{
           "corners": [],
           "vertical": [],
           "horizontal": [],
           "fullGame": []
-        },
+        }],
         startDate: new Date(),
         settings: {
           raffleType: 'digital',
