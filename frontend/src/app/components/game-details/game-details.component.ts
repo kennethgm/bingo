@@ -13,7 +13,7 @@ export class GameDetailsComponent implements OnInit {
 
   currentGame = null;
   message = '';
-  gameStarted = false;
+  editGame = false;
   gameFinished = false;
   array_b = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   array_i = [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
@@ -38,7 +38,7 @@ export class GameDetailsComponent implements OnInit {
     ngOnInit(): void {
       this.message = '';
       this.getGame(this.route.snapshot.paramMap.get('id'));
-      
+     
     }
 
   getCards(): void {
@@ -111,6 +111,7 @@ export class GameDetailsComponent implements OnInit {
     .subscribe(
       data => {
         this.currentGame = data;
+        this.getCards();
       },
       error => {
         console.log(error);
@@ -154,7 +155,6 @@ export class GameDetailsComponent implements OnInit {
         "selectedNumbers": []
       });
       let raffleType = this.currentGame.settings.raffleType;
-      let gameStarted = this.gameStarted;
       let ways = {
         corners: this.currentGame.settings.winningWays.corners ? this.currentGame.settings.winningWays.corners : false,
         vertical:  this.currentGame.settings.winningWays.vertical ? this.currentGame.settings.winningWays.vertical : false,
@@ -163,10 +163,9 @@ export class GameDetailsComponent implements OnInit {
       };
       this.currentGame.settings = {
         "raffleType":  raffleType, 
-        "gameStarted": gameStarted, 
         "winningWays": ways
       };
-      this.gameStarted = false;
+      this.getCards();
       this.saveGameProgress();
     }
   }
@@ -184,10 +183,8 @@ export class GameDetailsComponent implements OnInit {
     }
   }
 
-  startGame() {
-    this.gameStarted = true;
-    this.currentGame.settings['gameStarted'] = this.gameStarted;
-    this.getCards();
+  editGameDetails() {
+    this.editGame = true;
   }
 
   addToGame(number) {

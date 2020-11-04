@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngIf="!gameStarted">
+    <div *ngIf="editGame">
         <div *ngIf="currentGame">
             <form class="edit-form">
                 <div class="form-group">
@@ -42,12 +42,12 @@
             <div class="buttons">
                 <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
                 <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> <br>
-                <button *ngIf="!currentGame.settings.gameStarted" class="btn start-game" (click)="startGame()"> <i class="fas fa-play"></i> INICIAR JUEGO  <i class="fas fa-play"></i></button>
-                <button *ngIf="currentGame.settings.gameStarted" class="btn start-game" (click)="startGame()"> <i class="fas fa-play"></i> CONTINUAR JUEGO  <i class="fas fa-play"></i></button>
+                <button class="btn start-game" (click)="editGame = false"> <i class="fas fa-play"></i> JUGAR <i class="fas fa-play"></i></button>
             </div>
         </div>
     </div>
-    <div *ngIf="gameStarted && currentGame">
+
+    <div *ngIf="!editGame && currentGame">
         <div class="bingo-allnumbers">
             <div id="board" class="flex">
                 <div class="row no-wrap set-size text-center notranslate">
@@ -221,8 +221,10 @@
             </div>
         </div>
         <div class="buttons ">
+            <button class="btn" (click)="editGame = true">  Editar Detalles <i class="fas fa-edit"></i></button>
             <button class="btn " (click)="restartGame() "> <i class="fas fa-recycle "></i> Reiniciar el Juego  </button>
-            <button class="btn " (click)="this.gameStarted=false "> <i class="fas fa-arrow-circle-left "></i> Salir  </button>
+            <button class="btn " routerLink='/admin'> <i class="fas fa-arrow-circle-left "></i> Salir  </button>
+
         </div>
     </div>
 </div>
