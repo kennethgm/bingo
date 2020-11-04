@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
 import { CardService } from 'src/app/services/card.service';
+
 @Component({
   selector: 'app-game-details',
   templateUrl: './game-details.component.html',
   styleUrls: ['./game-details.component.scss']
 })
+
 export class GameDetailsComponent implements OnInit {
 
   currentGame = null;
@@ -25,6 +27,7 @@ export class GameDetailsComponent implements OnInit {
   rankingOfWinners = [];
   moreStats = false;
   unTieNumber = 0;
+  showModal = false;
 
   constructor(
     private gameService: GameService,
@@ -262,7 +265,7 @@ export class GameDetailsComponent implements OnInit {
         }
       }
     });
-    console.log('gameFinished', self.gameFinished);
+    //console.log('gameFinished', self.gameFinished);
   }
 
   updateRankings(number) {
@@ -326,7 +329,7 @@ export class GameDetailsComponent implements OnInit {
       default: break;
     }
     if (player.corners == 4) {
-      player.winnerDetail += ' - (4 esquinas) ';
+      player.winnerDetail += ' - 4 esquinas ';
       self.currentGame.winners.corners.push(player);
     }
   }
@@ -378,23 +381,23 @@ export class GameDetailsComponent implements OnInit {
       index++;
     });
     if (player.verticalB == 5) {
-      player.winnerDetail += ' - (Vertical - Columna B)';
+      player.winnerDetail += ' - Vertical - Columna B ';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalI == 5) {
-      player.winnerDetail += ' - (Vertical - Columna I)';
+      player.winnerDetail += ' - Vertical - Columna I ';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalN == 4) {
-      player.winnerDetail += ' - (Vertical - Columna N (centro))';
+      player.winnerDetail += ' - Vertical - Columna N (centro)';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalG == 5) {
-      player.winnerDetail += ' - (Vertical - Columna G)';
+      player.winnerDetail += ' - Vertical - Columna G';
       self.currentGame.winners.vertical.push(player);
     }
     if (player.verticalO == 5) {
-      player.winnerDetail += ' - (Vertical - Columna O)';
+      player.winnerDetail += ' - Vertical - Columna O';
       self.currentGame.winners.vertical.push(player);
     }
   }
@@ -441,23 +444,23 @@ export class GameDetailsComponent implements OnInit {
     }
 
     if (player.horizontal1 == 5) {
-      player.winnerDetail += ' - (Horizontal - Fila 1)';
+      player.winnerDetail += ' - Horizontal - Fila 1';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal2 == 5) {
-      player.winnerDetail += ' - (Horizontal - Fila 2)';
+      player.winnerDetail += ' - Horizontal - Fila 2';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal3 == 4) {
-      player.winnerDetail += ' - (Horizontal - Fila 3 (centro))';
+      player.winnerDetail += ' - Horizontal - Fila 3 (centro)';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal4 == 5) {
-      player.winnerDetail += ' - (Horizontal - Fila 4)';
+      player.winnerDetail += ' - Horizontal - Fila 4';
       self.currentGame.winners.horizontal.push(player);
     }
     if (player.horizontal5 == 5) {
-      player.winnerDetail += ' - (Horizontal - Fila 5)';
+      player.winnerDetail += ' - Horizontal - Fila 5';
       self.currentGame.winners.horizontal.push(player);
     }
   }
@@ -498,10 +501,11 @@ export class GameDetailsComponent implements OnInit {
       });
 
     if (player.fullGame == 24) {
-      player.winnerDetail += ' - (Carton Lleno)';
+      player.winnerDetail += ' - Carton Lleno';
       self.currentGame.winners.fullGame.push(player);
     }
     
   }
 
 }
+
