@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "localhost",
+    HOST: "bingo.c7u8j0hizgeo.us-east-1.rds.amazonaws.com",
     USER: "postgres",
     PASSWORD: "adminKroot1$3",
-    DB: "bingo",
+    DB: "postgres",
     dialect: "postgres",
     pool: {
         max: 5,
