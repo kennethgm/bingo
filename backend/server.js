@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-    origin: "http://tombolacr.s3-website-us-east-1.amazonaws.com/"
+    origin: "http://tombolacr.s3-website-us-east-1.amazonaws.com"
 };
 
 app.use(cors(corsOptions));
