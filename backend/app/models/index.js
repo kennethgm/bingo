@@ -15,6 +15,15 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
 const db = {};
 
+sequelize
+    .authenticate()
+    .then(function(err) {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(function(err) {
+        console.log('Unable to connect to the database:', err);
+    });
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
