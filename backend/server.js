@@ -39,10 +39,11 @@ app.listen(PORT, () => {
         .then(function(err) {
             message = 'Connection has been established successfully.';
             console.log('Connection has been established successfully.');
+            console.log(`Server is running on port ?${PORT}. message=` + message);
         })
         .catch(function(err) {
             message = 'Unable to connect to the database:' + err
             console.log('Unable to connect to the database:', err);
+            console.log(`Server is running on port ?${PORT}. message=` + message);
         });
-    console.log(`Server is running on port ?${PORT}. message=` + message);
 });
