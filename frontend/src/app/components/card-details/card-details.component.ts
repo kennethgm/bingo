@@ -80,7 +80,7 @@ export class CardDetailsComponent implements OnInit {
   }
 
   download(id) {
-    alert (id);
+    //alert (id);
     let self = this;
     html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY}).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
