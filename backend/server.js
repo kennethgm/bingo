@@ -34,7 +34,7 @@ require("./app/routes/card.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
+
     db.sequelize.authenticate()
         .then(function(err) {
             console.log('Connection has been established successfully.');
@@ -42,4 +42,5 @@ app.listen(PORT, () => {
         .catch(function(err) {
             console.log('Unable to connect to the database:', err);
         });
+    console.log(`Server is running on port ${PORT}.`);
 });
