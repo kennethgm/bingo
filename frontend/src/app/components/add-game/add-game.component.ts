@@ -74,7 +74,8 @@ export class AddGameComponent implements OnInit {
             "vertical": false,
             "horizontal": false,
             "fullGame": false
-          }
+          },
+          absentPlayers: []
         }
       };
     }
