@@ -16,6 +16,7 @@ import { GamesListComponent } from './components/games-list/games-list.component
 import { AddGameComponent } from './components/add-game/add-game.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { HomeComponent } from './components/home/home.component';
+import { CardsListComponent } from './components/cards-list/cards-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomeComponent } from './components/home/home.component';
     GamesListComponent,
     AddGameComponent,
     GameDetailsComponent,
-    HomeComponent
+    HomeComponent,
+    CardsListComponent
   ],
   imports: [
   BrowserModule,
