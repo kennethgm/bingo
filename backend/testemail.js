@@ -1,52 +1,40 @@
-// Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the region 
-AWS.config.loadFromPath('config.json');
+// import dotenv 
+require('dotenv').config();
+// import AWS SDK
+const AWS = require('aws-sdk');
 
-// Create sendEmail params 
+// Amazon SES configuration
+const SESConfig = {
+    apiVersion: '2010-12-01',
+    accessKeyId: process.env.AWS_SES_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SES_SECRET_ACCESS_KEY,
+    region: process.env.AWS_SES_REGION
+};
+
 var params = {
-    Destination: { /* required */
-        CcAddresses: [
-            'EMAIL_ADDRESS',
-            /* more items */
-        ],
+    Source: 'zenproduc01@gmail.com',
+    Destination: {
         ToAddresses: [
-            'kenneth.granados@gmail.com',
-            /* more items */
+            'kenneth.granados@gmail.com'
         ]
     },
-    Message: { /* required */
-        Body: { /* required */
+    ReplyToAddresses: [
+        'zenproduc01@gmail.com',
+    ],
+    Message: {
+        Body: {
             Html: {
                 Charset: "UTF-8",
-                Data: "HTML_FORMAT_BODY"
-            },
-            Text: {
-                Charset: "UTF-8",
-                Data: "TEXT_FORMAT_BODY"
+                Data: 'IT IS <strong>WORKING</strong>!'
             }
         },
         Subject: {
             Charset: 'UTF-8',
-            Data: 'Test email'
+            Data: 'Node + SES Example'
         }
-    },
-    Source: 'kenneth.granados@gmail.com',
-    /* required */
-    ReplyToAddresses: [
-        'EMAIL_ADDRESS',
-        /* more items */
-    ],
+    }
 };
 
-// Create the promise and SES service object
-var sendPromise = new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail(params).promise();
-
-// Handle promise's fulfilled/rejected states
-sendPromise.then(
-    function(data) {
-        console.log(data.MessageId);
-    }).catch(
-    function(err) {
-        console.error(err, err.stack);
-    });
+new AWS.SES(SESConfig).sendEmail(params).promise().then((res) => {
+    console.log(res);
+});
