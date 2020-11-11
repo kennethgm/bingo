@@ -1,13 +1,13 @@
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Set the region 
-AWS.config.update({ region: 'REGION' });
+AWS.config.loadFromPath('config.json');
 
 // Create sendEmail params 
 var params = {
     Destination: { /* required */
         CcAddresses: [
-            'kenneth.granados@proximitycr.com',
+            'EMAIL_ADDRESS',
             /* more items */
         ],
         ToAddresses: [
