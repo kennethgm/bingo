@@ -28,6 +28,15 @@ input.form-control {
     margin: 3px;
 }
 
+.round {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted;
+    span {
+        text-decoration: underline;
+    }
+}
+
 .btn-danger {
     background-color: #dc3545;
     color: white;
