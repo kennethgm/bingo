@@ -35,10 +35,10 @@ select.form-control {
 }
 
 .bingo-card {
-    background-color: gainsboro;
-    border-radius: 10px;
-    padding: 15px;
-    max-width: 60%;
+    background-color: #00B0F6;
+    border-radius: 35px;
+    padding: 25px;
+    max-width: 520px;
     .row {
         padding: 20px;
         display: flex;
@@ -60,6 +60,7 @@ select.form-control {
             text-align: center;
             padding: .25em;
             margin: 0;
+            color: white;
         }
         .card-numbers {
             border-top: 1px solid #cecece;
@@ -69,10 +70,26 @@ select.form-control {
                 background: #fff;
                 border: 1px solid #cecece;
                 text-align: center;
-                padding: .25em;
+                padding: .45em;
                 margin: 0;
             }
+            .card-number-center {
+                background: #fff;
+                padding: 0;
+                margin: 0;
+                .freespace {
+                    img {
+                        max-width: 65px;
+                    }
+                }
+            }
         }
+    }
+}
+
+#download {
+    img {
+        max-width: 520px;
     }
 }
 

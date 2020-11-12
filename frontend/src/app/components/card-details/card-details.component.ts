@@ -93,7 +93,7 @@ export class CardDetailsComponent implements OnInit {
   }
 
   sendByEmail(){
-    html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY}).then(canvas => {
+    html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY, width:535, height: 560}).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
 
       let requestData = new Object();
