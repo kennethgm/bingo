@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 })
 export class CardDetailsComponent implements OnInit {
   currentCard = null;
+  successMessage = '';
   message = '';
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -93,18 +94,18 @@ export class CardDetailsComponent implements OnInit {
   }
 
   sendByEmail(){
+    this.successMessage = '';
     html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY, width:535, height: 560}).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
 
       let requestData = new Object();
       requestData['emailTo'] =   this.currentCard.email;
-      requestData['message'] = 'this is test message';
+      requestData['message'] = 'Hola, ' + this.currentCard.name + ' adjunto el bingo...';
       requestData['path'] = this.canvas.nativeElement.src; 
-      requestData['subject'] = 'this is a test subject';
-      console.log('requestData', requestData);
+      requestData['subject'] = 'Cartón Oficial de La Tómbola CR';
       
       this.cardService.sendEmail(requestData).subscribe((data) => {
-        console.log('data', data);
+        this.successMessage = 'El carton fue enviado correctamente';
       });
       
     
