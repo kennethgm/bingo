@@ -3,6 +3,7 @@ const Card = db.cards;
 const Op = db.Sequelize.Op;
 require('dotenv').config();
 const AWS = require('aws-sdk');
+const mailcomposer = require('mailcomposer');
 
 // Amazon SES configuration
 const SESConfig = {
@@ -176,43 +177,39 @@ exports.findWithGameCode = (req, res) => {
 };
 
 exports.sendEmail = (req, res1) => {
-    console.log('req', req.body);
     let emailTo = (req.body.emailTo).toString();
     let message = (req.body.message).toString();
     let subject = (req.body.subject).toString();
+    let path = (req.body.path).toString();
 
-    let params = {
-        Source: 'zenproduc01@gmail.com',
-        Destination: {
-            ToAddresses: [
-                emailTo
-            ]
-        },
-        ReplyToAddresses: [
-            'zenproduc01@gmail.com',
-        ],
-        Message: {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: message
-                }
-            },
-            Subject: {
-                Charset: 'UTF-8',
-                Data: subject
-            }
+    const mail = mailcomposer({
+        from: 'zenproduc01@gmail.com',
+        replyTo: 'zenproduc01@gmail.com',
+        to: emailTo,
+        subject: subject,
+        text: message,
+        attachments: [{
+            path: path
+        }, ],
+    });
+
+
+    mail.build((err, message) => {
+        if (err) {
+            reject(`Error generating raw email: ${err}`);
         }
-    };
 
-    new AWS.SES(SESConfig).sendEmail(params).promise().then((res) => {
-        console.log('res', res);
-        res1.send(res);
-    }).catch((error) => {
-        console.log('error', error);
-        res1.status(500).send({
-            message: error.message || "Some error sending email."
+        new AWS.SES(SESConfig).sendRawEmail({ RawMessage: { Data: message } }).promise().then((res) => {
+            console.log('res', res);
+            res1.send(res);
+        }).catch((error) => {
+            console.log('error', error);
+            res1.status(500).send({
+                message: error.message || "Error sending email."
+            });
         });
     });
+
+
 
 };

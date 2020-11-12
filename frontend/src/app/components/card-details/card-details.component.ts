@@ -93,12 +93,21 @@ export class CardDetailsComponent implements OnInit {
   }
 
   sendByEmail(){
-    let requestData = new Object();
-    requestData['emailTo'] =   this.currentCard.email;
-    requestData['message'] = 'this is test message';
-    requestData['subject'] = 'this is a test subject';
-    this.cardService.sendEmail(requestData).subscribe((data) => {
-      console.log('data', data);
+    html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY}).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+
+      let requestData = new Object();
+      requestData['emailTo'] =   this.currentCard.email;
+      requestData['message'] = 'this is test message';
+      requestData['path'] = this.canvas.nativeElement.src; 
+      requestData['subject'] = 'this is a test subject';
+      console.log('requestData', requestData);
+      
+      this.cardService.sendEmail(requestData).subscribe((data) => {
+        console.log('data', data);
+      });
+      
+    
     });
   }
 

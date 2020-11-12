@@ -51,7 +51,8 @@ export class CardService {
     const dataToSend = {
       emailTo: data.emailTo,
       message: data.message,
-      subject: data.subject
+      subject: data.subject,
+      path: data.path
     };
     return this.http.post(baseUrl + '/send/email', dataToSend);
   }
