@@ -53,7 +53,7 @@ export class AddCardComponent implements OnInit {
     const data = {
       name: this.card.name,
       phonenumber: this.card.phonenumber,
-      email: this.card.phonenumber,
+      email: this.card.email,
       numbers: this.card.numbers,
       gameCode: this.card.gameCode,
       officialId: this.card.officialId
