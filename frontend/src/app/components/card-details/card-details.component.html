@@ -96,6 +96,7 @@
     </div>
     <div class="no-print buttons">
         <button class="btn" (click)="printCard()"> <i class="fas fa-print"></i> Imprimir  </button>
+        <button class="btn" (click)="sendByEmail()"> <i class="fas fa-envelope-open-text"></i>Enviar Por Correo  </button>
         <button class="btn" (click)="download('card-' + currentCard.id + '-' + currentCard.gameCode )"><i class="fas fa-download"></i> Descargar  </button> <br>
 
         <p>{{ message }}</p>

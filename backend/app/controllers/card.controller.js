@@ -1,6 +1,16 @@
 const db = require("../models");
 const Card = db.cards;
 const Op = db.Sequelize.Op;
+require('dotenv').config();
+const AWS = require('aws-sdk');
+
+// Amazon SES configuration
+const SESConfig = {
+    apiVersion: '2010-12-01',
+    accessKeyId: process.env.AWS_SES_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SES_SECRET_ACCESS_KEY,
+    region: process.env.AWS_SES_REGION
+};
 
 // Create and Save a new Card
 exports.create = (req, res) => {
@@ -163,4 +173,51 @@ exports.findWithGameCode = (req, res) => {
                 message: err.message || "Some error occurred while retrieving cards."
             });
         });
+};
+
+exports.sendEmail = (req, res1) => {
+    console.log('req', req.body);
+    let emailTo = (req.body.emailTo).toString();
+    let message = (req.body.message).toString();
+    let subject = (req.body.subject).toString();
+
+    console.log('email', emailTo);
+    console.log('message', message);
+    console.log('subject', subject);
+
+
+    let params = {
+        Source: 'zenproduc01@gmail.com',
+        Destination: {
+            ToAddresses: [
+                emailTo
+            ]
+        },
+        ReplyToAddresses: [
+            'zenproduc01@gmail.com',
+        ],
+        Message: {
+            Body: {
+                Html: {
+                    Charset: "UTF-8",
+                    Data: message
+                }
+            },
+            Subject: {
+                Charset: 'UTF-8',
+                Data: subject
+            }
+        }
+    };
+
+    new AWS.SES(SESConfig).sendEmail(params).promise().then((res) => {
+        console.log('res', res);
+        res1.send(res);
+    }).catch((error) => {
+        console.log('error', error);
+        res1.status(500).send({
+            message: error.message || "Some error sending email."
+        });
+    });
+
 };

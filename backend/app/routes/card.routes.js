@@ -11,6 +11,8 @@ module.exports = app => {
 
     router.post("/find/code", cards.findWithGameCode);
 
+    router.post("/send/email", cards.sendEmail);
+
     // Retrieve all published Tutorials
     router.get("/published", cards.findAllPublished);
 

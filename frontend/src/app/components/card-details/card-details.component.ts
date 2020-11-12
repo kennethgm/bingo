@@ -91,4 +91,8 @@ export class CardDetailsComponent implements OnInit {
       this.downloadLink.nativeElement.click();
     });
   }
+
+  sendByEmail(){
+    
+  }
 }
