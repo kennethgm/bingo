@@ -181,11 +181,6 @@ exports.sendEmail = (req, res1) => {
     let message = (req.body.message).toString();
     let subject = (req.body.subject).toString();
 
-    console.log('email', emailTo);
-    console.log('message', message);
-    console.log('subject', subject);
-
-
     let params = {
         Source: 'zenproduc01@gmail.com',
         Destination: {

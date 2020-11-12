@@ -93,6 +93,13 @@ export class CardDetailsComponent implements OnInit {
   }
 
   sendByEmail(){
-    
+    let requestData = new Object();
+    requestData['emailTo'] =   this.currentCard.email;
+    requestData['message'] = 'this is test message';
+    requestData['subject'] = 'this is a test subject';
+    this.cardService.sendEmail(requestData).subscribe((data) => {
+      console.log('data', data);
+    });
   }
+
 }
