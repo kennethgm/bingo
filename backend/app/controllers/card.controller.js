@@ -28,7 +28,7 @@ exports.create = (req, res) => {
     const card = {
         name: req.body.name,
         phonenumber: req.body.phonenumber,
-        email: req.body.phonenumber,
+        email: req.body.email,
         numbers: req.body.numbers,
         gameCode: req.body.gameCode,
         officialId: req.body.officialId

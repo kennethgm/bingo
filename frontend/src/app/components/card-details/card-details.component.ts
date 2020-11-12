@@ -66,7 +66,7 @@ export class CardDetailsComponent implements OnInit {
       .subscribe(
         response => {
         //  console.log(response);
-          alert(response);
+        //  alert(response);
           this.router.navigate(['/']);
 
         },
