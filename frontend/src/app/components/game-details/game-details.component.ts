@@ -32,6 +32,11 @@ export class GameDetailsComponent implements OnInit {
   potentialWinnersCorners = [];
   checkingUntieCorners = false;
   cornersClick = 0;
+
+  potentialWinnersVertical = [];
+  checkingUntieVertical = false;
+  verticalClick = 0;
+
   currentUntieNumbers = [];
 
   constructor(
@@ -153,6 +158,7 @@ export class GameDetailsComponent implements OnInit {
       this.lastNumber = undefined;
       this.rankingOfWinners = [];
       this.potentialWinnersCorners = [];
+      this.potentialWinnersVertical = [];
       this.currentGame.winners.push({
         "corners": [],
         "vertical": [],
@@ -276,6 +282,11 @@ export class GameDetailsComponent implements OnInit {
             self.cornersClick = clicks + 1;
             self.checkWinnerCorners();
           }
+          case 'vertical': {
+            self.potentialWinnersVertical[clicks].untieScore = newNumber;
+            self.verticalClick = clicks + 1;
+            self.checkWinnerVerticals();
+          }
         }
         
       }, 5900);
@@ -342,9 +353,8 @@ export class GameDetailsComponent implements OnInit {
         }
       });
     });
-    let index = 0;
+
     ways.forEach(way => {
-      index = 0;
       switch (way[0]) {
         case 'corners':
           if (way[1] && self.currentGame.winners[round].corners.length == 0) {
@@ -406,14 +416,66 @@ export class GameDetailsComponent implements OnInit {
           }
 
           break;
-        /*case 'vertical':
-          if (way[1] && self.currentGame.winners[round].vertical.length == 0) {
-            if (!self.checkAbsentPlayer(player)) {
-              self.checkVerticals(player, number);
-            //  self.checkIfFinished();
+          case 'vertical':
+            console.log('here');
+            if (way[1] && self.currentGame.winners[round].vertical.length == 0) {
+              if (self.potentialWinnersVertical.length == 0) {
+                break;
+              } else {
+                if (self.potentialWinnersVertical.length == 1) {
+                  if(!self.checkAbsentPlayer(self.potentialWinnersVertical[0])) {
+                    alert('BINGO - Vertical - ' + self.potentialWinnersVertical[0].name );
+                    if (confirm('Es el único ganador! Está '+ self.potentialWinnersVertical[0].name +' presente en la llamada?')) {
+                      //player.winnerDetail += ' - 4 esquinas ';
+                      let round = self.currentGame.winners.length - 1;
+                      let winnerPlayer = new Object();
+                      winnerPlayer['id'] = self.potentialWinnersVertical[0].id;
+                      winnerPlayer['name'] = self.potentialWinnersVertical[0].name;
+                      winnerPlayer['numbers'] = self.potentialWinnersVertical[0].numbers;
+                      winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[0].winnerDetail;
+                      winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+                      self.currentGame.winners[round].vertical.push(winnerPlayer);
+                      self.potentialWinnersVertical = [];
+                    } else {
+                      let absentPlayer = new Object();
+                      absentPlayer['id'] = self.potentialWinnersVertical[0].id;
+                      absentPlayer['name'] = self.potentialWinnersVertical[0].name;
+                      self.currentGame.settings.absentPlayers.push(absentPlayer);
+                      alert('El ganador no estaba presente! \n Seguimos jugando verticales!');
+                      self.potentialWinnersVertical = [];
+                      break;
+                    }
+                  }
+                  
+                } else {
+  
+                  alert('BINGO - Vertical - Tenemos varios cartones ganadores! Pasemos lista!');
+                  self.potentialWinnersVertical.forEach(element => { 
+                    if (!confirm('Está '+ element.name +' presente en la llamada?')) {
+                      element.absent = true;
+                      let absentPlayer = new Object();
+                      absentPlayer['id'] = element.id;
+                      absentPlayer['name'] = element.name;
+                      self.currentGame.settings.absentPlayers.push(absentPlayer);
+                    } 
+                  });
+  
+                  let newArray = [];
+  
+                  self.potentialWinnersVertical.forEach(element => { 
+                    if (!element.absent) {
+                      newArray.push(element);
+                    } 
+                  });
+  
+                  self.potentialWinnersVertical = newArray;
+                  this.checkAfterAbsentsVertical();
+  
+                }
+              } 
             }
-          }
-          break;
+            break;
+            /*
         case 'horizontal':
           if (way[1] && self.currentGame.winners[round].horizontal.length == 0) {
             if (!self.checkAbsentPlayer(player)) {
@@ -473,6 +535,41 @@ export class GameDetailsComponent implements OnInit {
     }
   }
 
+  checkAfterAbsentsVertical() {
+    let self = this;
+    let round = self.currentGame.winners.length - 1;
+    if (self.potentialWinnersVertical.length == 0) {
+      alert('Ninguno de los ganadores estaba presente! \n Seguimos jugando verticales!');
+      self.potentialWinnersVertical = [];
+      self.potentialWinnersVertical.forEach(element => {
+        let absentPlayer = new Object();
+        absentPlayer['id'] = element.id;
+        absentPlayer['name'] = element.name;
+        self.currentGame.settings.absentPlayers.push(absentPlayer);
+      });
+    } else {
+      if (self.potentialWinnersVertical.length == 1) {
+        if(!self.checkAbsentPlayer(self.potentialWinnersVertical[0])) {
+          alert('Tenemos ganador del premio vertical! Unico ganador presente: ' + self.potentialWinnersVertical[0].name);
+          let winnerPlayer = new Object();
+          winnerPlayer['id'] = self.potentialWinnersVertical[0].id;
+          winnerPlayer['name'] = self.potentialWinnersVertical[0].name;
+          winnerPlayer['numbers'] = self.potentialWinnersVertical[0].numbers;
+          winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[0].winnerDetail;
+          winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+          self.currentGame.winners[round].vertical.push(winnerPlayer);
+          self.potentialWinnersVertical = [];
+        }
+      } else {
+        alert('Como tenemos varios ganadores presentes, vamos a la tómbola de desempate!');
+        self.showUntieRaffle = true;
+        self.checkingUntieVertical = true;
+        self.currentUntieNumbers = [];
+        /** Continue checking winner logic after click in other methods. */
+      }
+    }
+  }
+
   checkWinnerCorners () {
     let self = this;
     let allScoresUntied = true;
@@ -514,6 +611,47 @@ export class GameDetailsComponent implements OnInit {
   }
 
 
+  checkWinnerVerticals () {
+    let self = this;
+    let allScoresUntied = true;
+    let winnerIndex = -1;
+    let higherNumber = 0;
+    let currentIndex = 0;
+    this.potentialWinnersVertical.forEach(element => {
+      if (element.untieScore == 0) {
+        allScoresUntied = false;
+      }
+    });
+
+    if (allScoresUntied) {
+      this.potentialWinnersVertical.forEach(element => {
+        if (element.untieScore > higherNumber) {
+          higherNumber = element.untieScore;
+          winnerIndex = currentIndex;
+        }
+        currentIndex++;
+      });
+      setTimeout(function(){ 
+        alert('El ganador de verticales, por ser el número más alto ('+ higherNumber + ') es: ' + self.potentialWinnersVertical[winnerIndex].name);
+        let winnerPlayer = new Object();
+        let round = self.currentGame.winners.length - 1;
+        winnerPlayer['id'] = self.potentialWinnersVertical[0].id;
+        winnerPlayer['name'] = self.potentialWinnersVertical[0].name;
+        winnerPlayer['numbers'] = self.potentialWinnersVertical[0].numbers;
+        winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[0].winnerDetail;
+        winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+        self.currentGame.winners[round].vertical.push(winnerPlayer);
+        self.checkIfFinished();
+      }, 1000);
+      setTimeout(function(){ 
+        self.showUntieRaffle = false;
+        self.checkingUntieVertical = false;
+        self.currentUntieNumbers = [];
+      }, 3000);
+    } 
+  }
+
+
   checkAbsentPlayer(player) {
     let found = false;
     this.currentGame.settings.absentPlayers.forEach(element => {
@@ -545,9 +683,8 @@ export class GameDetailsComponent implements OnInit {
         break;
       default: break;
     }
-    if(!self.checkAbsentPlayer(player)) {
+    if (!self.checkAbsentPlayer(player)) {
       if (player.corners == 4) {
-      
         let winnerPlayer = new Object();
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
@@ -607,97 +744,68 @@ export class GameDetailsComponent implements OnInit {
       }
       index++;
     });
-    let round = self.currentGame.winners.length - 1;
-    if (player.verticalB == 5) {
-      alert('BINGO - - Vertical - Columna B - ' + player.name);
-      if (confirm('Esta '+ player.name +' presente en la llamada?')) {
-        player.winnerDetail += ' - Vertical - Columna B ';
+
+    if(!this.checkAbsentPlayer(player)) {
+      if (player.verticalB == 5) {
         let winnerPlayer = new Object();
+        //player.winnerDetail += ' - Vertical - Columna B ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
-        self.currentGame.winners[round].vertical.push(winnerPlayer); 
+        winnerPlayer['absent'] = false;
+        winnerPlayer['untieScore'] = 0;
+        self.potentialWinnersVertical.push(winnerPlayer); 
       }
-      else {
-        let absentPlayer = new Object();
-        absentPlayer['id'] = player.id;
-        absentPlayer['name'] = player.name;
-        self.currentGame.settings.absentPlayers.push(absentPlayer);
-      }
-    }
-    if (player.verticalI == 5) {
-      alert('BINGO - - Vertical - Columna I - ' + player.name);
-      if (confirm('Esta '+ player.name +' presente en la llamada?')) {
-        player.winnerDetail += ' - Vertical - Columna I ';
+      if (player.verticalI == 5) {
         let winnerPlayer = new Object();
+       // player.winnerDetail += ' - Vertical - Columna I ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
-        self.currentGame.winners[round].vertical.push(winnerPlayer);
-      } else {
-        let absentPlayer = new Object();
-        absentPlayer['id'] = player.id;
-        absentPlayer['name'] = player.name;
-        self.currentGame.settings.absentPlayers.push(absentPlayer);
+        winnerPlayer['absent'] = false;
+        winnerPlayer['untieScore'] = 0;
+        self.potentialWinnersVertical.push(winnerPlayer); 
       }
-    }
-    if (player.verticalN == 4) {
-      alert('BINGO - - Vertical - Columna N (centro) - ' + player.name);
-      if (confirm('Esta '+ player.name +' presente en la llamada?')) {
-        player.winnerDetail += ' - Vertical - Columna N (centro)';
+      if (player.verticalN == 4) {
         let winnerPlayer = new Object();
+       // player.winnerDetail += ' - Vertical - Columna N ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
-        self.currentGame.winners[round].vertical.push(winnerPlayer);
-      } else {
-        let absentPlayer = new Object();
-        absentPlayer['id'] = player.id;
-        absentPlayer['name'] = player.name;
-        self.currentGame.settings.absentPlayers.push(absentPlayer);
+        winnerPlayer['absent'] = false;
+        winnerPlayer['untieScore'] = 0;
+        self.potentialWinnersVertical.push(winnerPlayer); 
       }
-    }
-    if (player.verticalG == 5) {
-      alert('BINGO - - Vertical - Columna G - ' + player.name);
-      if (confirm('Esta '+ player.name +' presente en la llamada?')) {
-        player.winnerDetail += ' - Vertical - Columna G';
+      if (player.verticalG == 5) {
         let winnerPlayer = new Object();
+       // player.winnerDetail += ' - Vertical - Columna G ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
-        self.currentGame.winners[round].vertical.push(winnerPlayer);
-      } else {
-        let absentPlayer = new Object();
-        absentPlayer['id'] = player.id;
-        absentPlayer['name'] = player.name;
-        self.currentGame.settings.absentPlayers.push(absentPlayer);
+        winnerPlayer['absent'] = false;
+        winnerPlayer['untieScore'] = 0;
+        self.potentialWinnersVertical.push(winnerPlayer); 
       }
-    }
-    if (player.verticalO == 5) {
-      alert('BINGO - - Vertical - Columna O - ' + player.name);
-      if (confirm('Esta '+ player.name +' presente en la llamada?')) {
-        player.winnerDetail += ' - Vertical - Columna O';
+      if (player.verticalO == 5) {
         let winnerPlayer = new Object();
+       // player.winnerDetail += ' - Vertical - Columna O ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
-        self.currentGame.winners[round].vertical.push(winnerPlayer);
-      } else {
-        let absentPlayer = new Object();
-        absentPlayer['id'] = player.id;
-        absentPlayer['name'] = player.name;
-        self.currentGame.settings.absentPlayers.push(absentPlayer);
-      }
+        winnerPlayer['absent'] = false;
+        winnerPlayer['untieScore'] = 0;
+        self.potentialWinnersVertical.push(winnerPlayer); 
+      } 
     }
   }
 

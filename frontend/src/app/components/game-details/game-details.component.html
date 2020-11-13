@@ -235,8 +235,8 @@
                 <div *ngIf="showUntieRaffle" class="col-md-12 second-raffle">
                     <h1> Tombola de Desempate </h1>
                     <button *ngIf="!spinningRaffle && checkingUntieCorners" class="btn " (click)="getRandomNumber2(1, 99, 'corners', cornersClick) "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
-                    <!-- <button *ngIf="!spinningRaffle " class="btn " (click)="getRandomNumber2(1,99, 'horizontal') "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
-                    <button *ngIf="!spinningRaffle " class="btn " (click)="getRandomNumber2(1,99, 'vertical') "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
+                    <button *ngIf="!spinningRaffle && checkingUntieVertical" class="btn " (click)="getRandomNumber2(1,99, 'vertical', verticalClick) "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
+                    <!--  <button *ngIf="!spinningRaffle " class="btn " (click)="getRandomNumber2(1,99, 'vertical') "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
                     <button *ngIf="!spinningRaffle " class="btn " (click)="getRandomNumber2(1,99, 'fullGame') "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
                    -->
                     <div>
@@ -248,6 +248,11 @@
                     </div>
                     <div *ngIf="checkingUntieCorners">
                         <li *ngFor="let element of potentialWinnersCorners">
+                            {{ element.name }} - {{ element.untieScore }}
+                        </li>
+                    </div>
+                    <div *ngIf="checkingUntieVertical">
+                        <li *ngFor="let element of potentialWinnersVertical">
                             {{ element.name }} - {{ element.untieScore }}
                         </li>
                     </div>
