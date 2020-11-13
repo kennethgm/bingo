@@ -55,7 +55,7 @@
                             <span> Vertical </span>
                             <li *ngFor="let winnerDetail of winner.vertical"> {{ winnerDetail.name }}</li>
                         </div>
-                        <div *ngIf="winner.corners.fullGame > 0">
+                        <div *ngIf="winner.fullGame.length > 0">
                             <span> Carton Lleno </span>
                             <li *ngFor="let winnerDetail of winner.fullGame"> {{ winnerDetail.name }}</li>
                         </div>
@@ -237,8 +237,8 @@
                     <button *ngIf="!spinningRaffle && checkingUntieCorners" class="btn " (click)="getRandomNumber2(1, 99, 'corners', cornersClick) "> <i class="fas fa-undo "></i> Girar Tombola Esquinas<i class="fas fa-undo "></i> </button> <br>
                     <button *ngIf="!spinningRaffle && checkingUntieVertical" class="btn " (click)="getRandomNumber2(1,99, 'vertical', verticalClick) "> <i class="fas fa-undo "></i> Girar Tombola Verticales <i class="fas fa-undo "></i> </button> <br>
                     <button *ngIf="!spinningRaffle && checkingUntieHorizontal " class="btn " (click)="getRandomNumber2(1,99, 'horizontal', horizontalClick) "> <i class="fas fa-undo "></i> Girar Tombola Horizontales<i class="fas fa-undo "></i> </button>                    <br>
-                    <!--   <button *ngIf="!spinningRaffle " class="btn " (click)="getRandomNumber2(1,99, 'fullGame') "> <i class="fas fa-undo "></i> Girar Tombola <i class="fas fa-undo "></i> </button> <br>
-                   -->
+                    <button *ngIf="!spinningRaffle && checkingUntieFull" class="btn " (click)="getRandomNumber2(1,99, 'fullGame', fullGameClick) "> <i class="fas fa-undo "></i> Girar Tombola Carton Lleno <i class="fas fa-undo "></i> </button> <br>
+
                     <div>
                         <img *ngIf="spinningRaffle " src="../../../assets/bingo.gif " />
                         <img *ngIf="!spinningRaffle " src="../../../assets/bingo-paused.jpg " />
@@ -258,6 +258,11 @@
                     </div>
                     <div *ngIf="checkingUntieHorizontal">
                         <li *ngFor="let element of potentialWinnersHorizontal">
+                            {{ element.name }} - {{ element.untieScore }}
+                        </li>
+                    </div>
+                    <div *ngIf="checkingUntieFull">
+                        <li *ngFor="let element of potentialWinnersFull">
                             {{ element.name }} - {{ element.untieScore }}
                         </li>
                     </div>
