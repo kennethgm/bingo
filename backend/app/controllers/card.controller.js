@@ -184,8 +184,8 @@ exports.sendEmail = (req, res1) => {
     let path = (req.body.path).toString();
 
     const mail = mailcomposer({
-        from: 'zenproduc01@gmail.com',
-        replyTo: 'zenproduc01@gmail.com',
+        from: 'kerberos.productionscr@gmail.com',
+        replyTo: 'kerberos.productionscr@gmail.com',
         to: emailTo,
         subject: subject,
         text: message,
