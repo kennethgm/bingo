@@ -28,19 +28,27 @@ export class GameDetailsComponent implements OnInit {
   moreStats = false;
   unTieNumber = 0;
   showModal = false;
-  showUntieRaffle = false;
+
+  spinningRaffleCorners = false;
+  showUntieRaffleCorners = false;
   potentialWinnersCorners = [];
   checkingUntieCorners = false;
   cornersClick = 0;
 
+  spinningRaffleVertical = false;
+  showUntieRaffleVertical = false;
   potentialWinnersVertical = [];
   checkingUntieVertical = false;
   verticalClick = 0;
 
+  spinningRaffleHorizontal = false;
+  showUntieRaffleHorizontal = false;
   potentialWinnersHorizontal = [];
   checkingUntieHorizontal = false;
   horizontalClick = 0;
 
+  spinningRaffleFull = false;
+  showUntieRaffleFull = false;
   potentialWinnersFull = [];
   checkingUntieFull = false;
   fullGameClick = 0;
@@ -169,6 +177,10 @@ export class GameDetailsComponent implements OnInit {
       this.potentialWinnersVertical = [];
       this.potentialWinnersHorizontal = [];
       this.potentialWinnersFull = [];
+      this.cornersClick = 0;
+      this.verticalClick = 0;
+      this.horizontalClick = 0;
+      this.fullGameClick = 0;
       this.currentGame.winners.push({
         "corners": [],
         "vertical": [],
@@ -605,9 +617,10 @@ export class GameDetailsComponent implements OnInit {
         }
       } else {
         alert('Como tenemos varios ganadores presentes, vamos a la tómbola de desempate!');
-        self.showUntieRaffle = true;
+        self.showUntieRaffleCorners = true;
         self.checkingUntieCorners = true;
         self.currentUntieNumbers = [];
+        self.unTieNumber = 0;
         /** Continue checking winner logic after click in other methods. */
       }
     }
@@ -640,9 +653,10 @@ export class GameDetailsComponent implements OnInit {
         }
       } else {
         alert('Como tenemos varios ganadores presentes, vamos a la tómbola de desempate!');
-        self.showUntieRaffle = true;
+        self.showUntieRaffleVertical = true;
         self.checkingUntieVertical = true;
         self.currentUntieNumbers = [];
+        self.unTieNumber = 0;
         /** Continue checking winner logic after click in other methods. */
       }
     }
@@ -675,9 +689,10 @@ export class GameDetailsComponent implements OnInit {
         }
       } else {
         alert('Como tenemos varios ganadores presentes, vamos a la tómbola de desempate!');
-        self.showUntieRaffle = true;
+        self.showUntieRaffleHorizontal = true;
         self.checkingUntieHorizontal = true;
         self.currentUntieNumbers = [];
+        self.unTieNumber = 0;
         /** Continue checking winner logic after click in other methods. */
       }
     }
@@ -710,9 +725,10 @@ export class GameDetailsComponent implements OnInit {
         }
       } else {
         alert('Como tenemos varios ganadores presentes, vamos a la tómbola de desempate!');
-        self.showUntieRaffle = true;
+        self.showUntieRaffleFull = true;
         self.checkingUntieFull = true;
         self.currentUntieNumbers = [];
+        self.unTieNumber = 0;
         /** Continue checking winner logic after click in other methods. */
       }
     }
@@ -732,6 +748,7 @@ export class GameDetailsComponent implements OnInit {
     });
 
     if (allScoresUntied) {
+      self.cornersClick = 0;
       this.potentialWinnersCorners.forEach(element => {
         if (element.untieScore > higherNumber) {
           higherNumber = element.untieScore;
@@ -749,13 +766,16 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['winnerDetails'] = self.potentialWinnersCorners[winnerIndex].winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].corners.push(winnerPlayer);
+        
         self.checkIfFinished();
       }, 1000);
+
       setTimeout(function(){ 
-        self.showUntieRaffle = false;
+        self.showUntieRaffleCorners = false;
         self.checkingUntieCorners = false;
         self.currentUntieNumbers = [];
-      }, 3000);
+      }, 2000);
+     
     } 
   }
 
@@ -773,6 +793,7 @@ export class GameDetailsComponent implements OnInit {
     });
 
     if (allScoresUntied) {
+      self.verticalClick = 0;
       this.potentialWinnersVertical.forEach(element => {
         if (element.untieScore > higherNumber) {
           higherNumber = element.untieScore;
@@ -790,13 +811,16 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[winnerIndex].winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].vertical.push(winnerPlayer);
+        self.potentialWinnersVertical = [];
         self.checkIfFinished();
       }, 1000);
+
       setTimeout(function(){ 
-        self.showUntieRaffle = false;
+        self.showUntieRaffleVertical = false;
         self.checkingUntieVertical = false;
         self.currentUntieNumbers = [];
-      }, 3000);
+      }, 2000);
+      
     } 
   }
 
@@ -813,6 +837,7 @@ export class GameDetailsComponent implements OnInit {
     });
 
     if (allScoresUntied) {
+      self.horizontalClick = 0;
       this.potentialWinnersHorizontal.forEach(element => {
         if (element.untieScore > higherNumber) {
           higherNumber = element.untieScore;
@@ -832,11 +857,13 @@ export class GameDetailsComponent implements OnInit {
         self.currentGame.winners[round].horizontal.push(winnerPlayer);
         self.checkIfFinished();
       }, 1000);
+
       setTimeout(function(){ 
-        self.showUntieRaffle = false;
+        self.showUntieRaffleHorizontal = false;
         self.checkingUntieHorizontal = false;
         self.currentUntieNumbers = [];
-      }, 3000);
+      }, 2000);
+
     } 
   }
 
@@ -853,6 +880,7 @@ export class GameDetailsComponent implements OnInit {
     });
 
     if (allScoresUntied) {
+      self.fullGameClick = 0;
       this.potentialWinnersFull.forEach(element => {
         if (element.untieScore > higherNumber) {
           higherNumber = element.untieScore;
@@ -873,16 +901,35 @@ export class GameDetailsComponent implements OnInit {
         self.checkIfFinished();
       }, 1000);
       setTimeout(function(){ 
-        self.showUntieRaffle = false;
+        self.showUntieRaffleFull = false;
         self.checkingUntieFull = false;
         self.currentUntieNumbers = [];
-      }, 3000);
+      }, 2000);
     } 
   }
 
   getRandomNumber2(min, max, type, clicks) {
     let self = this;
     self.spinningRaffle = true;
+    self.unTieNumber = 0;
+    //console.log('type', type,'clicks', clicks);
+    switch(type) {
+      case 'corners': {
+        self.spinningRaffleCorners = true;
+      }
+      break;
+      case 'vertical': {
+        self.spinningRaffleVertical = true;
+      }
+      break;
+      case 'horizontal': {
+        self.spinningRaffleHorizontal = true;
+      } 
+      break;
+      case 'fullGame': {
+        self.spinningRaffleFull = true;
+      } 
+    }
     let newNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     if (self.isInArrayUntie(newNumber)) {
       self.getRandomNumber2(min, max, type, clicks);
@@ -895,24 +942,28 @@ export class GameDetailsComponent implements OnInit {
           case 'corners': {
             self.potentialWinnersCorners[clicks].untieScore = newNumber;
             self.cornersClick = clicks + 1;
+            self.spinningRaffleCorners = false;
             self.checkWinnerCorners();
           }
           break;
           case 'vertical': {
             self.potentialWinnersVertical[clicks].untieScore = newNumber;
             self.verticalClick = clicks + 1;
+            self.spinningRaffleVertical = false;
             self.checkWinnerVerticals();
           }
           break;
           case 'horizontal': {
             self.potentialWinnersHorizontal[clicks].untieScore = newNumber;
             self.horizontalClick = clicks + 1;
+            self.spinningRaffleHorizontal = false;
             self.checkWinnerHorizontals();
           } 
           break;
           case 'fullGame': {
             self.potentialWinnersFull[clicks].untieScore = newNumber;
             self.fullGameClick = clicks + 1;
+            self.spinningRaffleFull = false;
             self.checkWinnerFullGame();
           } 
           break;
