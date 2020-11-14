@@ -95,7 +95,7 @@ export class CardDetailsComponent implements OnInit {
 
   sendByEmail(){
     this.successMessage = '';
-    html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY, width:535, height: 560}).then(canvas => {
+    html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY + 3, width:534, height: 558}).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
 
       let requestData = new Object();

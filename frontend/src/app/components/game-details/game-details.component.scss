@@ -1,5 +1,5 @@
 .container {
-    padding: 30px;
+    padding: 30px 0;
 }
 
 .form-control.date {
@@ -22,10 +22,10 @@ input.form-control {
 }
 
 .btn {
-    background-color: #ededed;
-    color: black;
+    background-color: #00B0F6;
+    color: white;
     border-radius: 5px;
-    margin: 3px;
+    margin: 0px 20px;
 }
 
 .round {
@@ -99,7 +99,7 @@ input.form-control {
     }
     button {
         width: 85%;
-        background-color: #1396d3;
+        background-color: #00B0F6;
         color: white;
         margin: 20px 0;
     }
@@ -129,6 +129,12 @@ input.form-control {
     .second-raffle {
         margin-top: 120px;
         margin-bottom: 30px;
+        li {
+            list-style: none;
+            margin: 15px;
+            font-size: 20px;
+            color: black;
+        }
     }
     ul {
         list-style: none;
@@ -158,7 +164,7 @@ input.form-control {
                 left: 25%;
                 z-index: 5;
                 color: white;
-                width: 20%;
+                width: 185px;
                 border-radius: 5px;
                 .bcard {
                     display: inline-block;

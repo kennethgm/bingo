@@ -123,7 +123,7 @@
             </div>
         </div>
         <div class="last-calls">
-            <p> Ultimos numeros: </p>
+            <p> Últimos Números: </p>
             <span *ngFor="let number of currentGame.settings.selectedNumbers?.slice(-5); index as i;">
                <span *ngIf="number != lastNumber"> 
                    {{ number }}  
@@ -145,13 +145,13 @@
                 </div>
             </div>
             <div class="ranking col-md-12 d-inline-block ">
-                <h2> Ranking de Jugadores </h2>
+                <h2> Ránking de Jugadores </h2>
                 <ul>
                     <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} - Ver Carton <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
                         <span class="current"> 
                             Puntos: {{ ranking.fullGame }} 
                         </span> <br>
-                        <span> Detalles del Ranking <i (click)="moreStats = !moreStats" class="fas fa-info-circle"></i>  </span>
+                        <!-- <span> Detalles del Ranking <i (click)="moreStats = !moreStats" class="fas fa-info-circle"></i>  </span> -->
                         <span class="winner" *ngIf="ranking.winnerDetail != ''"> BINGO! <br> {{ ranking.winnerDetail }} </span>
                         <div class="details" *ngIf="ranking.showDetails==true ">
 
@@ -236,7 +236,7 @@
                 <div *ngIf="checkingUntieCorners && showUntieRaffleCorners" class="col-md-12 second-raffle">
                     <h1> Tómbola de Desempate (4 Esquinas) </h1>
                     <button *ngIf="!spinningRaffleCorners && checkingUntieCorners" class="btn " (click)="getRandomNumber2(1, 99, 'corners', cornersClick) "> 
-                        <i class="fas fa-undo "></i> Girar Tómbola 4 Esquinas<i class="fas fa-undo "></i> 
+                        <i class="fas fa-undo "></i> Girar Tómbola 4 Esquinas <i class="fas fa-undo "></i> 
                     </button>
                     <br>
                     <div>
@@ -273,7 +273,7 @@
                 <div *ngIf="checkingUntieHorizontal && showUntieRaffleHorizontal" class="col-md-12 second-raffle">
                     <h1> Tómbola de Desempate (Horizontales) </h1>
                     <button *ngIf="!spinningRaffleHorizontal && checkingUntieHorizontal " class="btn " (click)="getRandomNumber2(1,99, 'horizontal', horizontalClick) "> 
-                        <i class="fas fa-undo "></i> Girar Tómbola Horizontales<i class="fas fa-undo "></i> 
+                        <i class="fas fa-undo "></i> Girar Tómbola Horizontales <i class="fas fa-undo "></i> 
                     </button>
                     <br>
                     <div>
@@ -292,7 +292,7 @@
                 <div *ngIf="checkingUntieFull && showUntieRaffleFull">
                     <h1> Tómbola de Desempate (Cartón Lleno) </h1>
                     <button *ngIf="!spinningRaffleFull && checkingUntieFull" class="btn " (click)="getRandomNumber2(1,99, 'fullGame', fullGameClick) "> 
-                        <i class="fas fa-undo "></i> Girar Tómbola Carton Lleno <i class="fas fa-undo "></i> 
+                        <i class="fas fa-undo "></i> Girar Tómbola Cartón Lleno <i class="fas fa-undo "></i> 
                     </button>
                     <br>
                     <div>
@@ -311,8 +311,8 @@
             </div>
         </div>
         <div class="buttons ">
-            <button class="btn" (click)="editGame = true">  Ver / Editar Detalles <i class="fas fa-edit"></i></button>
-            <button class="btn " (click)="restartGame() "> <i class="fas fa-recycle "></i> Reiniciar el Juego  </button>
+            <button class="btn" (click)="editGame = true">  Ver / Editar Detalles del Juego <i class="fas fa-edit"></i></button>
+            <button class="btn " (click)="restartGame() ">  Reiniciar / Nueva Ronda <i class="fas fa-recycle "></i> </button>
             <button class="btn " routerLink='/admin'> <i class="fas fa-arrow-circle-left "></i> Salir  </button>
 
         </div>
