@@ -100,12 +100,21 @@ export class CardDetailsComponent implements OnInit {
 
       let requestData = new Object();
       requestData['emailTo'] =   this.currentCard.email;
-      requestData['message'] = 'Hola, ' + this.currentCard.name + ' adjunto el bingo...';
+      requestData['message'] = 'Saludos, \n\n Estimado(a) '+ this.currentCard.name + '\n\n De parte de Kerberos Producciones'+
+      ' y su marca LaTómbolaCR es un placer servirle en este juego de tómbola virtual. '+
+      ' \n Le deseamos la mejor de las suertes en el juego a realizarse el domingo 15 de Noviembre a las 4:00PM. \n '+
+      'Adjuntamos la imágen de su cartón, con un código único y de uso exclusivo para este juego. \n\n '+
+      'Este es link de acceso a la transimión de Zoom: https://zoom.us/meeting/register/tJYrf-iorDsuGtONKPKdrW9yx1GXQnxrD6tX \n\n'+
+      'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. Búscanos en Facebook como Kerberos.\n\n' +
+      'Michael Martínez Castro. \n'+
+      'Productor de Kerberos Producciones. \n'+
+      'Contacto: 6161 2298 ';
+      
       requestData['path'] = this.canvas.nativeElement.src; 
       requestData['subject'] = 'Cartón Oficial de La Tómbola CR';
       
       this.cardService.sendEmail(requestData).subscribe((data) => {
-        this.successMessage = 'El carton fue enviado correctamente';
+        this.successMessage = 'El cartón fue enviado correctamente.';
       });
       
     
