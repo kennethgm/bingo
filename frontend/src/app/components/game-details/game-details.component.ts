@@ -1008,6 +1008,7 @@ export class GameDetailsComponent implements OnInit {
     if (!self.checkAbsentPlayer(player)) {
       if (player.corners == 4) {
         let winnerPlayer = new Object();
+        player.winnerDetail += ' - 4 esquinas';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1070,7 +1071,7 @@ export class GameDetailsComponent implements OnInit {
     if(!this.checkAbsentPlayer(player)) {
       if (player.verticalB == 5) {
         let winnerPlayer = new Object();
-        //player.winnerDetail += ' - Vertical - Columna B ';
+        player.winnerDetail += ' - Vertical - Columna B ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1082,7 +1083,7 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.verticalI == 5) {
         let winnerPlayer = new Object();
-       // player.winnerDetail += ' - Vertical - Columna I ';
+        player.winnerDetail += ' - Vertical - Columna I ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1094,7 +1095,7 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.verticalN == 4) {
         let winnerPlayer = new Object();
-       // player.winnerDetail += ' - Vertical - Columna N ';
+        player.winnerDetail += ' - Vertical - Columna N ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1106,7 +1107,7 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.verticalG == 5) {
         let winnerPlayer = new Object();
-       // player.winnerDetail += ' - Vertical - Columna G ';
+        player.winnerDetail += ' - Vertical - Columna G ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1118,7 +1119,7 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.verticalO == 5) {
         let winnerPlayer = new Object();
-       // player.winnerDetail += ' - Vertical - Columna O ';
+        player.winnerDetail += ' - Vertical - Columna O ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1151,23 +1152,31 @@ export class GameDetailsComponent implements OnInit {
             }
             break
           case 2:
-            if (player.numbers[letter][index] == newNumber) {
-              player.matchedNumbers[letter + (index+1)] = true;
-              player.horizontal3++;
-            }
-            break;
-          case 3:
-              if (letter != 'n') {
-                if (player.numbers[letter][index] == newNumber) {
-                  player.matchedNumbers[letter + (index+1)] = true;
-                  player.horizontal4++;
-                }
-              } else {
-                if (player.numbers[letter][index - 1] == newNumber) {
-                 player.matchedNumbers[letter + (index)] = true;
-                 player.horizontal4++;
-                }
+            if (letter != 'n') {
+              if (player.numbers[letter][index] == newNumber) {
+                player.matchedNumbers[letter + (index+1)] = true;
+                player.horizontal3++;
               }
+            } else {
+              if (player.numbers[letter][index - 1] == newNumber) {
+               player.matchedNumbers[letter + (index)] = true;
+               player.horizontal3++;
+              }
+            }
+            
+          case 3:
+            if (letter != 'n') {
+              if (player.numbers[letter][index] == newNumber) {
+                player.matchedNumbers[letter + (index+1)] = true;
+                player.horizontal4++;
+              }
+            } else {
+              if (player.numbers[letter][index - 1] == newNumber) {
+               player.matchedNumbers[letter + (index)] = true;
+               player.horizontal4++;
+              }
+            }
+            
             break;
           case 4:
             if (letter != 'n') {
@@ -1189,6 +1198,7 @@ export class GameDetailsComponent implements OnInit {
     if (!self.checkAbsentPlayer(player)) {
       if (player.horizontal1 == 5) {
         let winnerPlayer = new Object();
+        player.winnerDetail += ' - Horizontal 1';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1200,6 +1210,7 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.horizontal2 == 5) {
         let winnerPlayer = new Object();
+        player.winnerDetail += ' - Horizontal 2';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1211,6 +1222,7 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.horizontal3 == 4) {
         let winnerPlayer = new Object();
+        player.winnerDetail += ' - Horizontal 3';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1222,6 +1234,19 @@ export class GameDetailsComponent implements OnInit {
       }
       if (player.horizontal4 == 5) {
         let winnerPlayer = new Object();
+        player.winnerDetail += ' - Horizontal 4 ';
+        winnerPlayer['id'] = player.id;
+        winnerPlayer['name'] = player.name;
+        winnerPlayer['numbers'] = player.numbers;
+        winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+        winnerPlayer['absent'] = false;
+        winnerPlayer['untieScore'] = 0;
+        self.potentialWinnersHorizontal.push(winnerPlayer);
+      }
+      if (player.horizontal5 == 5) {
+        let winnerPlayer = new Object();
+        player.winnerDetail += ' - Horizontal 5';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
@@ -1271,6 +1296,7 @@ export class GameDetailsComponent implements OnInit {
     if(!self.checkAbsentPlayer(player)) {
       if (player.fullGame == 24) {
         let winnerPlayer = new Object();
+        player.winnerDetail += ' - CARTON LLENO ';
         winnerPlayer['id'] = player.id;
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
