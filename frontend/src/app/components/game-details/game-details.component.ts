@@ -148,6 +148,7 @@ export class GameDetailsComponent implements OnInit {
   }
 
   updateGame(): void {
+    console.log('currentGame', this.currentGame);
     this.gameService.update(this.currentGame.id, this.currentGame)
       .subscribe(
         response => {

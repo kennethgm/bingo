@@ -148,7 +148,7 @@ export class CardDetailsComponent implements OnInit {
       ' \n Le deseamos la mejor de las suertes en el juego a realizarse el '+ this.currentDate +' \n '+
       'Adjuntamos la imágen de su cartón, con un código único y de uso exclusivo para este juego. \n\n '+
       'Este es link de acceso a la transimión: ' + this.currentLink + '\n\n'+
-      'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. Búscanos en Facebook como Kerberos.\n\n' +
+      'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. \\n+ Esta es nuestra pagina de Facebook, SIGUENOS: https://www.facebook.com/keroproductions/ \n\n' +
       'Michael Martínez Castro. \n'+
       'Productor de Kerberos Producciones. \n'+
       'Contacto: 6161 2298 ';
