@@ -148,7 +148,7 @@
             <div class="ranking col-md-12 d-inline-block ">
                 <h2> Ránking de Jugadores </h2>
                 <ul class="list">
-                    <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. {{ ranking.name }} - Ver Carton <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i>
+                    <li *ngFor="let ranking of rankingOfWinners; index as i; "> {{ i + 1 }}. <i (mouseover)="ranking.showDetails = true" (mouseout)="ranking.showDetails = false" class="fas fa-eye "></i> - {{ ranking.name }}
                         <span class="current"> 
                             Puntos: {{ ranking.fullGame }} 
                         </span> <br>

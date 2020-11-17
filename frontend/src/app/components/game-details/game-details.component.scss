@@ -129,7 +129,9 @@ input.form-control {
     min-height: 75vh;
     .list {
         max-height: 90vh;
+        min-height: 80vh;
         overflow-y: scroll;
+        margin-bottom: 100px;
     }
     .second-raffle {
         margin-top: 120px;
@@ -148,6 +150,7 @@ input.form-control {
             margin: 10px 0;
             font-size: 18px;
             text-align: left;
+            position: relative;
             span {
                 font-size: 12px;
             }
@@ -166,11 +169,13 @@ input.form-control {
             .details {
                 background: black;
                 position: absolute;
-                left: 25%;
+                top: 20px;
+                left: 10px;
                 z-index: 5;
                 color: white;
                 width: 185px;
                 border-radius: 5px;
+                display: block;
                 .bcard {
                     display: inline-block;
                     vertical-align: top;
