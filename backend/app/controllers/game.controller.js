@@ -18,7 +18,8 @@ exports.create = (req, res) => {
         name: req.body.name,
         startDate: req.body.startDate,
         winners: req.body.winners,
-        settings: req.body.settings
+        settings: req.body.settings,
+        zoomLink: req.body.zoomLink
     };
 
     // Save Game in the database

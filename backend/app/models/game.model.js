@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         settings: {
             type: Sequelize.JSONB
+        },
+        zoomLink: {
+            type: Sequelize.STRING
         }
     });
 

@@ -13,7 +13,8 @@ export class AddGameComponent implements OnInit {
     name: '',
     winners: [],
     startDate: new Date(),
-    settings: {}
+    settings: {},
+    zoomLink: ''
   };
   submitted = false;
   games: any;
@@ -38,12 +39,13 @@ export class AddGameComponent implements OnInit {
     }
 
     saveGame(): void {
-     console.log('this.game', this.game);
+     //console.log('this.game', this.game);
       const data = {
         name: this.game.name,
         winners: this.game.winners,
         startDate: this.game.startDate,
-        settings: this.game.settings
+        settings: this.game.settings, 
+        zoomLink: this.game.zoomLink
       };
       console.log('will send', data);
       this.gameService.create(data)
@@ -76,7 +78,8 @@ export class AddGameComponent implements OnInit {
             "fullGame": false
           },
           absentPlayers: []
-        }
+        }, 
+        zoomLink : ''
       };
     }
 

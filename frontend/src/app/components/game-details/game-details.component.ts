@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
 import { CardService } from 'src/app/services/card.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-game-details',
@@ -59,7 +60,8 @@ export class GameDetailsComponent implements OnInit {
     private gameService: GameService,
     private cardService: CardService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public datepipe: DatePipe) { }
 
     ngOnInit(): void {
       this.message = '';
@@ -136,7 +138,8 @@ export class GameDetailsComponent implements OnInit {
     this.gameService.get(id)
     .subscribe(
       data => {
-        this.currentGame = data;
+        this.currentGame = data;                                               
+        this.currentGame.startDate = this.datepipe.transform(this.currentGame.startDate, "yyyy-MM-dd'T'HH:mm:ss");
         this.getCards();
       },
       error => {

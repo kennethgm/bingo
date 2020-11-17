@@ -17,6 +17,7 @@ import { AddGameComponent } from './components/add-game/add-game.component';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { HomeComponent } from './components/home/home.component';
 import { CardsListComponent } from './components/cards-list/cards-list.component';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { CardsListComponent } from './components/cards-list/cards-list.component
     MatInputModule
   ],
   exports: [MatInputModule],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
