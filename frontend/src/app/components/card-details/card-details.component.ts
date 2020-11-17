@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from './../../services/card.service';
 import { GameService } from './../../services/game.service';
 import html2canvas from 'html2canvas';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-card-details',
   templateUrl: './card-details.component.html',
@@ -16,22 +18,63 @@ export class CardDetailsComponent implements OnInit {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
   games = [];
+  currentLink = '';
+  currentDate = '';
 
   constructor(
     private cardService: CardService,
     private route: ActivatedRoute,
     private gameService: GameService,
-    private router: Router) { }
+    private router: Router,
+    public datepipe: DatePipe) { }
 
   ngOnInit(): void {
+    let self = this;
     this.message = '';
     this.getCard(this.route.snapshot.paramMap.get('id'));
     this.gameService.getAll().subscribe(
       data => {
         this.games = data;
+        this.games.forEach(element => {
+          if (element.id == self.currentCard.gameCode) {
+            self.currentLink = element.zoomLink;
+            self.currentDate = self.datepipe.transform(element.startDate, "dd") + ' de '+ self.translate(self.datepipe.transform(element.startDate, "LLLL")) + ' a las ' + self.datepipe.transform(element.startDate, "hh:mm a") ;
+           // console.log('currentLink', self.currentLink);
+           // console.log('currentDate', self.currentDate);
+          }
+        });
         //console.log('games', this.games);
       }
     );
+  }
+
+  translate(month) {
+    switch(month) {
+      case 'January':
+        return 'Enero';
+      case 'February': 
+        return 'Febrero';
+      case 'March':
+        return 'Marzo';
+      case 'April':
+        return 'Abril';
+      case 'May':
+        return 'Mayo';
+      case 'June':
+        return 'Junio';
+      case 'July': 
+        return 'Julio';
+      case 'August':
+        return 'Agosto';
+      case 'September':
+        return 'Setiembre';
+      case 'October':
+        return 'Octubre';
+      case 'November':
+        return 'Noviembre';
+      case 'December':
+        return 'Diciembre';
+    }
   }
 
   getCard(id): void {
@@ -102,9 +145,9 @@ export class CardDetailsComponent implements OnInit {
       requestData['emailTo'] =   this.currentCard.email;
       requestData['message'] = 'Saludos, \n\n Estimado(a) '+ this.currentCard.name + '\n\n De parte de Kerberos Producciones'+
       ' y su marca LaTómbolaCR es un placer servirle en este juego de tómbola virtual. '+
-      ' \n Le deseamos la mejor de las suertes en el juego a realizarse el 19 de Noviembre a las 10:00AM. \n '+
+      ' \n Le deseamos la mejor de las suertes en el juego a realizarse el '+ this.currentDate +' \n '+
       'Adjuntamos la imágen de su cartón, con un código único y de uso exclusivo para este juego. \n\n '+
-      'Este es link de acceso a la transimión de Zoom: https://zoom.us/j/97359854254?pwd=QzJNNndaVnFId3VOcTIrUmprTzNMZz09 \n\n'+
+      'Este es link de acceso a la transimión: ' + this.currentLink + '\n\n'+
       'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. Búscanos en Facebook como Kerberos.\n\n' +
       'Michael Martínez Castro. \n'+
       'Productor de Kerberos Producciones. \n'+

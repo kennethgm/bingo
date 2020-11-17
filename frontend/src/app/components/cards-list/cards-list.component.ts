@@ -86,8 +86,8 @@ export class CardsListComponent implements OnInit {
     console.log('called');
     let element = document.getElementById("game-" + id);
     let icon_element = document.getElementById('icon-' + id);
-    console.log('element', element);
-    console.log('icon_element', icon_element);
+    //console.log('element', element);
+    //console.log('icon_element', icon_element);
     if (getComputedStyle(element, null).display == 'none') {
       element.setAttribute('style', 'display: block;');
       icon_element.setAttribute('class', 'open-submenu fa fa-caret-up');
