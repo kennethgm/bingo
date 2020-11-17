@@ -1,6 +1,7 @@
 <div class="container">
     <div class='no-print' *ngIf="currentCard">
-        <h4>Cartón de {{ currentCard.name }} </h4>
+        <button class="btn" routerLink="/allcards"> <i class="fas fa-arrow-left"></i> Volver a la lista de Cartones</button>
+        <h1>Cartón de {{ currentCard.name }} </h1>
         <form class="edit-form">
             <div class="form-group">
                 <label for="title">Nombre</label>

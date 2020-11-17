@@ -355,7 +355,7 @@ export class GameDetailsComponent implements OnInit {
                 if(!self.checkAbsentPlayer(self.potentialWinnersCorners[0])) {
                   alert('BINGO - 4 esquinas - ' + self.potentialWinnersCorners[0].name);
                   if (confirm('Es el único ganador! Está '+ self.potentialWinnersCorners[0].name +' presente en la llamada?')) {
-                    //player.winnerDetail += ' - 4 esquinas ';
+                    self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
                     let round = self.currentGame.winners.length - 1;
                     let winnerPlayer = new Object();
                     winnerPlayer['id'] = self.potentialWinnersCorners[0].id;
@@ -415,7 +415,7 @@ export class GameDetailsComponent implements OnInit {
                   if(!self.checkAbsentPlayer(self.potentialWinnersVertical[0])) {
                     alert('BINGO - Vertical - ' + self.potentialWinnersVertical[0].name );
                     if (confirm('Es el único ganador! Está '+ self.potentialWinnersVertical[0].name +' presente en la llamada?')) {
-                      //player.winnerDetail += ' - 4 esquinas ';
+                      self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
                       let round = self.currentGame.winners.length - 1;
                       let winnerPlayer = new Object();
                       winnerPlayer['id'] = self.potentialWinnersVertical[0].id;
@@ -474,7 +474,7 @@ export class GameDetailsComponent implements OnInit {
                 if(!self.checkAbsentPlayer(self.potentialWinnersHorizontal[0])) {
                   alert('BINGO - Horizontal - ' + self.potentialWinnersHorizontal[0].name );
                   if (confirm('Es el único ganador! Está '+ self.potentialWinnersHorizontal[0].name +' presente en la llamada?')) {
-                    //player.winnerDetail += ' - 4 esquinas ';
+                    self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
                     let round = self.currentGame.winners.length - 1;
                     let winnerPlayer = new Object();
                     winnerPlayer['id'] = self.potentialWinnersHorizontal[0].id;
@@ -533,7 +533,7 @@ export class GameDetailsComponent implements OnInit {
                 if(!self.checkAbsentPlayer(self.potentialWinnersFull[0])) {
                   alert('BINGO - CARTON LLENO - ' + self.potentialWinnersFull[0].name );
                   if (confirm('Es el único ganador! Está '+ self.potentialWinnersFull[0].name +' presente en la llamada?')) {
-                    //player.winnerDetail += ' - 4 esquinas ';
+                    self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
                     let round = self.currentGame.winners.length - 1;
                     let winnerPlayer = new Object();
                     winnerPlayer['id'] = self.potentialWinnersFull[0].id;

@@ -1,0 +1,53 @@
+.list-group-item {
+    //border: none;
+    padding: 0;
+    height: 45px;
+    margin: 10px 0;
+    border-radius: 6px;
+    line-height: 22px;
+    width: 95%;
+    a {
+        color: black;
+        padding: 10px;
+        height: 45px;
+        width: 100%;
+        display: block;
+    }
+}
+
+.btn {
+    background-color: #00B0F6;
+    color: white;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+h1:hover {
+    cursor: pointer;
+}
+
+.game-item {
+    margin: 15px 0px;
+    background: #eeeeee;
+    min-height: 50px;
+    padding-left: 12px;
+    padding-top: 15px;
+    border-radius: 10px;
+    &:hover {
+        cursor: pointer;
+    }
+    .name {
+        font-size: 19px;
+        width: 100%;
+        display: block;
+        height: 100%;
+    }
+    .sublist {
+        max-height: 50vh;
+        overflow-y: scroll;
+    }
+}

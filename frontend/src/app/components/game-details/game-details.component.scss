@@ -12,7 +12,8 @@ input.form-control {
 }
 
 .buttons {
-    margin-top: 80px;
+    margin-top: 100px;
+    margin-bottom: 120px;
 }
 
 .form-group {
@@ -126,6 +127,10 @@ input.form-control {
 .ranking {
     vertical-align: top;
     min-height: 75vh;
+    .list {
+        max-height: 90vh;
+        overflow-y: scroll;
+    }
     .second-raffle {
         margin-top: 120px;
         margin-bottom: 30px;
@@ -224,16 +229,15 @@ input.form-control {
 }
 
 #board {
-    padding: 1rem;
+    padding: 5px;
     display: flex;
     flex-flow: column;
     align-self: stretch;
     justify-content: space-between;
-    background-color: black;
+    background-color: red;
     * {
-        font-size: 2.7rem;
-        font-size: 2vw;
-        line-height: 1.5;
+        font-size: 4.6vh;
+        line-height: 1.6;
     }
     .row {
         display: flex;
@@ -266,7 +270,7 @@ input.form-control {
         }
     }
     .ball {
-        color: #3c3c3c;
+        color: black;
         .selected {
             color: white;
         }

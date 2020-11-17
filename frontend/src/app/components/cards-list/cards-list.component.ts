@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-
+import { GameService } from 'src/app/services/game.service';
 import { CardService } from 'src/app/services/card.service';
 
 @Component({
@@ -11,14 +10,16 @@ import { CardService } from 'src/app/services/card.service';
 export class CardsListComponent implements OnInit {
 
   cards: any;
+  games: any;
   currentCard = null;
   currentIndex = -1;
   name = '';
 
-  constructor(private cardService: CardService) { }
+  constructor(private cardService: CardService, private gameService: GameService) { }
 
   ngOnInit(): void {
     this.retrievecards();
+    this.retrieveGames();
   }
 
   retrievecards(): void {
@@ -26,6 +27,19 @@ export class CardsListComponent implements OnInit {
       .subscribe(
         data => {
           this.cards = data;
+        //  console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  
+  retrieveGames(): void {
+    this.gameService.getAll()
+      .subscribe(
+        data => {
+          this.games = data;
         //  console.log(data);
         },
         error => {
@@ -66,6 +80,21 @@ export class CardsListComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  openSublist(id) {
+    console.log('called');
+    let element = document.getElementById("game-" + id);
+    let icon_element = document.getElementById('icon-' + id);
+    console.log('element', element);
+    console.log('icon_element', icon_element);
+    if (getComputedStyle(element, null).display == 'none') {
+      element.setAttribute('style', 'display: block;');
+      icon_element.setAttribute('class', 'open-submenu fa fa-caret-up');
+    } else {
+      element.setAttribute('style', 'display: none;');
+      icon_element.setAttribute('class', 'open-submenu fa fa-caret-down');
+    }
   }
 
 }
