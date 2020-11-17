@@ -138,6 +138,17 @@ export class CardDetailsComponent implements OnInit {
 
   sendByEmail(){
     this.successMessage = '';
+    let self = this;
+    this.games.forEach(element => {
+      if (element.id == self.currentCard.gameCode) {
+        self.currentLink = element.zoomLink;
+        let date = new Date(element.startDate);     
+        element.startDate = date.setHours(date.getHours() - 6);  
+        self.currentDate = self.datepipe.transform(element.startDate, "dd") + ' de '+ self.translate(self.datepipe.transform(element.startDate, "LLLL")) + ' a las ' + self.datepipe.transform(element.startDate, "hh:mm a") ;
+       //  console.log('currentLink', self.currentLink);
+       // console.log('currentDate', self.currentDate);
+      }
+    });
     html2canvas(this.screen.nativeElement, {scrollY: -window.scrollY + 3, width:534, height: 558}).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
 
@@ -148,7 +159,7 @@ export class CardDetailsComponent implements OnInit {
       ' \n Le deseamos la mejor de las suertes en el juego a realizarse el '+ this.currentDate +' \n '+
       'Adjuntamos la imágen de su cartón, con un código único y de uso exclusivo para este juego. \n\n '+
       'Este es link de acceso a la transimión: ' + this.currentLink + '\n\n'+
-      'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. \\n+ Esta es nuestra pagina de Facebook, SIGUENOS: https://www.facebook.com/keroproductions/ \n\n' +
+      'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. \nEsta es nuestra pagina de Facebook, SIGUENOS: https://www.facebook.com/keroproductions/ \n\n' +
       'Michael Martínez Castro. \n'+
       'Productor de Kerberos Producciones. \n'+
       'Contacto: 6161 2298 ';

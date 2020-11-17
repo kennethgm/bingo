@@ -138,7 +138,9 @@ export class GameDetailsComponent implements OnInit {
     this.gameService.get(id)
     .subscribe(
       data => {
-        this.currentGame = data;                                               
+        this.currentGame = data;     
+        let date = new Date(this.currentGame.startDate);     
+        this.currentGame.startDate = date.setHours(date.getHours() - 6);                                     
         this.currentGame.startDate = this.datepipe.transform(this.currentGame.startDate, "yyyy-MM-dd'T'HH:mm:ss");
         this.getCards();
       },
@@ -148,7 +150,9 @@ export class GameDetailsComponent implements OnInit {
   }
 
   updateGame(): void {
-    console.log('currentGame', this.currentGame);
+  
+    let dateToSave = new Date(this.currentGame.startDate);
+    this.currentGame.startDate = dateToSave.setHours(dateToSave.getHours() + 6);
     this.gameService.update(this.currentGame.id, this.currentGame)
       .subscribe(
         response => {

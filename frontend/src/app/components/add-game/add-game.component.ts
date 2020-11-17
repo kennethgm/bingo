@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-game',
@@ -22,7 +23,8 @@ export class AddGameComponent implements OnInit {
 
   constructor( 
     private gameService: GameService,
-    private router: Router) { }
+    private router: Router,
+    public datepipe: DatePipe) { }
 
     ngOnInit(): void {
       this.newGame();
@@ -40,6 +42,10 @@ export class AddGameComponent implements OnInit {
 
     saveGame(): void {
      //console.log('this.game', this.game);
+     let date = new Date(this.game.startDate);     
+     this.game.startDate = new Date(date.setHours(date.getHours() - 6));                                     
+     this.game.startDate = new Date(this.datepipe.transform(this.game.startDate, "yyyy-MM-dd'T'HH:mm:ss"));
+     
       const data = {
         name: this.game.name,
         winners: this.game.winners,
