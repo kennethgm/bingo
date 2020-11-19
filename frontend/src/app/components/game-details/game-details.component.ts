@@ -308,7 +308,6 @@ export class GameDetailsComponent implements OnInit {
         }
       }
     });
-    //console.log('gameFinished', self.gameFinished);
   }
 
   updateRankings(number) {
@@ -355,6 +354,7 @@ export class GameDetailsComponent implements OnInit {
     ways.forEach(way => {
       switch (way[0]) {
         case 'corners':
+         // console.log('case corners', way[0], self.currentGame.winners[round].corners.length );
           if (way[1] && self.currentGame.winners[round].corners.length == 0) {
             if (self.potentialWinnersCorners.length == 0) {
               break;
@@ -415,6 +415,7 @@ export class GameDetailsComponent implements OnInit {
 
           break;
           case 'vertical':
+           // console.log('case vertical', way[0], self.currentGame.winners[round].vertical.length );
             if (way[1] && self.currentGame.winners[round].vertical.length == 0) {
               if (self.potentialWinnersVertical.length == 0) {
                 break;
@@ -423,7 +424,7 @@ export class GameDetailsComponent implements OnInit {
                   if(!self.checkAbsentPlayer(self.potentialWinnersVertical[0])) {
                     alert('BINGO - Vertical - ' + self.potentialWinnersVertical[0].name );
                     if (confirm('Es el único ganador! Está '+ self.potentialWinnersVertical[0].name +' presente en la llamada?')) {
-                      self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
+                      self.potentialWinnersVertical[0].winnerDetail += ' - 4 esquinas ';
                       let round = self.currentGame.winners.length - 1;
                       let winnerPlayer = new Object();
                       winnerPlayer['id'] = self.potentialWinnersVertical[0].id;
@@ -474,6 +475,7 @@ export class GameDetailsComponent implements OnInit {
             break;
            
         case 'horizontal':
+          //console.log('case horizontal', way[0], self.currentGame.winners[round].horizontal.length );
           if (way[1] && self.currentGame.winners[round].horizontal.length == 0) {
             if (self.potentialWinnersHorizontal.length == 0) {
               break;
@@ -482,7 +484,7 @@ export class GameDetailsComponent implements OnInit {
                 if(!self.checkAbsentPlayer(self.potentialWinnersHorizontal[0])) {
                   alert('BINGO - Horizontal - ' + self.potentialWinnersHorizontal[0].name );
                   if (confirm('Es el único ganador! Está '+ self.potentialWinnersHorizontal[0].name +' presente en la llamada?')) {
-                    self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
+                    self.potentialWinnersHorizontal[0].winnerDetail += ' - 4 esquinas ';
                     let round = self.currentGame.winners.length - 1;
                     let winnerPlayer = new Object();
                     winnerPlayer['id'] = self.potentialWinnersHorizontal[0].id;
@@ -533,6 +535,7 @@ export class GameDetailsComponent implements OnInit {
           break;
         
         case 'fullGame':
+         // console.log('case full', way[0], self.currentGame.winners[round].fullGame.length );
           if (way[1] && self.currentGame.winners[round].fullGame.length == 0) {
             if (self.potentialWinnersFull.length == 0) {
               break;
@@ -541,7 +544,7 @@ export class GameDetailsComponent implements OnInit {
                 if(!self.checkAbsentPlayer(self.potentialWinnersFull[0])) {
                   alert('BINGO - CARTON LLENO - ' + self.potentialWinnersFull[0].name );
                   if (confirm('Es el único ganador! Está '+ self.potentialWinnersFull[0].name +' presente en la llamada?')) {
-                    self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
+                    self.potentialWinnersFull[0].winnerDetail += ' - 4 esquinas ';
                     let round = self.currentGame.winners.length - 1;
                     let winnerPlayer = new Object();
                     winnerPlayer['id'] = self.potentialWinnersFull[0].id;
@@ -1171,7 +1174,7 @@ export class GameDetailsComponent implements OnInit {
                player.horizontal3++;
               }
             }
-            
+            break;
           case 3:
             if (letter != 'n') {
               if (player.numbers[letter][index] == newNumber) {
@@ -1184,7 +1187,6 @@ export class GameDetailsComponent implements OnInit {
                player.horizontal4++;
               }
             }
-            
             break;
           case 4:
             if (letter != 'n') {
