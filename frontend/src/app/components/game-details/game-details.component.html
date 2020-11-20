@@ -154,8 +154,8 @@
                         </span> <br>
                         <!-- <span> Detalles del Ranking <i (click)="moreStats = !moreStats" class="fas fa-info-circle"></i>  </span> -->
                         <span class="winner" *ngIf="ranking.winnerDetail != ''"> <!-- BINGO! {{ ranking.winnerDetail }} --> </span>
+                        
                         <div class="details" *ngIf="ranking.showDetails==true ">
-
                             <div class="bcard">
                                 <div class="row ">
                                     <div class="col ">
@@ -213,6 +213,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--
                         <div *ngIf="moreStats" class="more-details">
                             <div class="stats">
                                 <label *ngIf="currentGame.settings.winningWays.corners"> Esquinas: {{ ranking.corners }} </label> <br>
@@ -230,7 +231,7 @@
                                 <label *ngIf="currentGame.settings.winningWays.horizontal"> Horizontal 5: {{ ranking.horizontal5 }} </label> <br>
                                 <label *ngIf="currentGame.settings.winningWays.fullGame"> Carton Lleno: {{ ranking.fullGame }} </label> <br>
                             </div>
-                        </div>
+                        </div> --> 
                     </li>
                 </ul>
 
