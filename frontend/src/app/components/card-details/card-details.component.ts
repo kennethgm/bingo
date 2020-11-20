@@ -38,7 +38,8 @@ export class CardDetailsComponent implements OnInit {
         this.games.forEach(element => {
           if (element.id == self.currentCard.gameCode) {
             self.currentLink = element.zoomLink;
-            self.currentDate = self.datepipe.transform(element.startDate, "dd") + ' de '+ self.translate(self.datepipe.transform(element.startDate, "LLLL")) + ' a las ' + self.datepipe.transform(element.startDate, "hh:mm a") ;
+            self.currentDate = element.eventDate;
+            //self.currentDate = self.datepipe.transform(element.startDate, "dd") + ' de '+ self.translate(self.datepipe.transform(element.startDate, "LLLL")) + ' a las ' + self.datepipe.transform(element.startDate, "hh:mm a") ;
            // console.log('currentLink', self.currentLink);
            // console.log('currentDate', self.currentDate);
           }
@@ -142,10 +143,12 @@ export class CardDetailsComponent implements OnInit {
     this.games.forEach(element => {
       if (element.id == self.currentCard.gameCode) {
         self.currentLink = element.zoomLink;
-        let date = new Date(element.startDate);     
+       /* let date = new Date(element.startDate);     
         element.startDate = date.setHours(date.getHours() - 6);  
         self.currentDate = self.datepipe.transform(element.startDate, "dd") + ' de '+ self.translate(self.datepipe.transform(element.startDate, "LLLL")) + ' a las ' + self.datepipe.transform(element.startDate, "hh:mm a") ;
-       //  console.log('currentLink', self.currentLink);
+       */ 
+        self.currentDate = element.eventDate;
+        //  console.log('currentLink', self.currentLink);
        // console.log('currentDate', self.currentDate);
       }
     });

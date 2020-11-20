@@ -15,7 +15,8 @@ export class AddGameComponent implements OnInit {
     winners: [],
     startDate: new Date(),
     settings: {},
-    zoomLink: ''
+    zoomLink: '',
+    eventDate: ''
   };
   submitted = false;
   games: any;
@@ -51,7 +52,8 @@ export class AddGameComponent implements OnInit {
         winners: this.game.winners,
         startDate: this.game.startDate,
         settings: this.game.settings, 
-        zoomLink: this.game.zoomLink
+        zoomLink: this.game.zoomLink,
+        eventDate: this.game.eventDate
       };
       console.log('will send', data);
       this.gameService.create(data)
@@ -85,7 +87,8 @@ export class AddGameComponent implements OnInit {
           },
           absentPlayers: []
         }, 
-        zoomLink : ''
+        zoomLink : '',
+        eventDate: ''
       };
     }
 

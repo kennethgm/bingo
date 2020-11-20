@@ -11,14 +11,23 @@
                     <input type="text" class="form-control" id="code" [(ngModel)]="currentGame.id" name="id" />
                 </div>
                 <div class="form-group">
-                    <label for="code">Link de la llamada</label>
+                    <label for="zoomLink">Link de la llamada</label>
                     <input type="text" class="form-control" id="zoomLink" [(ngModel)]="currentGame.zoomLink" name="zoomLink" />
                 </div>
+
+                <div class="form-group">
+                    <label for="eventDate">Fecha y Hora del Evento Escrita</label>
+                    <input type="text" class="form-control" id="eventDate" [(ngModel)]="currentGame.eventDate" name="eventDate" />
+                </div>
+
+                
+                <!-- 
                 <div class="form-group">
                     <label for="startDate">Fecha Inicio</label> <br>
                     <input type="datetime-local" id="startDate" class="form-control date" [(ngModel)]="currentGame.startDate" name="startDate" value="currentGame.startDate" />
 
                 </div>
+                -->
                 <div class="form-group">
                     <label for="raffleType">Tipo de Tombola</label> <br>
                     <input name="raffleType" type="radio" [(ngModel)]="currentGame.settings.raffleType" value="digital" /> Digital

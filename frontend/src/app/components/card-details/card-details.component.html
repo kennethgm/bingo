@@ -41,15 +41,15 @@
     </div>
 
     <div #screen>
-        <div class="bingo-card" id="card-{{ currentCard.id }}-{{ currentCard.gameCode }}">
-            <span class="details float-left"> {{ currentCard.name }} </span> <br>
-            <span class="details float-left"> Cartón # {{ currentCard.id }} </span>
-            <span class="details float-right"> Código de Juego: {{ currentCard.gameCode }} </span> <br>
+        <div class="bingo-card" id="card-{{ currentCard?.id }}-{{ currentCard?.gameCode }}">
+            <span class="details float-left"> {{ currentCard?.name }} </span> <br>
+            <span class="details float-left"> Cartón # {{ currentCard?.id }} </span>
+            <span class="details float-right"> Código de Juego: {{ currentCard?.gameCode }} </span> <br>
             <div class="row">
                 <div class="col">
                     <div class="card-letter">B</div>
                     <div class="card-numbers">
-                        <div *ngFor="let element of currentCard.numbers.b" class="card-number">
+                        <div *ngFor="let element of currentCard?.numbers.b" class="card-number">
                             {{ element }}
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                 <div class="col">
                     <div class="card-letter">I</div>
                     <div class="card-numbers">
-                        <div *ngFor="let element of currentCard.numbers.i" class="card-number">
+                        <div *ngFor="let element of currentCard?.numbers.i" class="card-number">
                             {{ element }}
                         </div>
                     </div>
@@ -66,26 +66,26 @@
                     <div class="card-letter">N</div>
                     <div class="card-numbers">
                         <div class="card-number">
-                            {{ currentCard.numbers.n[0] }}
+                            {{ currentCard?.numbers.n[0] }}
                         </div>
                         <div class="card-number">
-                            {{ currentCard.numbers.n[1] }}
+                            {{ currentCard?.numbers.n[1] }}
                         </div>
                         <div class="card-number-center">
                             <div class="freespace"><img src="../../../assets/logo-centro.jpg"></div>
                         </div>
                         <div class="card-number">
-                            {{ currentCard.numbers.n[2] }}
+                            {{ currentCard?.numbers.n[2] }}
                         </div>
                         <div class="card-number">
-                            {{ currentCard.numbers.n[3] }}
+                            {{ currentCard?.numbers.n[3] }}
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card-letter">G</div>
                     <div class="card-numbers">
-                        <div *ngFor="let element of currentCard.numbers.g" class="card-number">
+                        <div *ngFor="let element of currentCard?.numbers.g" class="card-number">
                             {{ element }}
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                 <div class="col">
                     <div class="card-letter">O</div>
                     <div class="card-numbers">
-                        <div *ngFor="let element of currentCard.numbers.o" class="card-number">
+                        <div *ngFor="let element of currentCard?.numbers.o" class="card-number">
                             {{ element }}
                         </div>
                     </div>
