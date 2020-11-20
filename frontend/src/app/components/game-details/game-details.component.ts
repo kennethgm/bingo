@@ -26,9 +26,8 @@ export class GameDetailsComponent implements OnInit {
   spinningRaffle = false;
   gameCards = [];
   rankingOfWinners = [];
-  moreStats = false;
+  //moreStats = false;
   unTieNumber = 0;
-  showModal = false;
 
   spinningRaffleCorners = false;
   showUntieRaffleCorners = false;
@@ -295,21 +294,6 @@ export class GameDetailsComponent implements OnInit {
     } 
   }
 
-  checkIfFinished() {
-    let self = this;
-    let ways = Object.entries(self.currentGame.settings.winningWays);
-    let round = self.currentGame.winners.length - 1;
-    ways.forEach(way => {
-      if (way[1]) {
-        if (self.currentGame.winners[round][way[0]].length > 0) {
-          self.gameFinished = true;
-        } else {
-          self.gameFinished = false;
-        }
-      }
-    });
-  }
-
   updateRankings(number) {
     let self = this;
     let ways = Object.entries(self.currentGame.settings.winningWays);
@@ -354,13 +338,12 @@ export class GameDetailsComponent implements OnInit {
     ways.forEach(way => {
       switch (way[0]) {
         case 'corners':
-         // console.log('case corners', way[0], self.currentGame.winners[round].corners.length );
           if (way[1] && self.currentGame.winners[round].corners.length == 0) {
             if (self.potentialWinnersCorners.length == 0) {
               break;
             } else {
               if (self.potentialWinnersCorners.length == 1) {
-                if(!self.checkAbsentPlayer(self.potentialWinnersCorners[0])) {
+                if (!self.checkAbsentPlayer(self.potentialWinnersCorners[0])) {
                   alert('BINGO - 4 esquinas - ' + self.potentialWinnersCorners[0].name);
                   if (confirm('Es el único ganador! Está '+ self.potentialWinnersCorners[0].name +' presente en la llamada?')) {
                     self.potentialWinnersCorners[0].winnerDetail += ' - 4 esquinas ';
@@ -383,9 +366,7 @@ export class GameDetailsComponent implements OnInit {
                     break;
                   }
                 }
-                
               } else {
-
                 alert('BINGO - 4 Esquinas - Tenemos varios cartones ganadores! Pasemos lista!');
                 self.potentialWinnersCorners.forEach(element => { 
                   if (!confirm('Está '+ element.name +' presente en la llamada?')) {
@@ -396,32 +377,25 @@ export class GameDetailsComponent implements OnInit {
                     self.currentGame.settings.absentPlayers.push(absentPlayer);
                   } 
                 });
-
                 let newArray = [];
-
                 self.potentialWinnersCorners.forEach(element => { 
                   if (!element.absent) {
                     newArray.push(element);
                   } 
                 });
-
                 self.potentialWinnersCorners = newArray;
                 this.checkAfterAbsentsCorners();
-
               }
             }
-            
           }
-
           break;
           case 'vertical':
-           // console.log('case vertical', way[0], self.currentGame.winners[round].vertical.length );
             if (way[1] && self.currentGame.winners[round].vertical.length == 0) {
               if (self.potentialWinnersVertical.length == 0) {
                 break;
               } else {
                 if (self.potentialWinnersVertical.length == 1) {
-                  if(!self.checkAbsentPlayer(self.potentialWinnersVertical[0])) {
+                  if (!self.checkAbsentPlayer(self.potentialWinnersVertical[0])) {
                     alert('BINGO - Vertical - ' + self.potentialWinnersVertical[0].name );
                     if (confirm('Es el único ganador! Está '+ self.potentialWinnersVertical[0].name +' presente en la llamada?')) {
                       self.potentialWinnersVertical[0].winnerDetail += ' - 4 esquinas ';
@@ -444,9 +418,7 @@ export class GameDetailsComponent implements OnInit {
                       break;
                     }
                   }
-                  
                 } else {
-  
                   alert('BINGO - Vertical - Tenemos varios cartones ganadores! Pasemos lista!');
                   self.potentialWinnersVertical.forEach(element => { 
                     if (!confirm('Está '+ element.name +' presente en la llamada?')) {
@@ -457,25 +429,19 @@ export class GameDetailsComponent implements OnInit {
                       self.currentGame.settings.absentPlayers.push(absentPlayer);
                     } 
                   });
-  
                   let newArray = [];
-  
                   self.potentialWinnersVertical.forEach(element => { 
                     if (!element.absent) {
                       newArray.push(element);
                     } 
                   });
-  
                   self.potentialWinnersVertical = newArray;
                   this.checkAfterAbsentsVertical();
-  
                 }
               } 
             }
             break;
-           
         case 'horizontal':
-          //console.log('case horizontal', way[0], self.currentGame.winners[round].horizontal.length );
           if (way[1] && self.currentGame.winners[round].horizontal.length == 0) {
             if (self.potentialWinnersHorizontal.length == 0) {
               break;
@@ -504,9 +470,7 @@ export class GameDetailsComponent implements OnInit {
                     break;
                   }
                 }
-                
               } else {
-
                 alert('BINGO - Horizontal - Tenemos varios cartones ganadores! Pasemos lista!');
                 self.potentialWinnersHorizontal.forEach(element => { 
                   if (!confirm('Está '+ element.name +' presente en la llamada?')) {
@@ -517,25 +481,19 @@ export class GameDetailsComponent implements OnInit {
                     self.currentGame.settings.absentPlayers.push(absentPlayer);
                   } 
                 });
-
                 let newArray = [];
-
                 self.potentialWinnersHorizontal.forEach(element => { 
                   if (!element.absent) {
                     newArray.push(element);
                   } 
                 });
-
                 self.potentialWinnersHorizontal = newArray;
                 this.checkAfterAbsentsHorizontal();
-
               }
             } 
           }
           break;
-        
         case 'fullGame':
-         // console.log('case full', way[0], self.currentGame.winners[round].fullGame.length );
           if (way[1] && self.currentGame.winners[round].fullGame.length == 0) {
             if (self.potentialWinnersFull.length == 0) {
               break;
@@ -564,9 +522,7 @@ export class GameDetailsComponent implements OnInit {
                     break;
                   }
                 }
-                
               } else {
-
                 alert('BINGO - CARTON LLENO - Tenemos varios cartones ganadores! Pasemos lista!');
                 self.potentialWinnersFull.forEach(element => { 
                   if (!confirm('Está '+ element.name +' presente en la llamada?')) {
@@ -577,18 +533,14 @@ export class GameDetailsComponent implements OnInit {
                     self.currentGame.settings.absentPlayers.push(absentPlayer);
                   } 
                 });
-
                 let newArray = [];
-
                 self.potentialWinnersFull.forEach(element => { 
                   if (!element.absent) {
                     newArray.push(element);
                   } 
                 });
-
                 self.potentialWinnersFull = newArray;
                 this.checkAfterAbsentsFullGame();
-
               }
             } 
           }
@@ -596,7 +548,6 @@ export class GameDetailsComponent implements OnInit {
         default: break;
       }
     });
-
     self.rankingOfWinners.sort(self.compareRanking);
     this.currentGame.settings['rankingOfWinners'] = this.rankingOfWinners;
   }
@@ -778,7 +729,6 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].corners.push(winnerPlayer);
         
-        self.checkIfFinished();
       }, 1000);
 
       setTimeout(function(){ 
@@ -823,7 +773,6 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].vertical.push(winnerPlayer);
         self.potentialWinnersVertical = [];
-        self.checkIfFinished();
       }, 1000);
 
       setTimeout(function(){ 
@@ -831,7 +780,6 @@ export class GameDetailsComponent implements OnInit {
         self.checkingUntieVertical = false;
         self.currentUntieNumbers = [];
       }, 2000);
-      
     } 
   }
 
@@ -866,7 +814,6 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['winnerDetails'] = self.potentialWinnersHorizontal[winnerIndex].winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].horizontal.push(winnerPlayer);
-        self.checkIfFinished();
       }, 1000);
 
       setTimeout(function(){ 
@@ -909,7 +856,6 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['winnerDetails'] = self.potentialWinnersFull[winnerIndex].winnerDetail;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].fullGame.push(winnerPlayer);
-        self.checkIfFinished();
       }, 1000);
       setTimeout(function(){ 
         self.showUntieRaffleFull = false;
@@ -923,23 +869,19 @@ export class GameDetailsComponent implements OnInit {
     let self = this;
     self.spinningRaffle = true;
     self.unTieNumber = 0;
-    //console.log('type', type,'clicks', clicks);
-    switch(type) {
-      case 'corners': {
+    switch (type) {
+      case 'corners': 
         self.spinningRaffleCorners = true;
-      }
       break;
-      case 'vertical': {
+      case 'vertical': 
         self.spinningRaffleVertical = true;
-      }
       break;
-      case 'horizontal': {
-        self.spinningRaffleHorizontal = true;
-      } 
+      case 'horizontal': 
+        self.spinningRaffleHorizontal = true; 
       break;
-      case 'fullGame': {
+      case 'fullGame': 
         self.spinningRaffleFull = true;
-      } 
+      break;
     }
     let newNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     if (self.isInArrayUntie(newNumber)) {
@@ -979,11 +921,9 @@ export class GameDetailsComponent implements OnInit {
           } 
           break;
         }
-        
       }, 5900);
     }
   }
-
 
   checkAbsentPlayer(player) {
     let found = false;
@@ -1273,7 +1213,6 @@ export class GameDetailsComponent implements OnInit {
   compareRanking(a, b) {
     const object1 = a.fullGame;
     const object2 =  b.fullGame;
-  
     let comparison = 0;
     if (object1 < object2) {
       comparison = 1;
@@ -1317,7 +1256,6 @@ export class GameDetailsComponent implements OnInit {
         self.potentialWinnersFull.push(winnerPlayer);
       }
     }
-    
   }
 
 }
