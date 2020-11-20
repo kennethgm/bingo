@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         zoomLink: {
             type: Sequelize.STRING
+        },
+        eventDate: {
+            type: Sequelize.STRING
         }
     });
 
