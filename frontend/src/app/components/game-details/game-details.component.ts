@@ -1085,8 +1085,135 @@ export class GameDetailsComponent implements OnInit {
 
   checkHorizontals(player, newNumber) {
     let self = this;
-    let letters = ['b','i','n','g','o'];
-   
+   // let letters = ['b','i','n','g','o'];
+
+    /** Horizontal 1 */
+    if (player.numbers['b'][0] == newNumber) {
+      player.matchedNumbers['b1'] = true;
+      player.horizontal1++;
+    }
+
+    if (player.numbers['i'][0] == newNumber) {
+      player.matchedNumbers['i1'] = true;;
+      player.horizontal1++;
+    }
+
+    if (player.numbers['n'][0] == newNumber) {
+      player.matchedNumbers['n1'] = true;;
+      player.horizontal1++;
+    }
+
+    if (player.numbers['g'][0] == newNumber) {
+      player.matchedNumbers['g1'] = true;;
+      player.horizontal1++;
+    }
+
+    if (player.numbers['o'][0] == newNumber) {
+      player.matchedNumbers['o1'] = true;;
+      player.horizontal1++;
+    }
+
+      /** Horizontal 2 */
+      if (player.numbers['b'][1] == newNumber) {
+        player.matchedNumbers['b2'] = true;;
+        player.horizontal2++;
+      }
+  
+      if (player.numbers['i'][1] == newNumber) {
+        player.matchedNumbers['i2'] = true;;
+        player.horizontal2++;
+      }
+  
+      if (player.numbers['n'][1] == newNumber) {
+        player.matchedNumbers['n2'] = true;;
+        player.horizontal2++;
+      }
+  
+      if (player.numbers['g'][1] == newNumber) {
+        player.matchedNumbers['g2'] = true;;
+        player.horizontal2++;
+      }
+  
+      if (player.numbers['o'][1] == newNumber) {
+        player.matchedNumbers['o2'] = true;;
+        player.horizontal2++;
+      }
+
+       /** Horizontal 3 */
+      if (player.numbers['b'][2] == newNumber) {
+        player.matchedNumbers['b3'] = true;
+        player.horizontal3++;
+      }
+  
+      if (player.numbers['i'][2] == newNumber) {
+        player.matchedNumbers['i3'] = true;;
+        player.horizontal3++;
+      }
+  
+      if (player.numbers['g'][2] == newNumber) {
+        player.matchedNumbers['g3'] = true;;
+        player.horizontal3++;
+      }
+  
+      if (player.numbers['o'][2] == newNumber) {
+        player.matchedNumbers['o3'] = true;;
+        player.horizontal3++;
+      }
+
+       /** Horizontal 4 */
+       if (player.numbers['b'][3] == newNumber) {
+        player.matchedNumbers['b4'] = true;;
+        player.horizontal4++;
+      }
+  
+      if (player.numbers['i'][3] == newNumber) {
+        player.matchedNumbers['i4'] = true;;
+        player.horizontal4++;
+      }
+  
+      if (player.numbers['n'][2] == newNumber) {
+        player.matchedNumbers['n3'] = true;;
+        player.horizontal4++;
+      }
+  
+      if (player.numbers['g'][3] == newNumber) {
+        player.matchedNumbers['g4'] = true;;
+        player.horizontal4++;
+      }
+  
+      if (player.numbers['o'][3] == newNumber) {
+        player.matchedNumbers['o4'] = true;;
+        player.horizontal4++;
+      }
+
+      /** Horizontal 5 */
+      if (player.numbers['b'][4] == newNumber) {
+        player.matchedNumbers['b5'] = true;;
+        player.horizontal5++;
+      }
+  
+      if (player.numbers['i'][4] == newNumber) {
+        player.matchedNumbers['i5'] = true;;
+        player.horizontal5++;
+      }
+  
+      if (player.numbers['n'][3] == newNumber) {
+        player.matchedNumbers['n5'] = true;;
+        player.horizontal5++;
+      }
+  
+      if (player.numbers['g'][4] == newNumber) {
+        player.matchedNumbers['g5'] = true;;
+        player.horizontal5++;
+      }
+  
+      if (player.numbers['o'][4] == newNumber) {
+        player.matchedNumbers['o5'] = true;;
+        player.horizontal5++;
+      }
+
+     
+   /*
     for (let index = 0; index < 5; index++) {
       letters.forEach(letter => {
         switch (index) {
@@ -1143,7 +1270,7 @@ export class GameDetailsComponent implements OnInit {
             break;
         }
       });
-    }
+    }*/
 
     if (!self.checkAbsentPlayer(player)) {
       if (player.horizontal1 == 5) {
