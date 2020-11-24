@@ -76,7 +76,8 @@
 
             <div class="buttons">
                 <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
-                <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> <br>
+                <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> 
+                <button class="btn " (click)="exportData()"><i class="fas fa-download"></i> Exportar Resultados </button> <br>
                 <button class="btn start-game" (click)="editGame = false"> <i class="fas fa-play"></i> JUGAR <i class="fas fa-play"></i></button>
             </div>
         </div>
@@ -192,7 +193,7 @@
                                             <div class="card-number " [class.selected]="ranking.matchedNumbers['n2'] ? 'selected' : ''">
                                                 {{ ranking.numbers.n[1] }}
                                             </div>
-                                            <div class="card-number ">
+                                            <div class="card-number selected">
                                                 <div class="freespace "><span>X</span></div>
                                             </div>
                                             <div class="card-number " [class.selected]="ranking.matchedNumbers['n4'] ? 'selected' : ''">

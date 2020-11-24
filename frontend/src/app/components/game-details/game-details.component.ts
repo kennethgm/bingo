@@ -54,6 +54,8 @@ export class GameDetailsComponent implements OnInit {
   fullGameClick = 0;
 
   currentUntieNumbers = [];
+  allCards = [];
+  finalExport = [];
 
   constructor(
     private gameService: GameService,
@@ -75,6 +77,7 @@ export class GameDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.gameCards = data;
+          self.allCards = data;
           this.rankingOfWinners = [];
           this.gameCards.forEach(element => {
             let rankingPlayer = new Object();
@@ -1212,66 +1215,6 @@ export class GameDetailsComponent implements OnInit {
         player.horizontal5++;
       }
 
-     
-   /*
-    for (let index = 0; index < 5; index++) {
-      letters.forEach(letter => {
-        switch (index) {
-          case 0:
-            if (player.numbers[letter][index] == newNumber) {
-              player.matchedNumbers[letter + (index+1)] = true;
-              player.horizontal1++;
-            } 
-            break;
-          case 1:
-            if (player.numbers[letter][index] == newNumber) {
-              player.matchedNumbers[letter + (index+1)] = true;
-              player.horizontal2++;
-            }
-            break
-          case 2:
-            if (letter != 'n') {
-              if (player.numbers[letter][index] == newNumber) {
-                player.matchedNumbers[letter + (index+1)] = true;
-                player.horizontal3++;
-              }
-            } else {
-              if (player.numbers[letter][index - 1] == newNumber) {
-               player.matchedNumbers[letter + (index)] = true;
-               player.horizontal3++;
-              }
-            }
-            break;
-          case 3:
-            if (letter != 'n') {
-              if (player.numbers[letter][index] == newNumber) {
-                player.matchedNumbers[letter + (index+1)] = true;
-                player.horizontal4++;
-              }
-            } else {
-              if (player.numbers[letter][index - 1] == newNumber) {
-               player.matchedNumbers[letter + (index)] = true;
-               player.horizontal4++;
-              }
-            }
-            break;
-          case 4:
-            if (letter != 'n') {
-              if (player.numbers[letter][index] == newNumber) {
-                player.matchedNumbers[letter + (index+1)] = true;
-                player.horizontal5++;
-              }
-            } else {
-              if (player.numbers[letter][index - 1] == newNumber) {
-               player.matchedNumbers[letter + (index - 1)] = true;
-               player.horizontal5++;
-              }
-            }
-            break;
-        }
-      });
-    }*/
-
     if (!self.checkAbsentPlayer(player)) {
       if (player.horizontal1 == 5) {
         let winnerPlayer = new Object();
@@ -1383,6 +1326,97 @@ export class GameDetailsComponent implements OnInit {
         self.potentialWinnersFull.push(winnerPlayer);
       }
     }
+  }
+
+  exportData() {
+    let self = this;
+    self.cardService.findByGameCode(self.currentGame.id).subscribe(
+      data => {
+        self.allCards = data;
+        let index = 0;
+        self.currentGame.winners.forEach(element => {
+          if (element.corners.length > 0) {
+            let winner = self.searchInCards(self.allCards, element.corners[0].id, index);
+            winner['way'] = 'corners';
+            self.finalExport.push(winner);
+          }
+          if (element.horizontal.length > 0) {
+            let winner = self.searchInCards(self.allCards, element.horizontal[0].id, index);
+            winner['way'] = 'horizontal';
+            self.finalExport.push(winner);
+          }
+          if (element.vertical.length > 0) {
+            let winner = self.searchInCards(self.allCards, element.vertical[0].id, index);
+            winner['way'] = 'vertical';
+            self.finalExport.push(winner);
+          }
+          if (element.fullGame.length > 0) {
+            let winner = self.searchInCards(self.allCards, element.fullGame[0].id, index);
+            winner['way'] = 'fullGame';
+            self.finalExport.push(winner);
+          }
+          index++;
+        });
+        console.log('finalExport', self.finalExport);
+        self.downloadFile(self.finalExport);
+      }
+    );
+    
+    
+  }
+
+  searchInCards(array, id, index) {
+    let winner = new Object();
+    array.forEach(element => {
+      if (element.id == id) {
+        winner = element;
+      }
+    });
+    winner['ronda'] = '';
+    return winner;
+  }
+
+  ConvertToCSV(objArray, headerList) {
+    let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+    let row = '#,';
+    for (let index in headerList) {
+     row += headerList[index] + ',';
+    }
+    row = row.slice(0, -1);
+    str += row + '\r\n';
+    for (let i = 0; i < array.length; i++) {
+     let line = (i+1)+'';
+     for (let index in headerList) {
+        let head = headerList[index];
+        if (array[i][head] == '' || array[i][head] == undefined) {
+          line += ','
+        } else {
+          line += ',' + array[i][head];
+        }
+        
+     }
+     str += line + '\r\n';
+    }
+    return str;
+   }
+
+   downloadFile(data, filename='data') {
+    let csvData = this.ConvertToCSV(data, ['ronda','name','officialId', 'phonenumber', 'email', 'way']);
+    console.log(csvData)
+    let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+    let dwldLink = document.createElement("a");
+    let url = URL.createObjectURL(blob);
+    let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+    if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+        dwldLink.setAttribute("target", "_blank");
+    }
+    dwldLink.setAttribute("href", url);
+    dwldLink.setAttribute("download", filename + ".csv");
+    dwldLink.style.visibility = "hidden";
+    document.body.appendChild(dwldLink);
+    dwldLink.click();
+    document.body.removeChild(dwldLink);
   }
 
 }
