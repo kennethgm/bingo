@@ -48,28 +48,53 @@
                 </div>
 
                 <div class="form-group">
-                    <h1>Lista de Ganadores</h1> <br>
-                    <div class="round" *ngFor="let winner of currentGame.winners; let i = index;">
-                        <b>Ronda {{ i + 1 }}</b> <br>
-                        <div *ngIf="winner.corners.length > 0">
-                            <!-- <b>Numeros que salieron: </b>
-                            <span *ngFor="let number of winner.corners[0].selectedNumbers"> {{ number }} - </span> <br> -->
-                            <span> 4 Esquinas </span>
-                            <li *ngFor="let winnerDetail of winner.corners"> {{ winnerDetail.name }}</li>
-                        </div>
-                        <div *ngIf="winner.horizontal.length > 0">
-                            <span> Horizontal</span>
-                            <li *ngFor="let winnerDetail of winner.horizontal"> {{ winnerDetail.name }}</li>
-                        </div>
-                        <div *ngIf="winner.vertical.length > 0">
-                            <span> Vertical </span>
-                            <li *ngFor="let winnerDetail of winner.vertical"> {{ winnerDetail.name }}</li>
-                        </div>
-                        <div *ngIf="winner.fullGame.length > 0">
-                            <span> Carton Lleno </span>
-                            <li *ngFor="let winnerDetail of winner.fullGame"> {{ winnerDetail.name }}</li>
+                    <h1>Lista de Ganadores</h1> 
+                    <button class="btn" (click)="showWinners = !showWinners"> Ver/Ocultar Ganadores </button> <br>
+
+                    <div *ngIf="showWinners" >
+                        <div  class="round" *ngFor="let winner of currentGame.winners; let i = index;">
+                            <b>Ronda {{ i + 1 }}</b> <br>
+                            <div *ngIf="winner.corners.length > 0">
+                                <!-- <b>Numeros que salieron: </b>
+                                <span *ngFor="let number of winner.corners[0].selectedNumbers"> {{ number }} - </span> <br> -->
+                                <span> 4 Esquinas </span>
+                                <li *ngFor="let winnerDetail of winner.corners"> 
+                                    Nombre: {{ winnerDetail.name }} <br>
+                                    Cedula: {{ winnerDetail.officialId }} <br>
+                                    Cel: {{ winnerDetail.phonenumber }} <br>
+                                    Correo: {{ winnerDetail.email }} 
+                                </li>
+                            </div>
+                            <div *ngIf="winner.horizontal.length > 0">
+                                <span> Horizontal</span>
+                                <li *ngFor="let winnerDetail of winner.horizontal">  
+                                    Nombre: {{ winnerDetail.name }} <br>
+                                    Cedula: {{ winnerDetail.officialId }} <br>
+                                    Cel: {{ winnerDetail.phonenumber }} <br>
+                                    Correo: {{ winnerDetail.email }} 
+                                </li>
+                            </div>
+                            <div *ngIf="winner.vertical.length > 0">
+                                <span> Vertical </span>
+                                <li *ngFor="let winnerDetail of winner.vertical">  
+                                    Nombre: {{ winnerDetail.name }} <br>
+                                    Cedula: {{ winnerDetail.officialId }} <br>
+                                    Cel: {{ winnerDetail.phonenumber }} <br>
+                                    Correo: {{ winnerDetail.email }} 
+                                </li>
+                            </div>
+                            <div *ngIf="winner.fullGame.length > 0">
+                                <span> Carton Lleno </span>
+                                <li *ngFor="let winnerDetail of winner.fullGame">  
+                                    Nombre: {{ winnerDetail.name }} <br>
+                                    Cedula: {{ winnerDetail.officialId }} <br>
+                                    Cel: {{ winnerDetail.phonenumber }} <br>
+                                    Correo: {{ winnerDetail.email }} 
+                                </li>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
             </form>
@@ -77,7 +102,7 @@
             <div class="buttons">
                 <button type="submit" class="btn btn-success" (click)="updateGame()"> <i class="fas fa-save"></i> Guardar  </button>
                 <button class="btn btn-danger" (click)="deleteGame()"><i class="fas fa-trash"></i> Borrar </button> 
-                <button class="btn " (click)="exportData()"><i class="fas fa-download"></i> Exportar Resultados </button> <br>
+          <!--      <button class="btn " (click)="exportData()"><i class="fas fa-download"></i> Exportar Resultados </button> <br> --> 
                 <button class="btn start-game" (click)="editGame = false"> <i class="fas fa-play"></i> JUGAR <i class="fas fa-play"></i></button>
             </div>
         </div>

@@ -28,6 +28,7 @@ export class GameDetailsComponent implements OnInit {
   rankingOfWinners = [];
   //moreStats = false;
   unTieNumber = 0;
+  showWinners = false;
 
   spinningRaffleCorners = false;
   showUntieRaffleCorners = false;
@@ -84,6 +85,9 @@ export class GameDetailsComponent implements OnInit {
             rankingPlayer['id'] = element.id;
             rankingPlayer['name'] = element.name;
             rankingPlayer['numbers'] = element.numbers;
+            rankingPlayer['phonenumber'] = element.phonenumber;
+            rankingPlayer['email'] = element.email;
+            rankingPlayer['officialId'] = element.officialId;
             rankingPlayer['verticalB'] = 0;
             rankingPlayer['verticalI'] = 0;
             rankingPlayer['verticalN'] = 0;
@@ -356,6 +360,9 @@ export class GameDetailsComponent implements OnInit {
                     winnerPlayer['name'] = self.potentialWinnersCorners[0].name;
                     winnerPlayer['numbers'] = self.potentialWinnersCorners[0].numbers;
                     winnerPlayer['winnerDetails'] = self.potentialWinnersCorners[0].winnerDetail;
+                    winnerPlayer['phonenumber'] = self.potentialWinnersCorners[0].phonenumber;
+                    winnerPlayer['email'] = self.potentialWinnersCorners[0].email;
+                    winnerPlayer['officialId'] = self.potentialWinnersCorners[0].officialId;
                     winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
                     self.currentGame.winners[round].corners.push(winnerPlayer);
                     self.potentialWinnersCorners = [];
@@ -409,6 +416,9 @@ export class GameDetailsComponent implements OnInit {
                       winnerPlayer['numbers'] = self.potentialWinnersVertical[0].numbers;
                       winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[0].winnerDetail;
                       winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
+                      winnerPlayer['phonenumber'] = self.potentialWinnersVertical[0].phonenumber;
+                      winnerPlayer['email'] = self.potentialWinnersVertical[0].email;
+                      winnerPlayer['officialId'] = self.potentialWinnersVertical[0].officialId;
                       self.currentGame.winners[round].vertical.push(winnerPlayer);
                       self.potentialWinnersVertical = [];
                     } else {
@@ -460,6 +470,9 @@ export class GameDetailsComponent implements OnInit {
                     winnerPlayer['name'] = self.potentialWinnersHorizontal[0].name;
                     winnerPlayer['numbers'] = self.potentialWinnersHorizontal[0].numbers;
                     winnerPlayer['winnerDetails'] = self.potentialWinnersHorizontal[0].winnerDetail;
+                    winnerPlayer['phonenumber'] = self.potentialWinnersHorizontal[0].phonenumber;
+                    winnerPlayer['email'] = self.potentialWinnersHorizontal[0].email;
+                    winnerPlayer['officialId'] = self.potentialWinnersHorizontal[0].officialId;
                     winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
                     self.currentGame.winners[round].horizontal.push(winnerPlayer);
                     self.potentialWinnersHorizontal = [];
@@ -512,6 +525,9 @@ export class GameDetailsComponent implements OnInit {
                     winnerPlayer['name'] = self.potentialWinnersFull[0].name;
                     winnerPlayer['numbers'] = self.potentialWinnersFull[0].numbers;
                     winnerPlayer['winnerDetails'] = self.potentialWinnersFull[0].winnerDetail;
+                    winnerPlayer['phonenumber'] = self.potentialWinnersFull[0].phonenumber;
+                    winnerPlayer['email'] = self.potentialWinnersFull[0].email;
+                    winnerPlayer['officialId'] = self.potentialWinnersFull[0].officialId;
                     winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
                     self.currentGame.winners[round].fullGame.push(winnerPlayer);
                     self.potentialWinnersFull = [];
@@ -576,6 +592,9 @@ export class GameDetailsComponent implements OnInit {
           winnerPlayer['name'] = self.potentialWinnersCorners[0].name;
           winnerPlayer['numbers'] = self.potentialWinnersCorners[0].numbers;
           winnerPlayer['winnerDetails'] = self.potentialWinnersCorners[0].winnerDetail;
+          winnerPlayer['phonenumber'] = self.potentialWinnersCorners[0].phonenumber;
+          winnerPlayer['email'] = self.potentialWinnersCorners[0].email;
+          winnerPlayer['officialId'] = self.potentialWinnersCorners[0].officialId;
           winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
           self.currentGame.winners[round].corners.push(winnerPlayer);
           self.potentialWinnersCorners = [];
@@ -612,6 +631,9 @@ export class GameDetailsComponent implements OnInit {
           winnerPlayer['name'] = self.potentialWinnersVertical[0].name;
           winnerPlayer['numbers'] = self.potentialWinnersVertical[0].numbers;
           winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[0].winnerDetail;
+          winnerPlayer['phonenumber'] = self.potentialWinnersVertical[0].phonenumber;
+          winnerPlayer['email'] = self.potentialWinnersVertical[0].email;
+          winnerPlayer['officialId'] = self.potentialWinnersVertical[0].officialId;
           winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
           self.currentGame.winners[round].vertical.push(winnerPlayer);
           self.potentialWinnersVertical = [];
@@ -648,6 +670,9 @@ export class GameDetailsComponent implements OnInit {
           winnerPlayer['name'] = self.potentialWinnersHorizontal[0].name;
           winnerPlayer['numbers'] = self.potentialWinnersHorizontal[0].numbers;
           winnerPlayer['winnerDetails'] = self.potentialWinnersHorizontal[0].winnerDetail;
+          winnerPlayer['phonenumber'] = self.potentialWinnersHorizontal[0].phonenumber;
+          winnerPlayer['email'] = self.potentialWinnersHorizontal[0].email;
+          winnerPlayer['officialId'] = self.potentialWinnersHorizontal[0].officialId;
           winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
           self.currentGame.winners[round].horizontal.push(winnerPlayer);
           self.potentialWinnersHorizontal = [];
@@ -684,6 +709,9 @@ export class GameDetailsComponent implements OnInit {
           winnerPlayer['name'] = self.potentialWinnersFull[0].name;
           winnerPlayer['numbers'] = self.potentialWinnersFull[0].numbers;
           winnerPlayer['winnerDetails'] = self.potentialWinnersFull[0].winnerDetail;
+          winnerPlayer['phonenumber'] = self.potentialWinnersFull[0].phonenumber;
+          winnerPlayer['email'] = self.potentialWinnersFull[0].email;
+          winnerPlayer['officialId'] = self.potentialWinnersFull[0].officialId;
           winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
           self.currentGame.winners[round].fullGame.push(winnerPlayer);
           self.potentialWinnersFull = [];
@@ -729,6 +757,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = self.potentialWinnersCorners[winnerIndex].name;
         winnerPlayer['numbers'] = self.potentialWinnersCorners[winnerIndex].numbers;
         winnerPlayer['winnerDetails'] = self.potentialWinnersCorners[winnerIndex].winnerDetail;
+        winnerPlayer['phonenumber'] = self.potentialWinnersCorners[winnerIndex].phonenumber;
+        winnerPlayer['email'] = self.potentialWinnersCorners[winnerIndex].email;
+        winnerPlayer['officialId'] = self.potentialWinnersCorners[winnerIndex].officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].corners.push(winnerPlayer);
         
@@ -773,6 +804,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = self.potentialWinnersVertical[winnerIndex].name;
         winnerPlayer['numbers'] = self.potentialWinnersVertical[winnerIndex].numbers;
         winnerPlayer['winnerDetails'] = self.potentialWinnersVertical[winnerIndex].winnerDetail;
+        winnerPlayer['phonenumber'] = self.potentialWinnersVertical[winnerIndex].phonenumber;
+        winnerPlayer['email'] = self.potentialWinnersVertical[winnerIndex].email;
+        winnerPlayer['officialId'] = self.potentialWinnersVertical[winnerIndex].officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].vertical.push(winnerPlayer);
         self.potentialWinnersVertical = [];
@@ -815,6 +849,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = self.potentialWinnersHorizontal[winnerIndex].name;
         winnerPlayer['numbers'] = self.potentialWinnersHorizontal[winnerIndex].numbers;
         winnerPlayer['winnerDetails'] = self.potentialWinnersHorizontal[winnerIndex].winnerDetail;
+        winnerPlayer['phonenumber'] = self.potentialWinnersHorizontal[winnerIndex].phonenumber;
+        winnerPlayer['email'] = self.potentialWinnersHorizontal[winnerIndex].email;
+        winnerPlayer['officialId'] = self.potentialWinnersHorizontal[winnerIndex].officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].horizontal.push(winnerPlayer);
       }, 1000);
@@ -857,6 +894,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = self.potentialWinnersFull[winnerIndex].name;
         winnerPlayer['numbers'] = self.potentialWinnersFull[winnerIndex].numbers;
         winnerPlayer['winnerDetails'] = self.potentialWinnersFull[winnerIndex].winnerDetail;
+        winnerPlayer['phonenumber'] = self.potentialWinnersFull[winnerIndex].phonenumber;
+        winnerPlayer['email'] = self.potentialWinnersFull[winnerIndex].email;
+        winnerPlayer['officialId'] = self.potentialWinnersFull[winnerIndex].officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         self.currentGame.winners[round].fullGame.push(winnerPlayer);
       }, 1000);
@@ -967,6 +1007,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1030,6 +1073,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1042,6 +1088,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1054,6 +1103,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1066,6 +1118,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1078,6 +1133,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1223,6 +1281,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1235,6 +1296,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1247,6 +1311,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1259,6 +1326,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1271,6 +1341,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
@@ -1320,6 +1393,9 @@ export class GameDetailsComponent implements OnInit {
         winnerPlayer['name'] = player.name;
         winnerPlayer['numbers'] = player.numbers;
         winnerPlayer['winnerDetails'] = player.winnerDetail;
+        winnerPlayer['phonenumber'] = player.phonenumber;
+        winnerPlayer['email'] = player.email;
+        winnerPlayer['officialId'] = player.officialId;
         winnerPlayer['selectedNumbers'] = self.currentGame.settings.selectedNumbers;
         winnerPlayer['absent'] = false;
         winnerPlayer['untieScore'] = 0;
