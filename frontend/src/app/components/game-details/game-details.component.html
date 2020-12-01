@@ -42,6 +42,8 @@
                     <span> Vertical </span> <br>
                     <input name="horizotal" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.horizontal">
                     <span> Horizontal  </span> <br>
+                    <input name="diagonal" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.diagonal">
+                    <span> Diagonal  </span> <br>
                     <input name="fullGame" type="checkbox" [(ngModel)]="currentGame.settings.winningWays.fullGame">
                     <span> Carton Lleno </span> <br>
 
@@ -68,6 +70,15 @@
                             <div *ngIf="winner.horizontal.length > 0">
                                 <span> Horizontal</span>
                                 <li *ngFor="let winnerDetail of winner.horizontal">  
+                                    Nombre: {{ winnerDetail.name }} <br>
+                                    Cedula: {{ winnerDetail.officialId }} <br>
+                                    Cel: {{ winnerDetail.phonenumber }} <br>
+                                    Correo: {{ winnerDetail.email }} 
+                                </li>
+                            </div>
+                            <div *ngIf="winner.diagonal.length > 0">
+                                <span> Diagonal </span>
+                                <li *ngFor="let winnerDetail of winner.diagonal">  
                                     Nombre: {{ winnerDetail.name }} <br>
                                     Cedula: {{ winnerDetail.officialId }} <br>
                                     Cel: {{ winnerDetail.phonenumber }} <br>
@@ -326,7 +337,26 @@
                 </div>
 
 
-                <div *ngIf="checkingUntieFull && showUntieRaffleFull">
+                <div *ngIf="checkingUntieDiagonal && showUntieRaffleDiagonal" class="col-md-12 second-raffle">
+                    <h1> Tómbola de Desempate (Diagonal) </h1>
+                    <button *ngIf="!spinningRaffleDiagonal && checkingUntieDiagonal" class="btn " (click)="getRandomNumber2(1, 99, 'diagonal', diagonalClick) "> 
+                        <i class="fas fa-undo "></i> Girar Tómbola Diagonales <i class="fas fa-undo "></i> 
+                    </button>
+                    <br>
+                    <div>
+                        <img *ngIf="spinningRaffleDiagonal " src="../../../assets/bingo.gif " />
+                        <img *ngIf="!spinningRaffleDiagonal " src="../../../assets/bingo-paused.jpg " />
+                        <div *ngIf="unTieNumber && !spinningRaffleDiagonal " class="ball ">
+                            {{ unTieNumber }}
+                        </div>
+                    </div>
+                    <li *ngFor="let element of potentialWinnersDiagonal">
+                        {{ element.name }} - {{ element.untieScore }}
+                    </li>
+                </div>
+
+
+                <div *ngIf="checkingUntieFull && showUntieRaffleFull"  class="col-md-12 second-raffle">
                     <h1> Tómbola de Desempate (Cartón Lleno) </h1>
                     <button *ngIf="!spinningRaffleFull && checkingUntieFull" class="btn " (click)="getRandomNumber2(1,99, 'fullGame', fullGameClick) "> 
                         <i class="fas fa-undo "></i> Girar Tómbola Cartón Lleno <i class="fas fa-undo "></i> 

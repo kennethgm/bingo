@@ -74,6 +74,7 @@ export class AddGameComponent implements OnInit {
           "corners": [],
           "vertical": [],
           "horizontal": [],
+          "diagonal": [],
           "fullGame": []
         }],
         startDate: new Date(),
@@ -83,6 +84,7 @@ export class AddGameComponent implements OnInit {
             "corners": false,
             "vertical": false,
             "horizontal": false,
+            "diagonal": false,
             "fullGame": false
           },
           absentPlayers: []
