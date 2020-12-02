@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="list row">
-        <div class="col-md-8">
+        <div *ngIf="!openSubpage" class="col-md-8">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Buscar por nombre" [(ngModel)]="name" />
                 <div class="input-group-append">
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div *ngIf="!openSubpage" class="col-md-8">
             <h4>Lista de Cartones (Por Juego)</h4>
 
             <div>
@@ -19,12 +19,18 @@
                     <span class="name"> {{ game.name }}
                         <i id="icon-{{ game.id }}"  class="fas fa-caret-down"></i>
                     </span>
+
                     <div style="display: none;" class="sublist" id="game-{{game.id}}">
+                        <br>
+                        <i class="fas fa-envelope-open-text" (click)="openPage(game.id)" > </i>
+                        <br>
                         <ul class="list-group">
                             <div *ngFor="let card of cards; let i = index" [class.active]="i == currentIndex" (click)="setActiveGame(card, i)">
                                 <li *ngIf="card.gameCode == game.id" class="list-group-item">
                                     <a routerLink="/cards/{{ card.id }}"> {{ card.name }} </a>
+                                    
                                 </li>
+                                
                             </div>
                         </ul>
                     </div>
@@ -33,6 +39,84 @@
 
         </div>
 
+        <div *ngIf="openSubpage">
+            <button (click)="this.openSubpage = false" class="btn"> Volver </button>
+
+            <button (click)="sendEmailAll(currentEmailId)" class="btn btn-danger"> Enviar Correo a TODOS </button>
+
+            <div *ngFor="let card of cardsToSend">
+                <h1> {{card.name}} </h1>
+                <div id="card-{{ card?.id }}-{{ card?.gameCode }}">
+                    <div class="bingo-card" id="card-{{ card?.id }}-{{ card?.gameCode }}">
+                        <span class="details float-left"> {{ card?.name }} </span> <br>
+                        <span class="details float-left"> Cartón # {{ card?.id }} </span>
+                        <span class="details float-right"> Código de Juego: {{ card?.gameCode }} </span> <br>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-letter">B</div>
+                                <div class="card-numbers">
+                                    <div *ngFor="let element of card?.numbers.b" class="card-number">
+                                        {{ element }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-letter">I</div>
+                                <div class="card-numbers">
+                                    <div *ngFor="let element of card?.numbers.i" class="card-number">
+                                        {{ element }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-letter">N</div>
+                                <div class="card-numbers">
+                                    <div class="card-number">
+                                        {{ card?.numbers.n[0] }}
+                                    </div>
+                                    <div class="card-number">
+                                        {{ card?.numbers.n[1] }}
+                                    </div>
+                                    <div class="card-number-center">
+                                        <div class="freespace"><img src="../../../assets/logo-centro.jpg"></div>
+                                    </div>
+                                    <div class="card-number">
+                                        {{ card?.numbers.n[2] }}
+                                    </div>
+                                    <div class="card-number">
+                                        {{ card?.numbers.n[3] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-letter">G</div>
+                                <div class="card-numbers">
+                                    <div *ngFor="let element of card?.numbers.g" class="card-number">
+                                        {{ element }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-letter">O</div>
+                                <div class="card-numbers">
+                                    <div *ngFor="let element of card?.numbers.o" class="card-number">
+                                        {{ element }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img id="canvas-{{ card.id }}-{{card.gameCode}}" />
+                </div>
+            </div>
+
+            <!-- 
+            <i (click)="sendByEmail(card.id, card.gameCode)" class="fas fa-eye "></i>
+            
+            -->
+        </div>
+
+
     </div>
-    <button class="btn add-game" routerLink="/add">Crear Nuevo Carton</button>
+    <button *ngIf="!openSubpage" class="btn add-game" routerLink="/add">Crear Nuevo Carton</button>
 </div>
