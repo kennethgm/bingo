@@ -22,7 +22,7 @@
 
                     <div style="display: none;" class="sublist" id="game-{{game.id}}">
                         <br>
-                        <i class="fas fa-envelope-open-text" (click)="openPage(game.id)" > </i>
+                        <h2 (click)="openPage(game.id)"> Enviar Correos <i class="fas fa-envelope-open-text" (click)="openPage(game.id)" > </i> </h2> 
                         <br>
                         <ul class="list-group">
                             <div *ngFor="let card of cards; let i = index" [class.active]="i == currentIndex" (click)="setActiveGame(card, i)">
@@ -42,10 +42,11 @@
         <div *ngIf="openSubpage">
             <button (click)="this.openSubpage = false" class="btn"> Volver </button>
 
-            <button (click)="sendEmailAll(currentEmailId)" class="btn btn-danger"> Enviar Correo a TODOS </button>
-
-            <div *ngFor="let card of cardsToSend">
-                <h1> {{card.name}} </h1>
+            <div *ngFor="let card of cardsToSend; let i = index;">
+                {{ i + 1 }} de {{ cardsToSend.length }}.<h2> {{card.name}} </h2>
+                
+                <button class="btn" id="button-{{ card?.id }}-{{ card?.gameCode }}" (click)="sendByEmail(card.id, card.gameCode, card)"> Enviar Correo </button>
+                <br>
                 <div id="card-{{ card?.id }}-{{ card?.gameCode }}">
                     <div class="bingo-card" id="card-{{ card?.id }}-{{ card?.gameCode }}">
                         <span class="details float-left"> {{ card?.name }} </span> <br>

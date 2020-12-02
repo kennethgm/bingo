@@ -114,29 +114,11 @@ export class CardsListComponent implements OnInit {
     });
   }
 
-  sendEmailAll(gameCode) {
-    if(confirm('Esta seguro de que quiere enviar el correo a TODOS los participantes?')) {
-      let index = 0;
-      let self = this;
-      this.cardsToSend.forEach(element => {
-        if (index <= 10) {
-          self.sendByEmail(element.id, gameCode, element);
-        } else {
-          /** TO DO THIS PART OF WAIT */
-          setTimeout(function(){
-            index = 0;
-          }, 2000);
-        }
-        index++;
-      });
-    }
-  }
-
   sendByEmail(id, gameCode, card){
     this.successMessage = '';
     let self = this;
-    let item = document.getElementById("card-"+id+"-"+gameCode);
-    let canvasElement = document.getElementById("canvas-"+id+"-"+gameCode);
+    let item = document.getElementById("card-"+ id +"-"+ gameCode);
+    let canvasElement = document.getElementById("canvas-"+ id +"-"+ gameCode);
     this.games.forEach(element => {
       if (element.id == gameCode) {
         self.currentLink = element.zoomLink;
@@ -152,7 +134,7 @@ export class CardsListComponent implements OnInit {
       ' y su marca LaTómbolaCR es un placer servirle en este juego de tómbola virtual. '+
       ' \n Le deseamos la mejor de las suertes en el juego a realizarse el '+ this.currentDate +' \n '+
       'Adjuntamos la imágen de su cartón, con un código único y de uso exclusivo para este juego. \n\n '+
-      'Este es link de acceso a la transimión: ' + this.currentLink + '\n\n'+
+      'Este es link de acceso a la transmisión: ' + this.currentLink + '\n\n'+
       'Se despide atentamente LaTómbolaCR, con una producción más de Kerberos Producciones. \nEsta es nuestra pagina de Facebook, SIGUENOS: https://www.facebook.com/keroproductions/ \n\n' +
       'Michael Martínez Castro. \n'+
       'Productor de Kerberos Producciones. \n'+
@@ -161,6 +143,8 @@ export class CardsListComponent implements OnInit {
       requestData['path'] = canvasElement.getAttribute('src'); 
       requestData['subject'] = 'Cartón Oficial de La Tómbola CR';
       
+      item.setAttribute('style', 'display: none');
+      document.getElementById('button-'+id+'-'+gameCode).setAttribute('style', 'display: none');
       this.cardService.sendEmail(requestData).subscribe((data) => {
         this.successMessage = 'El cartón fue enviado correctamente.';
       });
