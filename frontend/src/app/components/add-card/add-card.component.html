@@ -31,6 +31,12 @@
             </div>
 
             <button (click)="saveCard()" class="btn btn-success">Crear</button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <button (click)="generateCards()" class="btn btn-success">Generar 200 cartones nuevos!</button>
+            <p> {{ massiveMessage }} </p>
         </div>
 
         <div *ngIf="submitted">

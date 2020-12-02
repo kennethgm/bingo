@@ -56,7 +56,7 @@
                     <div *ngIf="showWinners" >
                         <div  class="round" *ngFor="let winner of currentGame.winners; let i = index;">
                             <b>Ronda {{ i + 1 }}</b> <br>
-                            <div *ngIf="winner.corners.length > 0">
+                            <div *ngIf="winner.corners?.length > 0">
                                 <!-- <b>Numeros que salieron: </b>
                                 <span *ngFor="let number of winner.corners[0].selectedNumbers"> {{ number }} - </span> <br> -->
                                 <span> 4 Esquinas </span>
@@ -67,7 +67,7 @@
                                     Correo: {{ winnerDetail.email }} 
                                 </li>
                             </div>
-                            <div *ngIf="winner.horizontal.length > 0">
+                            <div *ngIf="winner.horizontal?.length > 0">
                                 <span> Horizontal</span>
                                 <li *ngFor="let winnerDetail of winner.horizontal">  
                                     Nombre: {{ winnerDetail.name }} <br>
@@ -76,7 +76,7 @@
                                     Correo: {{ winnerDetail.email }} 
                                 </li>
                             </div>
-                            <div *ngIf="winner.diagonal.length > 0">
+                            <div *ngIf="winner.diagonal?.length > 0">
                                 <span> Diagonal </span>
                                 <li *ngFor="let winnerDetail of winner.diagonal">  
                                     Nombre: {{ winnerDetail.name }} <br>
@@ -85,7 +85,7 @@
                                     Correo: {{ winnerDetail.email }} 
                                 </li>
                             </div>
-                            <div *ngIf="winner.vertical.length > 0">
+                            <div *ngIf="winner.vertical?.length > 0">
                                 <span> Vertical </span>
                                 <li *ngFor="let winnerDetail of winner.vertical">  
                                     Nombre: {{ winnerDetail.name }} <br>
@@ -94,7 +94,7 @@
                                     Correo: {{ winnerDetail.email }} 
                                 </li>
                             </div>
-                            <div *ngIf="winner.fullGame.length > 0">
+                            <div *ngIf="winner.fullGame?.length > 0">
                                 <span> Carton Lleno </span>
                                 <li *ngFor="let winnerDetail of winner.fullGame">  
                                     Nombre: {{ winnerDetail.name }} <br>
@@ -385,4 +385,4 @@
         </div>
     </div>
 </div>
-<span>La Tómbola CR - Versión (30-Nov-2020)</span> 
+<span>La Tómbola CR - Versión (01-Dic-2020)</span> 

@@ -21,6 +21,7 @@ export class AddCardComponent implements OnInit {
   cards: any;
   cardsLength = '';
   games = [];
+  massiveMessage = '';
 
   constructor(
     private cardService: CardService,
@@ -115,6 +116,32 @@ export class AddCardComponent implements OnInit {
     }
   
     return array;
+  }
+
+  generateCards() {
+    let self = this;
+    if (confirm('Esta seguro que quiere generar 200 nuevos cartones?')) {
+       
+      for (let i = 0; i < 200; i++) { 
+        let card = {
+          name: '-',
+          phonenumber: '-',
+          email: '-',
+          numbers: self.numbersGenerator(),
+          gameCode: '-',
+          officialId: '-'
+        };
+        self.cardService.create(card).subscribe(
+          response => {
+            console.log('card created', response);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+      self.massiveMessage = '200 cartones fueron generados';
+    }
   }
 
 }
